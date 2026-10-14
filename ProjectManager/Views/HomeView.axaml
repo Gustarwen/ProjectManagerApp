@@ -4,6 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ProjectManager.Views.HomeView"
+             xmlns:vm="clr-namespace:ProjectManager.ViewModels"
+             x:DataType="vm:HomeViewModel"
+             xmlns:data ="clr-namespace:ProjectManager.DataTemplates"
              xmlns:view="clr-namespace:ProjectManager.Views">
-    Welcome to Home!
+    <Grid RowDefinitions="Auto,Auto,Auto,*">
+        <TextBox x:Name = "Name" Grid.Row="0" Text="{Binding Names}" Watermark="Name"></TextBox>
+        <DatePicker x:Name="DatePicker1" Grid.Row="1" SelectedDate="{Binding Dates}"></DatePicker>
+        <Button  Grid.Row="2" Command="{Binding AddPropertyCommand}"  />
+        <ListBox Grid.Row="3" ItemsSource="{Binding Mydata}" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid RowDefinitions="Auto,Auto" Background="Red">
+                        
+                        <TextBox Text="{Binding  Date}"></TextBox>
+                        <TextBox Grid.Row="1" Text="{Binding Name}"></TextBox>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+            
+                
+          
+            
+        
+    </Grid>
+
 </UserControl>

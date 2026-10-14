@@ -4,5 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ProjectManager.Views.QaAView">
-        <TextBlock Text="Ahoj QaA:::"></TextBlock>
+        <ListBox.ItemTemplate></ListBox.ItemTemplate>
+    
 </UserControl>

@@ -16,13 +16,13 @@
         <vm:MainViewModel />
     </Design.DataContext>
 
-   <StackPanel >
+   <Grid RowDefinitions="Auto,Auto,Auto" >
        <TextBlock  Text="Hello in Project Manager">
            
        </TextBlock>
        
-       <Button Command="{Binding GoToQaACommand}" VerticalContentAlignment="Center"  HorizontalContentAlignment="Center" Width="300" Height="300" Content="This is my buttoN"></Button>
-       <ContentControl Content="{Binding  CurrentPage}"></ContentControl>
-   </StackPanel>
+       <Button Grid.Row="1" Command="{Binding GoToQaACommand}" VerticalContentAlignment="Center"  HorizontalContentAlignment="Center" Width="300" Height="300" Content="This is my buttoN"></Button>
+       <ContentControl Grid.Row="2" Content="{Binding  CurrentPage}"></ContentControl>
+   </Grid>
 
 </Window>
