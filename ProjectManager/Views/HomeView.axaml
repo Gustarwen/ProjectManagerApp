@@ -12,7 +12,7 @@
         <TextBox x:Name = "Name" Grid.Row="0" Text="{Binding Names}" Watermark="Name"></TextBox>
         <DatePicker x:Name="DatePicker1" Grid.Row="1" SelectedDate="{Binding Dates}"></DatePicker>
         <Button  Grid.Row="2" Command="{Binding AddPropertyCommand}"  />
-        <ListBox Grid.Row="3" ItemsSource="{Binding Mydata}" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <ListBox Grid.Row="3" ItemsSource="{Binding Mydata}" ScrollViewer.VerticalScrollBarVisibility="Visible">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid RowDefinitions="Auto,Auto" Background="Red">
