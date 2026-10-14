@@ -15,11 +15,11 @@
         <ListBox Grid.Row="3" ItemsSource="{Binding Mydata}" ScrollViewer.VerticalScrollBarVisibility="Visible">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid RowDefinitions="Auto,Auto" Background="Red">
-                        
-                        <TextBox Text="{Binding  Date}"></TextBox>
-                        <TextBox Grid.Row="1" Text="{Binding Name}"></TextBox>
+                    <Grid ColumnDefinitions="auto,auto">
+                        <TextBlock Background="DarkBlue" Text="{Binding Name}"/>
+                        <TextBlock Grid.Column = "1" Text="{Binding Date}"/>
                     </Grid>
+                   
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

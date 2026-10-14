@@ -1,6 +1,8 @@
 using System;
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ProjectManager.Views;
 
 namespace ProjectManager.ViewModels;
 
@@ -29,5 +31,14 @@ public partial class MainViewModel : ViewModelBase
     {
         CurrentPage = _QaA;
         Console.WriteLine("Nacetl se QaA.");
+    }
+
+    [RelayCommand]
+    private void OpenSettingDialog(Window? parentWindow)
+    {
+        var dialog = new ProjectManager.Views.SettingsView();
+        dialog.DataContext = new SettingViewModel();
+        
+        dialog.ShowDialog<bool>(parentWindow);
     }
 }
