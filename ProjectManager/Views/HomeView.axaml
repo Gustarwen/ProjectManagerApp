@@ -10,14 +10,15 @@
              xmlns:view="clr-namespace:ProjectManager.Views">
     <Grid RowDefinitions="Auto,Auto,Auto,*">
         <TextBox x:Name = "Name" Grid.Row="0" Text="{Binding Names}" Watermark="Name"></TextBox>
-        <DatePicker x:Name="DatePicker1" Grid.Row="1" SelectedDate="{Binding Dates}"></DatePicker>
-        <Button  Grid.Row="2" Command="{Binding AddPropertyCommand}"  />
+        <DatePicker   x:Name="DatePicker1" Grid.Row="1" SelectedDate="{Binding Dates}"></DatePicker>
+        <Button  Grid.Row="2" Command="{Binding AddPropertyCommand}"  Content="Add Property"/>
         <ListBox Grid.Row="3" ItemsSource="{Binding Mydata}" ScrollViewer.VerticalScrollBarVisibility="Visible">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid ColumnDefinitions="auto,auto">
-                        <TextBlock Background="DarkBlue" Text="{Binding Name}"/>
-                        <TextBlock Grid.Column = "1" Text="{Binding Date}"/>
+                    <Grid ColumnDefinitions="auto,auto,*,Auto,Auto">
+                        <TextBlock  Text="{Binding Name}"/>
+                        <Button Grid.Column="3" Background="LightGreen">Accept</Button>
+                        <Button Grid.Column="4" Background="LightCoral">Delete</Button>
                     </Grid>
                    
                 </DataTemplate>

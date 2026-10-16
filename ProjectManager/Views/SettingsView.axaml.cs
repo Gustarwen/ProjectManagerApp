@@ -9,6 +9,6 @@ public partial class SettingsView : Window
     public SettingsView()
     {
         InitializeComponent();
-    
+        
     }
 }
