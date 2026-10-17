@@ -8,6 +8,9 @@
              x:DataType="vm:HomeViewModel"
              xmlns:data ="clr-namespace:ProjectManager.DataTemplates"
              xmlns:view="clr-namespace:ProjectManager.Views">
+    <UserControl.Styles>
+        <StyleInclude Source="../styles/style.axaml"></StyleInclude>
+    </UserControl.Styles>
     <Grid RowDefinitions="Auto,Auto,Auto,*">
         <TextBox x:Name = "Name" Grid.Row="0" Text="{Binding Names}" Watermark="Name"></TextBox>
         <DatePicker   x:Name="DatePicker1" Grid.Row="1" SelectedDate="{Binding Dates}"></DatePicker>
@@ -17,13 +20,15 @@
                 <DataTemplate>
                     <Grid ColumnDefinitions="auto,auto,*,Auto,Auto">
                         <TextBlock  Text="{Binding Name}"/>
-                        <Button Grid.Column="3" Background="LightGreen">Accept</Button>
-                        <Button Grid.Column="4" Background="LightCoral">Delete</Button>
+                        <Button Grid.Column="3" Background="LightGreen" Command="{Binding $parent[ListBox].DataContext.AcceptCommand}" CommandParameter="{Binding Index}">Accept</Button>
+                        <Button Grid.Column="4" Background="LightCoral" Command="{Binding $parent[ListBox].DataContext.DeletePropertyCommand}"
+                                CommandParameter="{Binding Index}">Delete</Button>
                     </Grid>
                    
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        
 
             
                 

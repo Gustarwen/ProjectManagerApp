@@ -20,14 +20,15 @@ public partial class HomeViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    public void DeleteProperty()
+    public void DeleteProperty(int id)
     {
+        Mydata.RemoveAt(id);
     }
 
     [RelayCommand]
     public void Accept(int index)
     {
-        Mydata[index].Finished = true;
+        Mydata[index].Finished = !Mydata[index].Finished;
     }
     [RelayCommand]
     public void AddProperty()
