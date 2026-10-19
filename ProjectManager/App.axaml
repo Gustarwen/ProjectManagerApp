@@ -11,4 +11,9 @@
     <Application.Styles>
         <FluentTheme />
     </Application.Styles>
+    <Application.Resources>
+        <SolidColorBrush x:Key="PrimaryBackground">#ff00ff</SolidColorBrush>
+        <SolidColorBrush x:Key="PrimaryHoverBackground">#ff0055</SolidColorBrush>
+        <SolidColorBrush x:Key="PrimaryPressedBackground">#ff0033</SolidColorBrush>
+    </Application.Resources>
 </Application>

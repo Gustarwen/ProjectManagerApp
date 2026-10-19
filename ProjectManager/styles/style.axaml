@@ -2,15 +2,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
         <Border Padding="20">
+            <Button>hello</Button>
             <!-- Add Controls for Previewer Here -->
           
         </Border>
     </Design.PreviewWith>
-    <Style Selector="ListBoxItem.Finished" >
-        <Setter Property="Background" Value="lightGreen"></Setter>
+    <Style Selector="Button" >
+        <Setter Property="Background" Value="{DynamicResource PrimaryBackground}"></Setter>
     </Style>
-    
-
-    <!-- Add Styles Here -->
+    <Style Selector="Button:pressed /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource PrimaryPressedBackground}"></Setter>
+    </Style>
+    <!--wow can you actually start to count my time?-->
+  <Style Selector="Button:pointerover">
+      <Setter Property="Background" Value="{DynamicResource PrimaryHoverBackground}"></Setter>
+  </Style>
+<!--i did my best bcs it was too hard to do it nevermind--><!-- Add Styles Here -->
     
 </Styles>

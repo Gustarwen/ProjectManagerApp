@@ -9,4 +9,4 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
-}
+}//skoro 20 minut uz mam naprogramovanych so vipada to zatim ok

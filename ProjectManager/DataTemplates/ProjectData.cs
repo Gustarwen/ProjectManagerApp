@@ -1,11 +1,14 @@
 ﻿using System;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace ProjectManager.DataTemplates;
 
-public class ProjectData
+public partial class ProjectData : ObservableObject
 {
-    public bool Finished { get; set; } = false;
+    [ObservableProperty]
+    private bool finished = false;
     public int Index { get; set; } = 0;
     public string Name { get; set; } = "Untitled";
 
