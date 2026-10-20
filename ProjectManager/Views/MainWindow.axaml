@@ -10,16 +10,18 @@
         
         Icon="/Assets/avalonia-logo.ico"
         Title="ProjectManager">
-
+        <Window.Styles>
+            <StyleInclude Source="../styles/style.axaml"></StyleInclude>
+        </Window.Styles>
     <Design.DataContext>
       
         <vm:MainViewModel />
     </Design.DataContext>
 
    <Grid  RowDefinitions="Auto,Auto,*,auto" ColumnDefinitions="200,*" >
-       <TextBlock  Text="Hello in Project Manager">
+      
            
-       </TextBlock>
+  
        <StackPanel VerticalAlignment="Center" Grid.RowSpan="4">
            <Button   Grid.Row="2" Command="{Binding GoToHomeCommand}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center"     Content="Home"></Button>
            <Button   Grid.Row="1" Command="{Binding GoToQaACommand}" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"    Content="QaA"></Button>

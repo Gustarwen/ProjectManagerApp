@@ -12,8 +12,49 @@
         <FluentTheme />
     </Application.Styles>
     <Application.Resources>
-        <SolidColorBrush x:Key="PrimaryBackground">#ff00ff</SolidColorBrush>
-        <SolidColorBrush x:Key="PrimaryHoverBackground">#ff0055</SolidColorBrush>
-        <SolidColorBrush x:Key="PrimaryPressedBackground">#ff0033</SolidColorBrush>
+        <!--colors-->
+        <Color x:Key="RedOne">#250902</Color>
+        <Color x:Key="RedTwo">#38040E</Color>
+        <Color x:Key="RedThree">#640D14</Color>
+        <Color x:Key="RedFour">#800E13</Color>
+        <Color x:Key="RedFive">#AD2831</Color>
+        
+        <Color x:Key="GreenOne">#10451D</Color>
+        <Color x:Key="GreenTwo">#155D27</Color>
+        <Color x:Key="GreenThree">#1A7431</Color>
+        <Color x:Key="GreenFour">LawnGreen</Color>
+        
+        <Color x:Key="OrangeOne">#FF4800</Color>
+        <Color x:Key="OrangeTwo">#FF5400</Color>
+        <Color x:Key="OrangeThree">#FF6000</Color>
+        <Color x:Key="OrangeFour">#FF6D00</Color>
+        
+        <Color x:Key="BlueOne">#03045E</Color>
+        <Color x:Key="BlueTwo">#0077B6</Color>
+        <Color x:Key="BlueThree">#00B4D8</Color>
+        <Color x:Key="BlueFour">#90E0EF</Color>
+        
+        
+
+        
+        <!--cervene brushes-->
+        <SolidColorBrush x:Key="redone" Color="{DynamicResource RedOne}"></SolidColorBrush>
+        <SolidColorBrush x:Key="redtwo" Color="{DynamicResource RedTwo}"></SolidColorBrush>
+        <SolidColorBrush x:Key="redthree" Color="{DynamicResource RedThree}"></SolidColorBrush>
+        <SolidColorBrush x:Key="redfour" Color="{DynamicResource RedFour}"></SolidColorBrush>
+        <SolidColorBrush x:Key="redfive" Color="{DynamicResource RedFive}"></SolidColorBrush>
+        
+        <!--zelene brushes-->
+        <SolidColorBrush x:Key="greenone" Color="{DynamicResource GreenOne}"></SolidColorBrush>
+        <SolidColorBrush x:Key="greentwo" Color="{DynamicResource GreenTwo}"></SolidColorBrush>
+        <SolidColorBrush x:Key="greenthree" Color="{DynamicResource GreenThree}"></SolidColorBrush>
+        <SolidColorBrush x:Key="greenfour" Color="{DynamicResource GreenFour}"></SolidColorBrush>
+
+        <!--linear gradients-->
+        <LinearGradientBrush x:Key="BackgroundLinearGradient" StartPoint="0% 0%" EndPoint="0% 100%" >
+            <GradientStop Offset="0" Color="{DynamicResource RedOne}"></GradientStop>
+            <GradientStop Offset="1" Color="Black"></GradientStop>
+        </LinearGradientBrush>
+        
     </Application.Resources>
 </Application>

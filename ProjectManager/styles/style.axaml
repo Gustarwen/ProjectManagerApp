@@ -2,21 +2,93 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
         <Border Padding="20">
-            <Button>hello</Button>
+            <Button Classes="blue">hello</Button>
             <!-- Add Controls for Previewer Here -->
           
         </Border>
     </Design.PreviewWith>
-    <Style Selector="Button" >
-        <Setter Property="Background" Value="{DynamicResource PrimaryBackground}"></Setter>
+    <!--window-->
+    <Style Selector="Window">
+        <Setter Property="Background" Value="{DynamicResource BackgroundLinearGradient}"></Setter>
+        <Setter Property="Opacity" Value="1"></Setter>
     </Style>
-    <Style Selector="Button:pressed /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource PrimaryPressedBackground}"></Setter>
+    <!--normal button-->
+    <Style Selector="Button">
+        <Setter Property="Background" Value="{DynamicResource redone}"></Setter>
+        <Setter Property="Foreground" Value="white"></Setter>
     </Style>
-    <!--wow can you actually start to count my time?-->
-  <Style Selector="Button:pointerover">
-      <Setter Property="Background" Value="{DynamicResource PrimaryHoverBackground}"></Setter>
+    <!--accept default button-->
+    <Style Selector="Button.accept">
+        <Setter Property="Background" Value="{DynamicResource greenone}"></Setter>
+        <Setter Property="Foreground" Value="white"></Setter>
+    </Style>
+ 
+<!--hover-->
+        <!--normalni hover pro button-->
+  <Style Selector="Button:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource redone}"></Setter>
+      <Setter Property="BorderBrush" Value="{DynamicResource redfour}"></Setter>
+      <Setter Property="BorderThickness" Value="1"></Setter>
+      
   </Style>
-<!--i did my best bcs it was too hard to do it nevermind--><!-- Add Styles Here -->
+        <!--hover pro accept button-->
+        <Style Selector="Button.accept:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource greenone}"></Setter>
+            <Setter Property="BorderBrush" Value="{DynamicResource greenfour}"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+        </Style>
+    
+    <!--colors-->
+    
+                <!--red-->
+    <Style Selector="Button.red">
+        <Setter Property="Background" Value="{DynamicResource RedOne}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource RedFour}"></Setter>
+    </Style>
+    <Style Selector="Button.red:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource RedOne}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource RedFive}"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="Foreground" Value="white"></Setter>
+      
+    </Style>
+            <!--green-->
+    <Style Selector="Button.green">
+        <Setter Property="Background" Value="{DynamicResource GreenOne}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource GreenFour}"></Setter>
+    </Style>
+    <Style Selector="Button.green:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource GreenOne}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource GreenFive}"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="Foreground" Value="white"></Setter>
+      
+    </Style>
+            <!--blue-->
+    <Style Selector="Button.blue">
+        <Setter Property="Background" Value="{DynamicResource BlueOne}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource BlueFour}"></Setter>
+
+    </Style>
+    <Style Selector="Button.blue:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource BlueOne}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource BlueFive}"></Setter>
+        <Setter Property="Foreground" Value="white"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+      
+    </Style>
+            <!--orange-->
+    <Style Selector="Button.orange">
+        <Setter Property="Background" Value="{DynamicResource OrangeOne}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource OrangeFour}"></Setter>
+    </Style>
+    <Style Selector="Button.orange:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource OrangeOne}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource OrangeFour}"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="Foreground" Value="white"></Setter>
+      
+    </Style>
+<!-- Add Styles Here -->
     
 </Styles>
