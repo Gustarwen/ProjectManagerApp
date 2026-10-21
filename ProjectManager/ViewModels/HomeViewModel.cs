@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ProjectManager.DataTemplates;
@@ -16,19 +17,28 @@ public partial class HomeViewModel : ViewModelBase
 
     public HomeViewModel()
     {
+        foreach (var u in ProjectManager.DataTemplates.DataBaseController._repository.Query().Execute())
+        {
+            Mydata.Add(u);
+        }
         DateTime today = DateTime.Today;
     }
+
+    
 
     [RelayCommand]
     public void DeleteProperty(ProjectData data)
     {
         Mydata.Remove(data);
+        ProjectManager.DataTemplates.DataBaseController.DeleteProperty(data);
     }
-
+    
     [RelayCommand]
     public void Accept(ProjectData data)
     {
         data.Finished = !data.Finished;
+        var item = Mydata.FirstOrDefault(x => x.Id == data.Id);
+        ProjectManager.DataTemplates.DataBaseController._repository.Update(item);
     }
     [RelayCommand]
     public void AddProperty()
@@ -46,6 +56,7 @@ public partial class HomeViewModel : ViewModelBase
             
         }
         Mydata.Add(newData);
+        ProjectManager.DataTemplates.DataBaseController.InsertProperty(newData);
         Names = $"Untitled{Mydata.Count + 1}";
         Dates = null;
     }

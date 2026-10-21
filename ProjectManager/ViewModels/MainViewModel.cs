@@ -18,6 +18,7 @@ public partial class MainViewModel : ViewModelBase
     public MainViewModel()
     {
         CurrentPage = _home;
+        
     }
 
     [RelayCommand]
