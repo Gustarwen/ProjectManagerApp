@@ -2,7 +2,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
         <Border Padding="20">
-            <Button Classes="blue">hello</Button>
+           <Border Classes="question">
+               <TextBlock Classes="question" Text="Hello"></TextBlock>
+           </Border>
+          
             <!-- Add Controls for Previewer Here -->
           
         </Border>
@@ -70,12 +73,40 @@
         <Setter Property="BorderBrush" Value="{DynamicResource BlueFour}"></Setter>
 
     </Style>
+    
     <Style Selector="Button.blue:pointerover /template/ ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource BlueOne}"></Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource BlueFive}"></Setter>
         <Setter Property="Foreground" Value="white"></Setter>
         <Setter Property="BorderThickness" Value="1"></Setter>
       
+    </Style>
+    <Style Selector="TextBlock.question">
+        <Setter Property="Foreground" Value="Gray"></Setter>
+    </Style>
+    <Style Selector="Border.question">
+        <Setter Property="BorderBrush" Value="{DynamicResource redfour}"></Setter>
+        <Setter Property="BorderThickness" Value="2" ></Setter>
+        <Setter Property="Padding" Value="4"></Setter>
+        <Setter Property="CornerRadius" Value="3"></Setter>
+        <Setter Property="Margin" Value="4"></Setter>
+    </Style>
+    <Style Selector="TextBlock">
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+    </Style>
+    <Style Selector="TextBlock.answer">
+        <Setter Property="Foreground" Value="White"></Setter>
+        
+    </Style>
+    <Style Selector="TextBlock.header">
+        <Setter Property="FontSize" Value="100"></Setter>
+    </Style>
+    <Style Selector="Border.answer">
+        <Setter Property="BorderBrush" Value="{DynamicResource redthree}"></Setter>
+        <Setter Property="BorderThickness" Value="2" ></Setter>
+        <Setter Property="Padding" Value="4"></Setter>
+        <Setter Property="CornerRadius" Value="3"></Setter>
+        <Setter Property="Margin" Value="4"></Setter>
     </Style>
             <!--orange-->
     <Style Selector="Button.orange">

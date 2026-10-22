@@ -11,7 +11,7 @@ public partial class ProjectData : ObservableObject
     [Property("Id",Flags.Integer|Flags.PrimaryKey|Flags.AutoIncrement)]
     public int Id { get; set; }
 
-    [Property("Finished", Flags.Integer, 1)] [ObservableProperty]
+    [property:Property("Finished", Flags.Integer, 1)] [ObservableProperty]
     private bool finished = false;
     [Property("Index",Flags.Integer,0)]
     public int Index { get; set; } = 0;

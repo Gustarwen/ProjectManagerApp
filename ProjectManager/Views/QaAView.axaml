@@ -4,6 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ProjectManager.Views.QaAView">
-        <TextBox Text="Welcome to QaA"></TextBox>
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+            <TextBlock Classes="header" HorizontalAlignment="Center"  Text="Q&amp;A"></TextBlock>
+            
+            <Border Classes="question">
+                <TextBlock Classes ="question" Text="Why use this application?"></TextBlock>
+            </Border>
+            <Border Classes="answer">
+            <TextBlock Classes ="answer" Text="This application will help you manage your precious time more effectively. At the same time, it will assist people facing the same problem I once had—namely, completing their projects."></TextBlock>
+            </Border>
+            <Border Classes="question">
+            <TextBlock Classes ="question" Text="Who are you?"></TextBlock>
+                </Border>
+            <Border Classes="answer">
+            <TextBlock Classes ="answer" Text="I am Gustarwen. A silly developer."></TextBlock>
+                </Border>
+        </StackPanel>
     
 </UserControl>
