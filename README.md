@@ -1,4 +1,15 @@
 **Project Manager**
+
+**About**
+
+```
+This application is here for somebody,
+who want to finish his project effectively, or faster.
+In short, it can (in future) help users to manage their valuable time, prevent chaotically managed files and more.
+
+```
+
+**How To Use It**
 ```
 As we can see, there is something like a to-do list on the home page. 
 In the bottom-left corner, there are settings, and on the left, there is a navigation panel.
