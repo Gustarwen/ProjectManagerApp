@@ -25,7 +25,7 @@
        <StackPanel VerticalAlignment="Center" Grid.RowSpan="4">
            <Button   Grid.Row="2" Command="{Binding GoToHomeCommand}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center"     Content="Home"></Button>
            <Button   Grid.Row="1" Command="{Binding GoToQaACommand}" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"    Content="QaA"></Button>
-           
+           <Button Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Command="{Binding GoToCanvasCommand}" Content="Canvas"></Button>
        </StackPanel>
        
        <ContentControl Grid.Column="1" Grid.RowSpan="3" Content="{Binding  CurrentPage}"></ContentControl>

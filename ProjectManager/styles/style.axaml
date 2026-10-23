@@ -81,9 +81,11 @@
         <Setter Property="BorderThickness" Value="1"></Setter>
       
     </Style>
+    <!--definice question-->
     <Style Selector="TextBlock.question">
         <Setter Property="Foreground" Value="Gray"></Setter>
     </Style>
+
     <Style Selector="Border.question">
         <Setter Property="BorderBrush" Value="{DynamicResource redfour}"></Setter>
         <Setter Property="BorderThickness" Value="2" ></Setter>
@@ -91,16 +93,44 @@
         <Setter Property="CornerRadius" Value="3"></Setter>
         <Setter Property="Margin" Value="4"></Setter>
     </Style>
+    <!--normalni textblock-->
     <Style Selector="TextBlock">
         <Setter Property="TextWrapping" Value="Wrap"></Setter>
     </Style>
+    <!--definice answer-->
     <Style Selector="TextBlock.answer">
         <Setter Property="Foreground" Value="White"></Setter>
         
     </Style>
+    <!--definice header-->
+    
     <Style Selector="TextBlock.header">
         <Setter Property="FontSize" Value="100"></Setter>
     </Style>
+    <Style Selector="Border">
+        <Setter Property="BorderBrush" Value="Transparent"></Setter>
+        
+        <Setter Property="BorderThickness" Value="10"></Setter>
+        <Setter Property="CornerRadius" Value="10"></Setter>
+        <Setter Property="Transitions">
+            
+            <Transitions>
+                <BrushTransition Property="BorderBrush" Duration="0:0:0.5"></BrushTransition>
+            </Transitions>
+            
+        </Setter>
+    </Style>
+    <Style Selector="Border.finished">
+        <Setter Property="BorderBrush" >
+            <LinearGradientBrush EndPoint="100% 0%" StartPoint="0% 0%">
+                <GradientStop Color="{DynamicResource GreenOne}" Offset="0"></GradientStop>
+                <GradientStop Color="{DynamicResource GreenTwo}" Offset="1"></GradientStop>
+            </LinearGradientBrush>
+        </Setter>
+       
+    </Style>
+    <!--definice answer-->
+    
     <Style Selector="Border.answer">
         <Setter Property="BorderBrush" Value="{DynamicResource redthree}"></Setter>
         <Setter Property="BorderThickness" Value="2" ></Setter>

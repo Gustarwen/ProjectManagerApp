@@ -12,6 +12,7 @@ public partial class MainViewModel : ViewModelBase
     
     private  HomeViewModel _home = new ();
     [ObservableProperty]private  QaAViewModel _QaA = new();
+    [ObservableProperty] private canvasNodesViewModel cnvs = new();
    
     [ObservableProperty] private ViewModelBase currentPage;
 
@@ -25,6 +26,12 @@ public partial class MainViewModel : ViewModelBase
     private void GoToHome()
     {
         CurrentPage = _home;
+    }
+
+    [RelayCommand]
+    private void GoToCanvas()
+    {
+        CurrentPage = cnvs;
     }
 
     [RelayCommand]
