@@ -4,20 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ProjectManager.Views.canvasNodesView">
-                <Border Name="Container">
-                    <Canvas Name="MapCanvas" Width="10000" Height="100000">
+                <Border Name="Container"
+                        
+                        Background="Transparent"
+                        PointerPressed="OnPointerPressed"
+                        PointerMoved="OnPointerMoved"
+                        PointerReleased="OnPointerReleased"
+                            PointerWheelChanged="OnWheelChanged"
+                        ClipToBounds="True"
+                        BorderBrush="White">
+                    <Canvas HorizontalAlignment="Left" VerticalAlignment="Top" Name="MapCanvas" Width="10000" Height="100000" RenderTransformOrigin="0,0">
                         <Canvas.RenderTransform>
-                            <MatrixTransform></MatrixTransform>
+                            <MatrixTransform ></MatrixTransform>
                         </Canvas.RenderTransform> 
-                        <Border Canvas.Left="4900" Canvas.Top="4950" Width="200" Height="60" 
-                                Background="#3399FF" CornerRadius="5">
-                            <TextBlock Text="Hlavní téma" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
-                        </Border>
-            
-                        <Border Canvas.Left="5200" Canvas.Top="4850" Width="150" Height="50" 
-                                Background="#2ECC71" CornerRadius="5">
-                            <TextBlock Text="Podtéma 1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
-                        </Border>
+                        <Button x:Name="Button1" Height="100" Width="100" Canvas.Top="0" Canvas.Left="0"></Button>
                     </Canvas>
                     
                 </Border>
