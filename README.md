@@ -26,4 +26,5 @@ Go to release on this page, and install new Release (ProjectManager 0.0.3)
 Then open zip file and extract files from it.
 Run .exe file
 There will maybe pop a dialog with unknow developer message. Click on something like “More Options” and then “Run Anyway”.
+In some cases, it will want to install or update dot net. Just click to download and istall it.
 ```
