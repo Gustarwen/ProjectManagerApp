@@ -6,6 +6,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
+using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Media;
 
 namespace ProjectManager.Views;
@@ -146,10 +147,11 @@ public partial class canvasNodesView : UserControl
             {
                 Line line = new Line
                 {
-                    Stroke = Brushes.Red,
+                    
                     StrokeThickness = 5,
                     ZIndex = -1
                 };
+                line.Bind(Shape.StrokeProperty, new DynamicResourceExtension("redone"));
                 line.StartPoint = new Point(node.x, node.y);
                 line.EndPoint = new Point(candidates.First().x,candidates.First().y);
                 
@@ -204,6 +206,7 @@ public partial class canvasNodesView : UserControl
                 matrixTransform.Matrix = new Matrix(currentZoom, 0, 0, currentZoom, offsetX, offsetY);
             }
         }
+        
     }
 
 
@@ -247,7 +250,9 @@ public partial class canvasNodesView : UserControl
         currentZoom = currentZoom*factor;
 
         transform.Matrix = m;
-        
+        offsetX = m.M31;
+        offsetY = m.M32;
+
     }
 
 
