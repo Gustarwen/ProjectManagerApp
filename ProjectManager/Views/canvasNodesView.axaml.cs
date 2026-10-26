@@ -65,6 +65,22 @@ public partial class canvasNodesView : UserControl
         node6.parent = node3;
         node3.childern.Add(node7);
         node7.parent = node3;
+        node node12 = new();
+        node3.childern.Add(node12);
+        node node13 = new();
+        node3.childern.Add(node13);
+        node node14 = new();
+        node3.childern.Add(node14);
+        node node15 = new();
+        node3.childern.Add(node15);
+        node node16 = new();
+        node3.childern.Add(node16);
+        node node17 = new();
+        node3.childern.Add(node17);
+        node node18 = new();
+        node3.childern.Add(node18);
+        node node19 = new();
+        node3.childern.Add(node19);
         node4.childern.Add(node8);
         node8.parent = node4;
         node4.childern.Add(node9);
@@ -151,7 +167,7 @@ public partial class canvasNodesView : UserControl
                     StrokeThickness = 5,
                     ZIndex = -1
                 };
-                line.Bind(Shape.StrokeProperty, new DynamicResourceExtension("redone"));
+                line.Bind(Shape.StrokeProperty, new DynamicResourceExtension("redfour"));
                 line.StartPoint = new Point(node.x, node.y);
                 line.EndPoint = new Point(candidates.First().x,candidates.First().y);
                 

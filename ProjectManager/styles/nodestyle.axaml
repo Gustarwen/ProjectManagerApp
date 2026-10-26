@@ -1,0 +1,44 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+      
+            <!-- Add Controls for Previewer Here -->
+            <Grid ColumnDefinitions="* * *">
+                <Button Classes="Add"></Button>
+                <TextBlock Grid.Column="1">Hi</TextBlock>
+                <Button Grid.Column="2" Classes="Delete"></Button>
+            </Grid>
+      
+    </Design.PreviewWith>
+    <!--text block-->
+    <Style Selector="TextBlock">
+        <Setter Property="Height" Value="50"></Setter>
+        <Setter Property="TextAlignment" Value="Center"></Setter>
+        <Setter Property="text"></Setter>
+    </Style>
+    
+   <!--delete button-->
+    <Style Selector="Button.Delete">
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        <Setter Property="Height" Value="50"></Setter>
+    </Style>
+   <!--add button-->
+    <Style Selector="Button.Add">
+     <Setter Property="Width" Value="50"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        
+        <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+        <Setter Property="Background" Value="{DynamicResource GreenTwo}"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource GreenFour}"></Setter>
+  
+        <Setter Property="Height" Value="50"></Setter>
+        
+        <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+    </Style>
+    <!-- Add Styles Here -->
+    
+   
+ 
+
+
+</Styles>
