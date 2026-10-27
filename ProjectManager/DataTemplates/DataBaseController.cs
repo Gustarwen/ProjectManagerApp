@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Durable.Sql;
 using Durable.Sqlite;
 
@@ -23,7 +24,20 @@ public class DataBaseController
 
     public static void InsertTask(ProjectData data)
     {
-        _taskrepository.Create(data);
+        try 
+        {
+            _taskrepository.Create(data);
+            Console.WriteLine("Úkol úspěšně vložen do DB.");
+        }
+        catch (Exception ex) 
+        {
+            // ZDE uvidíte přesný důvod, proč se úkol neuložil (např. chyba reflexe, chybějící sloupec apod.)
+            Console.WriteLine($"CHYBA PŘI UKLÁDÁNÍ: {ex.Message}");
+            if (ex.InnerException != null)
+            {
+                Console.WriteLine($"Detail chyby: {ex.InnerException.Message}");
+            }
+        }
     }
     public static void DeleteTask(ProjectData data)
     {

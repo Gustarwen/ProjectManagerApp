@@ -8,7 +8,9 @@ using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Media;
+using CommunityToolkit.Mvvm.Messaging;
 using ProjectManager.DataTemplates;
+using ProjectManager.ViewModels;
 
 namespace ProjectManager.Views;
 
@@ -34,63 +36,87 @@ public partial class canvasNodesView : UserControl
     
     private Matrix originalMatrix = new  Matrix();
 
-    private void createMap(ProjectData first)
+    private  void createMap(ProjectData first)
     {
         
             
         List<List<ProjectManager.DataTemplates.ProjectData>> map = new List<List<ProjectData>>();
-        List<List<Button>> objects = new List<List<Button>>();
+   
         
         Queue<ProjectData> candidates = new Queue<ProjectData>();
         candidates.Enqueue(first);
-        map.Add(candidates.ToList());
+        
         
         //vytvoreni nodes
+        List<ProjectData> vrstva = new List<ProjectData>(){first};
         while (candidates.Count > 0)
         {
-            List<ProjectData> vrstva = new List<ProjectData>();
-            candidates.First().childerns = new List<ProjectData>();
-            
-            foreach (ProjectData data in ProjectManager.DataTemplates.DataBaseController._taskrepository.Query().Execute().Where(i => i.parentId == candidates.First().Id).ToList())
+            map.Add(vrstva.ToList());
+            List<ProjectData> dalsiVrstva = new List<ProjectData>();
+            foreach (ProjectData node in vrstva)
             {
-                Console.WriteLine($"node s nazvem {candidates.First().Name} ma dite {data}");
-                vrstva.Add(data);
-                candidates.Enqueue(data);
-                candidates.First().childerns.Add(data);
+                node.childerns = new List<ProjectData>();
+
+                foreach (ProjectData data in ProjectManager.DataTemplates.DataBaseController._taskrepository.Query()
+                             .Execute().Where(i => i.parentId == candidates.First().Id).ToList()
+                             .OrderBy(i => i.parentId))
+                {
+                    Console.WriteLine($"node s nazvem {candidates.First().Name} ma dite {data}");
+                    dalsiVrstva.Add(data);
+                    candidates.Enqueue(data);
+                    candidates.First().childerns.Add(data);
+                }
+
+                if (candidates.Count > 0 && candidates.Peek().Id == node.Id)
+                {
+                    candidates.Dequeue();
+                }
             }
-            candidates.Dequeue();
-            map.Add(vrstva);
-        
+            
+            
+
+           
+            vrstva = dalsiVrstva;
+
         }
 //vykresleni nodes
+        var viewModel = new canvasNodesViewModel();
         for (int i = map.Count -1; i >= 0; i--)
         {
             double predchozi = 0;
             foreach (ProjectData node in map[i])
             {
                 mapaobjects = new List<Ellipse>();
+                
                 Button ellipse = new Button
                 {
                     Content = node.Name,
                     Background =  Brushes.White,
                     Foreground = Brushes.Black,
-                    Height = 30
+                    Height = 30,
+                    MaxWidth = 60
+                    
                     
                     
                 };
+                if (viewModel != null)
+                {
+                    ellipse.Click += (sender, args) =>{viewModel.OnClicked(node); MapCanvas.Children.Clear();onUpdate();} ;
+        
+                }
                 if (node.childerns.Count == 0)
                 {
              
-                    node.x = predchozi+200 - ellipse.Height/2;
+                    node.x = predchozi+200;
                     predchozi += 200;
                  
-                    node.y = i*100 + 50;
+                    node.y = i*100;
                     
                     
                 }
                 else
                 {
-                    double Stredx = (node.childerns[0].x+node.childerns[node.childerns.Count-1].x) / 2 - ellipse.Height/2;
+                    double Stredx = (node.childerns[0].x + node.childerns[node.childerns.Count - 1].x) / 2.0 ;
               
                     node.x = Stredx;
                     node.y = i*100;
@@ -103,8 +129,8 @@ public partial class canvasNodesView : UserControl
                     predchozi = node.x + 60;
                 }
 
-                Canvas.SetLeft(ellipse, node.x+-10);
-                Canvas.SetTop(ellipse, node.y-10);
+                Canvas.SetLeft(ellipse, node.x);
+                Canvas.SetTop(ellipse, node.y);
                 
                 MapCanvas.Children.Add(ellipse);
                 
@@ -227,6 +253,15 @@ public partial class canvasNodesView : UserControl
 
     }
 
+    public  void onUpdate()
+    {
+        var freshFirst = ProjectManager.DataTemplates.DataBaseController._taskrepository.Query()
+            .Where(p => p.parentId == 0).Execute().First();
+        
+        // 3. Znovu vykreslíme
+        createMap(freshFirst);
+    }
+
 
 
 
@@ -239,16 +274,15 @@ public partial class canvasNodesView : UserControl
         
         Console.WriteLine("spusti se toto?");
         InitializeComponent();
-        foreach (var u in ProjectManager.DataTemplates.DataBaseController._taskrepository.Query().Execute()                                                                  
-                     .Where(i => i.ProjectId == 0))                                                                                                          
-        {                                                                                                                                                                   
-            currentData.Add(u);                                                                                                                                             
-        }                        
-       ProjectData first = currentData.Where(i => i.ProjectId == 0).FirstOrDefault();
-        createMap(first);
-     
-        
+
+        var freshFirst = ProjectManager.DataTemplates.DataBaseController._taskrepository.Query()
+            .Where(p => p.parentId == 0).Execute().First();
+        if (freshFirst == null) return;
+                    createMap(freshFirst);
+               
       
+
+
 
 
     }
