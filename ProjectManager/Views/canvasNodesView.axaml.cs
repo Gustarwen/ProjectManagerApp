@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
@@ -33,7 +34,7 @@ public partial class canvasNodesView : UserControl
     private Ellipse template;
     private List<Ellipse> mapaobjects;
     private List<ProjectData> currentData = new List<ProjectData>();
-    
+    private canvasNodesViewModel viewModel;
     private Matrix originalMatrix = new  Matrix();
 
     private  void createMap(ProjectData first)
@@ -80,7 +81,7 @@ public partial class canvasNodesView : UserControl
 
         }
 //vykresleni nodes
-        var viewModel = new canvasNodesViewModel();
+        var viewModel = this.DataContext as canvasNodesViewModel;
         for (int i = map.Count -1; i >= 0; i--)
         {
             double predchozi = 0;
@@ -255,8 +256,10 @@ public partial class canvasNodesView : UserControl
 
     public  void onUpdate()
     {
+       
+        Console.WriteLine(viewModel.project.Id);
         var freshFirst = ProjectManager.DataTemplates.DataBaseController._taskrepository.Query()
-            .Where(p => p.parentId == 0).Execute().First();
+            .Where(p => p.parentId == 0 && p.projectId==viewModel.project.Id).Execute().First();
         
         // 3. Znovu vykreslíme
         createMap(freshFirst);
@@ -274,12 +277,32 @@ public partial class canvasNodesView : UserControl
         
         Console.WriteLine("spusti se toto?");
         InitializeComponent();
+        viewModel = this.DataContext as canvasNodesViewModel;
 
-        var freshFirst = ProjectManager.DataTemplates.DataBaseController._taskrepository.Query()
-            .Where(p => p.parentId == 0).Execute().First();
-        if (freshFirst == null) return;
-                    createMap(freshFirst);
-               
+        DataContextChanged += (sender, args) =>
+        {
+            viewModel = this.DataContext as canvasNodesViewModel;
+
+            if (viewModel != null)
+            {
+                if (viewModel.project != null)
+                {
+                    // Teprve v tento moment máme 100% jistotu, jaké ID projektu kreslíme!
+                    Console.WriteLine($"[ÚSPĚCH] Tento canvas bude vykreslovat projekt s ID: {viewModel.project.Id}");
+                    
+                    // Nyní je to bezpečné, aplikace už nespadne
+                    onUpdate();
+                }
+                else
+                {
+                    Console.WriteLine("[VAROVÁNÍ] DataContext přiřazen, ale vlastnost 'project' uvnitř canvasNodesViewModelu je NULL!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("[VAROVÁNÍ] Přiřazený DataContext není typu canvasNodesViewModel!");
+            }
+        };
       
 
 

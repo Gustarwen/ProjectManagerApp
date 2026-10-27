@@ -9,7 +9,13 @@ namespace ProjectManager.ViewModels;
 
 public partial class canvasNodesViewModel:ViewModelBase
 {
-    public class RefreshMapMessage{}
+    public Project project;
+    public  canvasNodesViewModel(Project selectedProject)
+    {
+        project = selectedProject;
+    }
+    
+ 
  
     public  void OnClicked(ProjectData selectedTask)
     {
@@ -21,4 +27,5 @@ public partial class canvasNodesViewModel:ViewModelBase
         ProjectManager.DataTemplates.DataBaseController.InsertTask(newData);
 
     }
+    
 }

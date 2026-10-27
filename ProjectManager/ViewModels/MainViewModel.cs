@@ -2,6 +2,7 @@ using System;
 using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ProjectManager.DataTemplates;
 using ProjectManager.Views;
 
 namespace ProjectManager.ViewModels;
@@ -12,7 +13,6 @@ public partial class MainViewModel : ViewModelBase
     
     private  HomeViewModel _home = new ();
     [ObservableProperty]private  QaAViewModel _QaA = new();
-    [ObservableProperty] private canvasNodesViewModel cnvs = new();
    
     [ObservableProperty] private ViewModelBase currentPage;
 
@@ -28,11 +28,7 @@ public partial class MainViewModel : ViewModelBase
         CurrentPage = _home;
     }
 
-    [RelayCommand]
-    private void GoToCanvas()
-    {
-        CurrentPage = cnvs;
-    }
+
 
     [RelayCommand]
     private void GoToQaA()
@@ -40,6 +36,7 @@ public partial class MainViewModel : ViewModelBase
         CurrentPage = _QaA;
         Console.WriteLine("Nacetl se QaA.");
     }
+    
 
     [RelayCommand]
     private void OpenSettingDialog(Window? parentWindow)
@@ -48,5 +45,11 @@ public partial class MainViewModel : ViewModelBase
         dialog.DataContext = new SettingViewModel();
         
         dialog.ShowDialog<bool>(parentWindow);
+    }
+
+    [RelayCommand]
+    private void GoToProjectBoard(Project project)
+    {
+        CurrentPage = new ProjectBoardViewModel(project);
     }
 }

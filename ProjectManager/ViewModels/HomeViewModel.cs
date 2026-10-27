@@ -48,6 +48,10 @@ public partial class HomeViewModel : ViewModelBase
         var item = Mydata.FirstOrDefault(x => x.Id == data.Id);
         ProjectManager.DataTemplates.DataBaseController._projectrepositroy.Update(item);
     }
+    
+    
+
+    
     [RelayCommand]
     public void AddProperty()
     {
