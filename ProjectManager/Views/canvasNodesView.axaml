@@ -17,7 +17,7 @@
                         <Canvas.RenderTransform>
                             <MatrixTransform ></MatrixTransform>
                         </Canvas.RenderTransform> 
-                        <Button x:Name="Button1" Height="100" Width="100" Canvas.Top="0" Canvas.Left="0"></Button>
+                        <Button x:Name="Button1" Height="100" Width="100" Canvas.Top="0" Canvas.Left="0"> hello</Button>
                     </Canvas>
                     
                 </Border>

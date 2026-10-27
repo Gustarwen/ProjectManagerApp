@@ -21,13 +21,15 @@
                 <Style Selector="Grid.finished">
                     <Setter Property="Background" Value="LightGreen"></Setter>
                 </Style>
+                
             </ListBox.Styles>
            
             <ListBox.ItemTemplate >
                 <DataTemplate>
-                    
+               
                        
-                        <Border Grid.ColumnSpan="5" Padding="150" Classes.finished="{Binding Finished}">
+                        <Border Grid.ColumnSpan="5" Padding="150" Classes.finished="{Binding Finished }">
+                            
                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
                                 <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
                                 <Button  HorizontalAlignment="Center"

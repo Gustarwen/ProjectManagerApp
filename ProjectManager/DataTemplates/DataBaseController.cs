@@ -8,21 +8,34 @@ namespace ProjectManager.DataTemplates;
 public class DataBaseController
 {
     
-    public static SqliteRepository<ProjectData> _repository = new SqliteRepository<ProjectData>("Data Source=./task.db");
-    static  DataBaseController()
+    public static SqliteRepository<ProjectData> _taskrepository = new SqliteRepository<ProjectData>("Data Source=./task.db");
+    public static SqliteRepository<Project> _projectrepositroy = new SqliteRepository<Project>("Data Source=./task.db");
+
+    static DataBaseController()
     {
-        _repository.InitializeTable(typeof(ProjectData));
+        _taskrepository.InitializeTable(typeof(ProjectData));
+        _projectrepositroy.InitializeTable(typeof(Project));
     }
+
+
 
  
 
-    public static void InsertProperty(ProjectData data)
+    public static void InsertTask(ProjectData data)
     {
-        _repository.Create(data);
+        _taskrepository.Create(data);
     }
-    public static void DeleteProperty(ProjectData data)
+    public static void DeleteTask(ProjectData data)
     {
-        _repository.Delete(data);
+        _taskrepository.Delete(data);
+    }
+    public static void InsertProject(Project data)
+    {
+        _projectrepositroy.Create(data);
+    }
+    public static void DeleteProject(Project data)
+    {
+        _projectrepositroy.Delete(data);
     }
     
 }

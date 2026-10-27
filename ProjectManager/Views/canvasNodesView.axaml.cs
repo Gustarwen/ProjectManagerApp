@@ -8,19 +8,13 @@ using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Media;
+using ProjectManager.DataTemplates;
 
 namespace ProjectManager.Views;
 
 public partial class canvasNodesView : UserControl
 {
-    public class node
-    {
-        public node? parent { get; set; }
-        public List<node> childern = new List<node>();
-        public double x { get; set; }
-        public double y { get; set; }
-
-    }
+   
     private bool pan = false;
     private Point start;
 // Přidej tyto 3 proměnné pro držení přesného stavu transformace:
@@ -35,97 +29,59 @@ public partial class canvasNodesView : UserControl
     private double linex;
     private double liney;
     private Ellipse template;
-    private node node1 = new();
-    private node node2 = new();
-    private node node3 = new();
-    private node node4 = new();
-    private node node5 = new();
-    private node node6 = new();
-    private node node7 = new();
-    private node node8 = new();
-    private node node9 = new();
-    private node node10 = new();
-    private node node11 = new();
     private List<Ellipse> mapaobjects;
-
+    private List<ProjectData> currentData = new List<ProjectData>();
     
     private Matrix originalMatrix = new  Matrix();
 
-    private void createMap()
+    private void createMap(ProjectData first)
     {
-        node1.childern.Add(node2);
-        node2.parent = node1;
-        node1.childern.Add(node3);
-        node3.parent = node1;
-        node2.childern.Add(node4);
-        node4.parent = node2;
-        node2.childern.Add(node5);
-        node5.parent = node2;
-        node3.childern.Add(node6);
-        node6.parent = node3;
-        node3.childern.Add(node7);
-        node7.parent = node3;
-        node node12 = new();
-        node3.childern.Add(node12);
-        node node13 = new();
-        node3.childern.Add(node13);
-        node node14 = new();
-        node3.childern.Add(node14);
-        node node15 = new();
-        node3.childern.Add(node15);
-        node node16 = new();
-        node3.childern.Add(node16);
-        node node17 = new();
-        node3.childern.Add(node17);
-        node node18 = new();
-        node3.childern.Add(node18);
-        node node19 = new();
-        node3.childern.Add(node19);
-        node4.childern.Add(node8);
-        node8.parent = node4;
-        node4.childern.Add(node9);
-        node9.parent = node4;
-        node4.childern.Add(node10);
-        node10.parent = node4;
-        node6.childern.Add(node11);
-        node11.parent = node6;
-
-        List<List<node>> map = new List<List<node>>();
+        
+            
+        List<List<ProjectManager.DataTemplates.ProjectData>> map = new List<List<ProjectData>>();
         List<List<Button>> objects = new List<List<Button>>();
-
-        Queue<node> candidates = new Queue<node>();
-        candidates.Enqueue(node1);
+        
+        Queue<ProjectData> candidates = new Queue<ProjectData>();
+        candidates.Enqueue(first);
+        map.Add(candidates.ToList());
+        
         //vytvoreni nodes
-        List<node> aktualniVrstva = new List<node> { node1 };
-        while (aktualniVrstva.Count > 0)
+        while (candidates.Count > 0)
         {
-            map.Add(aktualniVrstva);
-            List<node> dalsiVrstva = new List<node>();
-            foreach (node n in aktualniVrstva)
+            List<ProjectData> vrstva = new List<ProjectData>();
+            candidates.First().childerns = new List<ProjectData>();
+            
+            foreach (ProjectData data in ProjectManager.DataTemplates.DataBaseController._taskrepository.Query().Execute().Where(i => i.parentId == candidates.First().Id).ToList())
             {
-                dalsiVrstva.AddRange(n.childern);
+                Console.WriteLine($"node s nazvem {candidates.First().Name} ma dite {data}");
+                vrstva.Add(data);
+                candidates.Enqueue(data);
+                candidates.First().childerns.Add(data);
             }
-            aktualniVrstva = dalsiVrstva;
+            candidates.Dequeue();
+            map.Add(vrstva);
+        
         }
 //vykresleni nodes
         for (int i = map.Count -1; i >= 0; i--)
         {
             double predchozi = 0;
-            foreach (node node in map[i])
+            foreach (ProjectData node in map[i])
             {
                 mapaobjects = new List<Ellipse>();
                 Button ellipse = new Button
                 {
+                    Content = node.Name,
                     Background =  Brushes.White,
-                    Height = 20,
-                    Width = 20,
+                    Foreground = Brushes.Black,
+                    Height = 30
                     
                     
                 };
-                if (node.childern.Count == 0)
+                if (node.childerns.Count == 0)
                 {
              
-                    node.x = predchozi+200;
+                    node.x = predchozi+200 - ellipse.Height/2;
                     predchozi += 200;
                  
                     node.y = i*100 + 50;
@@ -134,7 +90,7 @@ public partial class canvasNodesView : UserControl
                 }
                 else
                 {
-                    double Stredx = (node.childern[0].x+node.childern[node.childern.Count-1].x) / 2;
+                    double Stredx = (node.childerns[0].x+node.childerns[node.childerns.Count-1].x) / 2 - ellipse.Height/2;
               
                     node.x = Stredx;
                     node.y = i*100;
@@ -156,10 +112,10 @@ public partial class canvasNodesView : UserControl
             
            
         }
-        candidates.Enqueue(node1);
+        candidates.Enqueue(first);
         do
         {
-            foreach (node node in candidates.First().childern)
+            foreach (ProjectData node in candidates.First().childerns)
             {
                 Line line = new Line
                 {
@@ -169,7 +125,7 @@ public partial class canvasNodesView : UserControl
                 };
                 line.Bind(Shape.StrokeProperty, new DynamicResourceExtension("redfour"));
                 line.StartPoint = new Point(node.x, node.y);
-                line.EndPoint = new Point(candidates.First().x,candidates.First().y);
+                line.EndPoint = new Point(candidates.First().x+20,candidates.First().y);
                 
                 candidates.Enqueue(node);
                 MapCanvas.Children.Add(line);
@@ -278,8 +234,18 @@ public partial class canvasNodesView : UserControl
     {
         
         
+        
+        
+        
+        Console.WriteLine("spusti se toto?");
         InitializeComponent();
-        createMap();
+        foreach (var u in ProjectManager.DataTemplates.DataBaseController._taskrepository.Query().Execute()                                                                  
+                     .Where(i => i.ProjectId == 0))                                                                                                          
+        {                                                                                                                                                                   
+            currentData.Add(u);                                                                                                                                             
+        }                        
+       ProjectData first = currentData.Where(i => i.ProjectId == 0).FirstOrDefault();
+        createMap(first);
      
         
       

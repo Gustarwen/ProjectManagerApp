@@ -14,7 +14,7 @@
     <Style Selector="TextBlock">
         <Setter Property="Height" Value="50"></Setter>
         <Setter Property="TextAlignment" Value="Center"></Setter>
-        <Setter Property="text"></Setter>
+
     </Style>
     
    <!--delete button-->
