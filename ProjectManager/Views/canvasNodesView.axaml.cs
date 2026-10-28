@@ -1,24 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Avalonia.Input;
-using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Media;
-using CommunityToolkit.Mvvm.Messaging;
 using ProjectManager.DataTemplates;
 using ProjectManager.ViewModels;
 
 namespace ProjectManager.Views;
 
-public partial class canvasNodesView : UserControl
+public partial class CanvasNodesView : UserControl
 {
    
-    private bool pan = false;
+    private bool _pan = false;
     private Point start;
 // Přidej tyto 3 proměnné pro držení přesného stavu transformace:
     private double currentZoom = 1.0;
@@ -32,9 +29,9 @@ public partial class canvasNodesView : UserControl
     private double linex;
     private double liney;
     private Ellipse template;
-    private List<Ellipse> mapaobjects;
+    private List<task> mapaobjects;
     private List<ProjectData> currentData = new List<ProjectData>();
-    private canvasNodesViewModel viewModel;
+    private CanvasNodesViewModel viewModel;
     private Matrix originalMatrix = new  Matrix();
 
     private  void createMap(ProjectData first)
@@ -56,16 +53,16 @@ public partial class canvasNodesView : UserControl
             List<ProjectData> dalsiVrstva = new List<ProjectData>();
             foreach (ProjectData node in vrstva)
             {
-                node.childerns = new List<ProjectData>();
+                node.Childerns = new List<ProjectData>();
 
-                foreach (ProjectData data in ProjectManager.DataTemplates.DataBaseController._taskrepository.Query()
-                             .Execute().Where(i => i.parentId == candidates.First().Id).ToList()
-                             .OrderBy(i => i.parentId))
+                foreach (ProjectData data in ProjectManager.DataTemplates.DataBaseController.Taskrepository.Query()
+                             .Execute().Where(i => i.ParentId == candidates.First().Id).ToList()
+                             .OrderBy(i => i.ParentId))
                 {
                     Console.WriteLine($"node s nazvem {candidates.First().Name} ma dite {data}");
                     dalsiVrstva.Add(data);
                     candidates.Enqueue(data);
-                    candidates.First().childerns.Add(data);
+                    candidates.First().Childerns.Add(data);
                 }
 
                 if (candidates.Count > 0 && candidates.Peek().Id == node.Id)
@@ -81,57 +78,48 @@ public partial class canvasNodesView : UserControl
 
         }
 //vykresleni nodes
-        var viewModel = this.DataContext as canvasNodesViewModel;
+       
         for (int i = map.Count -1; i >= 0; i--)
         {
             double predchozi = 0;
             foreach (ProjectData node in map[i])
             {
-                mapaobjects = new List<Ellipse>();
-                
-                Button ellipse = new Button
-                {
-                    Content = node.Name,
-                    Background =  Brushes.White,
-                    Foreground = Brushes.Black,
-                    Height = 30,
-                    MaxWidth = 60
-                    
-                    
-                    
-                };
+                mapaobjects = new List<task>();
+
+                task ellipse = new task();
+                ellipse.Name.Text = node.Name;
                 if (viewModel != null)
                 {
-                    ellipse.Click += (sender, args) =>{viewModel.OnClicked(node); MapCanvas.Children.Clear();onUpdate();} ;
+                    ellipse.Add.Click += (sender, args) =>{viewModel.OnClicked(node); MapCanvas.Children.Clear();onUpdate();} ;
         
                 }
-                if (node.childerns.Count == 0)
+                if (node.Childerns.Count == 0)
                 {
              
-                    node.x = predchozi+200;
-                    predchozi += 200;
+                    node.X = predchozi+500;
+                    predchozi += 500;
                  
-                    node.y = i*100;
+                    node.Y = i*100;
                     
                     
                 }
                 else
                 {
-                    double Stredx = (node.childerns[0].x + node.childerns[node.childerns.Count - 1].x) / 2.0 ;
+                    double Stredx = (node.Childerns[0].X + node.Childerns[node.Childerns.Count - 1].X) / 2.0 ;
               
-                    node.x = Stredx;
-                    node.y = i*100;
+                    node.X = Stredx;
+                    node.Y = i*100;
                     predchozi += x;
                     
-                    if (node.x < predchozi + 60)
+                    if (node.X < predchozi + 500)
                     {
-                        node.x = predchozi + 60;
+                        node.X = predchozi + 500;
                     }
-                    predchozi = node.x + 60;
+                    predchozi = node.X + 500;
                 }
 
-                Canvas.SetLeft(ellipse, node.x);
-                Canvas.SetTop(ellipse, node.y);
+                Canvas.SetLeft(ellipse, node.X);
+                Canvas.SetTop(ellipse, node.Y);
                 
                 MapCanvas.Children.Add(ellipse);
                 
@@ -142,7 +130,7 @@ public partial class canvasNodesView : UserControl
         candidates.Enqueue(first);
         do
         {
-            foreach (ProjectData node in candidates.First().childerns)
+            foreach (ProjectData node in candidates.First().Childerns)
             {
                 Line line = new Line
                 {
@@ -151,8 +139,8 @@ public partial class canvasNodesView : UserControl
                     ZIndex = -1
                 };
                 line.Bind(Shape.StrokeProperty, new DynamicResourceExtension("redfour"));
-                line.StartPoint = new Point(node.x, node.y);
-                line.EndPoint = new Point(candidates.First().x+20,candidates.First().y);
+                line.StartPoint = new Point(node.X+125, node.Y+20);
+                line.EndPoint = new Point(candidates.First().X+125,candidates.First().Y+20);
                 
                 candidates.Enqueue(node);
                 MapCanvas.Children.Add(line);
@@ -179,7 +167,7 @@ public partial class canvasNodesView : UserControl
 
         if (pointerProperties.IsLeftButtonPressed)
         {
-            pan = true;
+            _pan = true;
             start = e.GetPosition(Container);
         
 
@@ -193,7 +181,7 @@ public partial class canvasNodesView : UserControl
 
     private void OnPointerMoved(object sender, PointerEventArgs e)
     {
-        if (pan)
+        if (_pan)
         {
             Point current = e.GetPosition(Container);
             
@@ -212,7 +200,7 @@ public partial class canvasNodesView : UserControl
     private void OnPointerReleased(object sender, PointerReleasedEventArgs e)   
     {
         
-        pan = false;
+        _pan = false;
         e.Pointer.Capture(null);
     }
 
@@ -257,9 +245,9 @@ public partial class canvasNodesView : UserControl
     public  void onUpdate()
     {
        
-        Console.WriteLine(viewModel.project.Id);
-        var freshFirst = ProjectManager.DataTemplates.DataBaseController._taskrepository.Query()
-            .Where(p => p.parentId == 0 && p.projectId==viewModel.project.Id).Execute().First();
+        Console.WriteLine(viewModel.Project.Id);
+        var freshFirst = ProjectManager.DataTemplates.DataBaseController.Taskrepository.Query()
+            .Where(p => (p.ParentId == 0||p.ParentId == null) && p.ProjectId==viewModel.Project.Id).Execute().First();
         
         // 3. Znovu vykreslíme
         createMap(freshFirst);
@@ -268,7 +256,7 @@ public partial class canvasNodesView : UserControl
 
 
 
-    public canvasNodesView()
+    public CanvasNodesView()
     {
         
         
@@ -277,18 +265,18 @@ public partial class canvasNodesView : UserControl
         
         Console.WriteLine("spusti se toto?");
         InitializeComponent();
-        viewModel = this.DataContext as canvasNodesViewModel;
+        viewModel = DataContext as CanvasNodesViewModel;
 
         DataContextChanged += (sender, args) =>
         {
-            viewModel = this.DataContext as canvasNodesViewModel;
+            viewModel = this.DataContext as CanvasNodesViewModel;
 
             if (viewModel != null)
             {
-                if (viewModel.project != null)
+                if (viewModel.Project != null)
                 {
                     // Teprve v tento moment máme 100% jistotu, jaké ID projektu kreslíme!
-                    Console.WriteLine($"[ÚSPĚCH] Tento canvas bude vykreslovat projekt s ID: {viewModel.project.Id}");
+                    Console.WriteLine($"[ÚSPĚCH] Tento canvas bude vykreslovat projekt s ID: {viewModel.Project.Id}");
                     
                     // Nyní je to bezpečné, aplikace už nespadne
                     onUpdate();

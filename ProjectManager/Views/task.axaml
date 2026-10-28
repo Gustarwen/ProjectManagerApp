@@ -4,12 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ProjectManager.Views.task">
-    <Grid ColumnDefinitions="Auto Auto" RowDefinitions="Auto Auto Auto">
-        <Image Grid.Column="0" Grid.RowSpan="2" Source="../Images/mainImage.png"></Image>
-        
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="NameOfTask"/>
-        
-      
-        
+    <Grid  ColumnDefinitions="Auto Auto Auto" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Button Grid.Column="0" Background="{DynamicResource RedFive}" Width="60"  Height="60" Foreground="white" FontSize="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  CornerRadius="30">-</Button>
+        <Border Grid.Column="1" Height="60" Margin="10" Padding="15" ><TextBlock x:Name="Name" >hello jak se mate ja se mam fajnove</TextBlock></Border>
+        <Button x:Name="Add" Grid.Column="2" Width="60" Height="60" CornerRadius="30" Background="{DynamicResource GreenTwo}" FontSize="40" Foreground="white" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">+</Button>
+                
     </Grid>
+    <UserControl.Styles>
+        <StyleInclude Source="../styles/nodestyle.axaml"></StyleInclude>
+    </UserControl.Styles>
 </UserControl>

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Durable.Sql;
+﻿
 using Durable.Sqlite;
 
 
@@ -8,48 +6,38 @@ namespace ProjectManager.DataTemplates;
 
 public class DataBaseController
 {
-    
-    public static SqliteRepository<ProjectData> _taskrepository = new SqliteRepository<ProjectData>("Data Source=./task.db");
-    public static SqliteRepository<Project> _projectrepositroy = new SqliteRepository<Project>("Data Source=./task.db");
+    //definice ovladačů pro SQLite databázi
+    public static SqliteRepository<ProjectData> Taskrepository = new SqliteRepository<ProjectData>("Data Source=./task.db");
+    public static SqliteRepository<Project> Projectrepositroy = new SqliteRepository<Project>("Data Source=./task.db");
 
+    //konstruktor pro class spravující databázi
     static DataBaseController()
     {
-        _taskrepository.InitializeTable(typeof(ProjectData));
-        _projectrepositroy.InitializeTable(typeof(Project));
+        Taskrepository.InitializeTable(typeof(ProjectData));
+        Projectrepositroy.InitializeTable(typeof(Project));
     }
 
 
 
  
-
+    //funkce ukládající Task
     public static void InsertTask(ProjectData data)
     {
-        try 
-        {
-            _taskrepository.Create(data);
-            Console.WriteLine("Úkol úspěšně vložen do DB.");
-        }
-        catch (Exception ex) 
-        {
-            // ZDE uvidíte přesný důvod, proč se úkol neuložil (např. chyba reflexe, chybějící sloupec apod.)
-            Console.WriteLine($"CHYBA PŘI UKLÁDÁNÍ: {ex.Message}");
-            if (ex.InnerException != null)
-            {
-                Console.WriteLine($"Detail chyby: {ex.InnerException.Message}");
-            }
-        }
+       
+            Taskrepository.Create(data);
+     
     }
     public static void DeleteTask(ProjectData data)
     {
-        _taskrepository.Delete(data);
+        Taskrepository.Delete(data);
     }
-    public static void InsertProject(Project data)
+    public static Project InsertProject(Project data)
     {
-        _projectrepositroy.Create(data);
+        return Projectrepositroy.Create(data);
     }
     public static void DeleteProject(Project data)
     {
-        _projectrepositroy.Delete(data);
+        Projectrepositroy.Delete(data);
     }
     
 }

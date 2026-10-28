@@ -6,7 +6,6 @@
              x:Class="ProjectManager.Views.HomeView"
              xmlns:vm="clr-namespace:ProjectManager.ViewModels"
              x:DataType="vm:HomeViewModel"
-             xmlns:data ="clr-namespace:ProjectManager.DataTemplates"
              xmlns:view="clr-namespace:ProjectManager.Views">
     <UserControl.Styles>
         <StyleInclude Source="../styles/style.axaml"></StyleInclude>

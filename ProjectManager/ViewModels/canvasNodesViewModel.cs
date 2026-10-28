@@ -1,30 +1,32 @@
 ﻿using System;
-using System.Reflection.Metadata.Ecma335;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
 using ProjectManager.DataTemplates;
 
 namespace ProjectManager.ViewModels;
 
-public partial class canvasNodesViewModel:ViewModelBase
+public partial class CanvasNodesViewModel:ViewModelBase
 {
-    public Project project;
-    public  canvasNodesViewModel(Project selectedProject)
+    public Project Project;
+    public  CanvasNodesViewModel(Project selectedProject)
     {
-        project = selectedProject;
+        Project = selectedProject;
     }
     
  
  
     public  void OnClicked(ProjectData selectedTask)
     {
+       
+
+// Spusťte insert uvnitř try-catch, jak máte teď
+
+        Console.WriteLine("dostal jsem se do bodu kdy insertnu task");
         ProjectData newData = new ProjectData();
         newData.Name = selectedTask.Name;
         newData.Finished = selectedTask.Finished;
-        newData.ProjectId = selectedTask.ProjectId;
-        newData.parentId = selectedTask.Id;
-        ProjectManager.DataTemplates.DataBaseController.InsertTask(newData);
+        newData.ProjectId = Project.Id;
+        Console.WriteLine(Project.Id);
+        newData.ParentId = selectedTask.Id;
+        DataBaseController.InsertTask(newData);
 
     }
     

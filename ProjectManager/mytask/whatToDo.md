@@ -7,6 +7,4 @@
 
 **tasks**
 
--   complete the node graph
--   add it to projects - on click or something like that
--   resize this file onto more text
+-   add some interaction to each node in graph

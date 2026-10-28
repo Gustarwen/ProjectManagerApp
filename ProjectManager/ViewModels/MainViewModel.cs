@@ -12,9 +12,9 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty] public partial string Greeting { get; set; } = "Welcome to Avalonia!";
     
     private  HomeViewModel _home = new ();
-    [ObservableProperty]private  QaAViewModel _QaA = new();
+    [ObservableProperty]private  QaAViewModel _qaa = new();
    
-    [ObservableProperty] private ViewModelBase currentPage;
+    [ObservableProperty] private ViewModelBase _currentPage;
 
     public MainViewModel()
     {
@@ -33,7 +33,7 @@ public partial class MainViewModel : ViewModelBase
     [RelayCommand]
     private void GoToQaA()
     {
-        CurrentPage = _QaA;
+        CurrentPage = _qaa;
         Console.WriteLine("Nacetl se QaA.");
     }
     
@@ -41,10 +41,13 @@ public partial class MainViewModel : ViewModelBase
     [RelayCommand]
     private void OpenSettingDialog(Window? parentWindow)
     {
-        var dialog = new ProjectManager.Views.SettingsView();
+        var dialog = new SettingsView();
         dialog.DataContext = new SettingViewModel();
-        
-        dialog.ShowDialog<bool>(parentWindow);
+
+        if (parentWindow != null)
+        {
+            dialog.ShowDialog<bool>(parentWindow);
+        }
     }
 
     [RelayCommand]

@@ -11,25 +11,25 @@ namespace ProjectManager.ViewModels;
 public partial class HomeViewModel : ViewModelBase
 {
     public ObservableCollection<Project> Mydata { get; set; } = new();
-    [ObservableProperty] private string names="Untitled";
-    [ObservableProperty] private DateTimeOffset? dates;
-    [ObservableProperty] private DateTime today = DateTime.Today;
+    [ObservableProperty] private string _names="Untitled";
+    [ObservableProperty] private DateTimeOffset? _dates;
+    [ObservableProperty] private DateTime _today = DateTime.Today;
     
 
     public HomeViewModel()
     {
-        foreach (var u in ProjectManager.DataTemplates.DataBaseController._projectrepositroy.Query().Execute())
+        foreach (var u in DataBaseController.Projectrepositroy.Query().Execute())
         {
-            u.tasks = new List<ProjectData>();
-            foreach (var v in ProjectManager.DataTemplates.DataBaseController._taskrepository.Query().Execute())
+            u.Tasks = new List<ProjectData>();
+            foreach (var v in DataBaseController.Taskrepository.Query().Execute())
             {
                 
-                u.tasks.Add(v);
+                u.Tasks.Add(v);
             }
             Mydata.Add(u);
             
         }
-        DateTime today = DateTime.Today;
+     
     }
 
     
@@ -38,15 +38,18 @@ public partial class HomeViewModel : ViewModelBase
     public void DeleteProperty(Project data)
     {
         Mydata.Remove(data);
-        ProjectManager.DataTemplates.DataBaseController.DeleteProject(data);
+       DataBaseController.DeleteProject(data);
     }
     
     [RelayCommand]
     public void Accept(Project data)
     {
-        data.Finished =1;
+        data.Finished =!data.Finished;
         var item = Mydata.FirstOrDefault(x => x.Id == data.Id);
-        ProjectManager.DataTemplates.DataBaseController._projectrepositroy.Update(item);
+        if (item != null)
+        {
+            DataBaseController.Projectrepositroy.Update(item);
+        }
     }
     
     
@@ -62,13 +65,18 @@ public partial class HomeViewModel : ViewModelBase
          
             
         };
-        if (Dates == null || newData.Name == null)
+        if (Dates == null)
         {
             return;
             
         }
         Mydata.Add(newData);
-        ProjectManager.DataTemplates.DataBaseController.InsertProject(newData);
+        newData=DataBaseController.InsertProject(newData);
+        ProjectData NewTask = new ProjectData();
+        NewTask.ProjectId = newData.Id;
+        NewTask.Name = newData.Name;
+        NewTask.Date = newData.Date;
+        DataBaseController.InsertTask(NewTask);
         Names = $"Untitled{Mydata.Count + 1}";
         Dates = null;
     }

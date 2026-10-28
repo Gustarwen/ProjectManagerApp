@@ -1,6 +1,6 @@
 ﻿namespace ProjectManager.DataTemplates;
 
-public class task
+public class Task
 {
     
 }
