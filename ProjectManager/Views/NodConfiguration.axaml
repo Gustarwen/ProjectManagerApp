@@ -9,7 +9,7 @@
         Title="NodConfiguration">
         <StackPanel>
                 <TextBox x:Name="NameBox" Watermark="name of task"></TextBox>
-                <DatePicker></DatePicker>
+                <DatePicker x:Name="MyDatePicker"></DatePicker>
                 <Button x:Name="Accept">Add Task</Button>
                 
         </StackPanel>

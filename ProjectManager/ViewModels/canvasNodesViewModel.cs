@@ -1,5 +1,7 @@
 ﻿using System;
+using Avalonia.Controls;
 using ProjectManager.DataTemplates;
+using ProjectManager.Views;
 
 namespace ProjectManager.ViewModels;
 
@@ -10,8 +12,14 @@ public partial class CanvasNodesViewModel:ViewModelBase
     {
         Project = selectedProject;
     }
-    
- 
+
+    public void showDialog(CanvasNodesView nodesview,Window root,ProjectData selectedProject)
+    {
+        Window dialog = new NodConfiguration(selectedProject,nodesview);
+        dialog.DataContext = this;
+        dialog.ShowDialog(root);
+        
+    }
  
     public  void OnClicked(ProjectData selectedTask)
     {

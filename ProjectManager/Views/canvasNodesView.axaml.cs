@@ -7,6 +7,7 @@ using Avalonia.Controls.Shapes;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Media;
+using Avalonia.VisualTree;
 using ProjectManager.DataTemplates;
 using ProjectManager.ViewModels;
 
@@ -90,7 +91,10 @@ public partial class CanvasNodesView : UserControl
                 ellipse.Name.Text = node.Name;
                 if (viewModel != null)
                 {
-                    ellipse.Add.Click += (sender, args) =>{viewModel.OnClicked(node); MapCanvas.Children.Clear();onUpdate();} ;
+                    ellipse.Add.Click += (sender, args) =>
+                    {
+                        Window root =this.FindAncestorOfType<Window>();
+                        viewModel.showDialog(this,root,node); } ;
         
                 }
                 if (node.Childerns.Count == 0)
