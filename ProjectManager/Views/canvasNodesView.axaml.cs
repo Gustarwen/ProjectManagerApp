@@ -35,134 +35,118 @@ public partial class CanvasNodesView : UserControl
     private CanvasNodesViewModel viewModel;
     private Matrix originalMatrix = new  Matrix();
 
-    private  void createMap(ProjectData first)
+    private int _addPositionToNodes(ProjectData firstData,double vrstva)
     {
-        
-            
-        List<List<ProjectManager.DataTemplates.ProjectData>> map = new List<List<ProjectData>>();
-   
-        
-        Queue<ProjectData> candidates = new Queue<ProjectData>();
-        candidates.Enqueue(first);
-        
-        
-        //vytvoreni nodes
-        List<ProjectData> vrstva = new List<ProjectData>(){first};
-        while (candidates.Count > 0)
+        firstData.Y = vrstva;
+        if (firstData.Childerns.Count == 0)
         {
-            map.Add(vrstva.ToList());
-            List<ProjectData> dalsiVrstva = new List<ProjectData>();
-            foreach (ProjectData node in vrstva)
-            {
-                node.Childerns = new List<ProjectData>();
-
-                foreach (ProjectData data in ProjectManager.DataTemplates.DataBaseController.Taskrepository.Query()
-                             .Execute().Where(i => i.ParentId == candidates.First().Id).ToList()
-                             .OrderBy(i => i.ParentId))
-                {
-                    Console.WriteLine($"node s nazvem {candidates.First().Name} ma dite {data}");
-                    dalsiVrstva.Add(data);
-                    candidates.Enqueue(data);
-                    candidates.First().Childerns.Add(data);
-                }
-
-                if (candidates.Count > 0 && candidates.Peek().Id == node.Id)
-                {
-                    candidates.Dequeue();
-                }
-            }
-            
-            
-
-           
-            vrstva = dalsiVrstva;
-
+            return 500;}
+        List<int> thedata = new List<int>();
+        int sum = 0;
+        for (int i = 0; i < firstData.Childerns.Count; i++)
+        
+        {
+            thedata.Add(_addPositionToNodes(firstData.Childerns[i],vrstva + 250));
+            sum += thedata[thedata.Count - 1];
         }
-//vykresleni nodes
-       
-        for (int i = map.Count -1; i >= 0; i--)
-        {
-            double predchozi = 0;
-            foreach (ProjectData node in map[i])
-            {
-                mapaobjects = new List<task>();
 
-                task ellipse = new task();
-                ellipse.Name.Text = node.Name;
-                if (viewModel != null)
-                {
-                    ellipse.Add.Click += (sender, args) =>
-                    {
-                        Window root =this.FindAncestorOfType<Window>();
-                        viewModel.showDialog(this,root,node); } ;
-        
-                }
-                if (node.Childerns.Count == 0)
-                {
+        for (int o = 0; o < thedata.Count; o++)
+        {
+            
+        }
+
+        int X = -sum / 2;
+ 
+        for (int i = 0; i < thedata.Count; i++)
+        {
+                firstData.Childerns[i].X = X+ thedata[i]/2;
+                X += thedata[i];
              
-                    node.X = predchozi+500;
-                    predchozi += 500;
-                 
-                    node.Y = i*100;
-                    
-                    
-                }
-                else
-                {
-                    double Stredx = (node.Childerns[0].X + node.Childerns[node.Childerns.Count - 1].X) / 2.0 ;
-              
-                    node.X = Stredx;
-                    node.Y = i*100;
-                    predchozi += x;
-                    
-                    if (node.X < predchozi + 500)
-                    {
-                        node.X = predchozi + 500;
-                    }
-                    predchozi = node.X + 500;
-                }
-
-                Canvas.SetLeft(ellipse, node.X);
-                Canvas.SetTop(ellipse, node.Y);
-                
-                MapCanvas.Children.Add(ellipse);
-                
-            }
-            
-           
-        }
-        candidates.Enqueue(first);
-        do
-        {
-            foreach (ProjectData node in candidates.First().Childerns)
-            {
-                Line line = new Line
-                {
-                    
-                    StrokeThickness = 5,
-                    ZIndex = -1
-                };
-                line.Bind(Shape.StrokeProperty, new DynamicResourceExtension("redfour"));
-                line.StartPoint = new Point(node.X+125, node.Y+20);
-                line.EndPoint = new Point(candidates.First().X+125,candidates.First().Y+20);
-                
-                candidates.Enqueue(node);
-                MapCanvas.Children.Add(line);
-
-            }
-
-            candidates.Dequeue();
           
+        }
 
+        return sum;
+    }
 
-
-
-
-
-
-
-        } while (candidates.Count > 0);
+    private void _fixPositionToNodes(ProjectData firstData,double X)
+    {
+        firstData.X = firstData.X+ X;
+        for (int i = 0; i < firstData.Childerns.Count; i++)
+        {
+            _fixPositionToNodes(firstData.Childerns[i], firstData.X);
+        }
         
+    }
+    public void createMap(ProjectData firstData)
+    {
+        // Vyčištění plátna před novým vykreslením
+        MapCanvas.Children.Clear();
+
+        // 1. KROK: Načteme VŠECHNY uzly pro daný projekt najednou z DB (obrovské zrychlení)
+        List<ProjectData> allNodes = DataBaseController.Taskrepository.Query().Execute()
+            .Where(p => p.ProjectId == firstData.ProjectId).ToList();
+
+        // Najdeme náš skutečný kořenový uzel uvnitř této sady (abychom pracovali se správnou instancí)
+        ProjectData root = allNodes.FirstOrDefault(p => p.Id == firstData.Id) ?? firstData;
+
+        // 2. KROK: Sestavení stromu v paměti pomocí fronty (BFS)
+        Queue<ProjectData> queue = new Queue<ProjectData>();
+        queue.Enqueue(root);
+    
+        while (queue.Count > 0)
+        {
+            ProjectData current = queue.Dequeue();
+        
+            // Hledáme v lokálním seznamu v paměti, tím pádem provazujeme stále stejné instance!
+            current.Childerns = allNodes.Where(p => p.ParentId == current.Id).ToList();
+        
+            foreach (var childern in current.Childerns)
+            {
+                queue.Enqueue(childern);
+            }
+        }
+    
+        // 3. KROK: Výpočet pozic (s opravenou matematikou)
+        int celkovaSirka = _addPositionToNodes(root, 0);
+    
+        // Posuneme kořen doprostřed plátna (např. 1000px), aby levá větev neutekla do záporu
+        double startovniX = Math.Max(1000.0, celkovaSirka / 2.0);
+        _fixPositionToNodes(root, startovniX);
+    
+        // 4. KROK: Samotné vykreslení
+        _renderNodes(root);
+    }
+
+    private void _renderNodes(ProjectData node)
+    {
+        task task = new task();
+        task.Add.Click += (a, v) =>
+        {
+            Window root = this.FindAncestorOfType<Window>();
+            viewModel.showDialog((CanvasNodesView)this,root, node);
+
+        };
+        Canvas.SetLeft(task,node.X);
+        Canvas.SetTop(task,node.Y);
+        task.Name.Text = node.Name;
+        MapCanvas.Children.Add(task);
+        Console.WriteLine($"tahle nodes ma {node.Childerns.Count} deti a to je na pozici {node.X} a {node.Y}");
+        foreach (var childern in node.Childerns)
+        {
+            Line line = new Line()
+            {
+                StartPoint = new Point(node.X+125,node.Y+25),
+                EndPoint = new Point(childern.X+125,childern.Y+25),
+                ZIndex = -1,
+                StrokeThickness = 10
+             
+            };
+            line.Bind(Line.StrokeProperty, new DynamicResourceExtension("redone"));
+
+            
+            MapCanvas.Children.Add(line);
+            _renderNodes(childern);
+        }
     }
 
     private void OnPointerPressed(object sender, PointerPressedEventArgs e)

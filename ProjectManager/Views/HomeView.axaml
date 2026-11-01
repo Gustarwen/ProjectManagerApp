@@ -27,10 +27,11 @@
                 <DataTemplate>
                
                        <Button x:Name="ProjectButton"  Command="{Binding $parent[view:MainWindow].((vm:MainViewModel)DataContext).GoToProjectBoardCommand}"  CommandParameter="{Binding}">
-                           <Border Grid.ColumnSpan="5" Padding="150" Classes.finished="{Binding Finished }">
+                           <Border Grid.ColumnSpan="5" Padding="150" Classes.finished="{Binding Finished }" x:Name="DragDrop" DragDrop.AllowDrop="True"  DragDrop.Drop="OnDrop">
                             
-                               <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
-                                   <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                               <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"  Width="300" Height="300">
+                                   <Image Source="{Binding ProjectBitmap}" ></Image>
+                                   <TextBlock Text="{Binding Name}" VerticalAlignment="Center"  HorizontalAlignment="Center" />
                                    <Button  HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
                                             Command="{Binding $parent[ListBox].DataContext.AcceptCommand}" 

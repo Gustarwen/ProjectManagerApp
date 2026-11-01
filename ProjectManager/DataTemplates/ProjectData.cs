@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using Durable;
 using System.Collections.Generic;
+using Avalonia.Media.Imaging;
 
 namespace ProjectManager.DataTemplates;
 
@@ -17,6 +18,8 @@ public partial class ProjectData : ObservableObject
     [property: Property("Finished", Flags.Integer, 1)] [ObservableProperty]
     private bool _finished = false;
 
+  
+    
     //hodnota spojující každý Task s jeho projektem
     [Property("project_id")] [ForeignKey(typeof(Project), "Id")]
     public int ProjectId{get;set;}
@@ -46,6 +49,8 @@ public partial class ProjectData : ObservableObject
 [Entity("projects")]
 public partial class Project : ObservableObject
 {
+    [property:Property("Image", Flags.String)] [ObservableProperty][NotifyPropertyChangedFor(nameof(ProjectBitmap))]
+    private string _myImage =@"C:\Users\alois\Pictures\catdos.png";
     //id pro každý projekt
     [Property("Id", Flags.Integer | Flags.PrimaryKey | Flags.AutoIncrement)]
     public int Id { get; set; }
@@ -62,5 +67,25 @@ public partial class Project : ObservableObject
     public DateTimeOffset? Date { get; set; }
 
     public List<ProjectData> Tasks = new List<ProjectData>();
+    
+    public Bitmap? ProjectBitmap
+    {
+        get
+        {
+            if(string.IsNullOrEmpty(MyImage)||!System.IO.File.Exists(MyImage))
+                return null;
+            try
+            {
+                return new Bitmap(MyImage);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+    }
 
 }
+
+

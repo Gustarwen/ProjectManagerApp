@@ -13,12 +13,18 @@
                             PointerWheelChanged="OnWheelChanged"
                         ClipToBounds="True"
                         BorderBrush="White">
-                    <Canvas HorizontalAlignment="Left" VerticalAlignment="Top" Name="MapCanvas" Width="10000" Height="100000" RenderTransformOrigin="0,0">
-                        <Canvas.RenderTransform>
-                            <MatrixTransform ></MatrixTransform>
-                        </Canvas.RenderTransform> 
-                        <Button x:Name="Button1" Height="100" Width="100" Canvas.Top="0" Canvas.Left="0"> hello</Button>
-                    </Canvas>
+                    <Grid>
+                        <Canvas HorizontalAlignment="Left" VerticalAlignment="Top" Name="MapCanvas" Width="10000" Height="100000" RenderTransformOrigin="0,0">
+                            <Canvas.RenderTransform>
+                                <MatrixTransform ></MatrixTransform>
+                            </Canvas.RenderTransform> 
+                            <Button x:Name="Button1" Height="100" Width="100" Canvas.Top="0" Canvas.Left="0"> hello</Button>
+                            
+                        </Canvas>
+                        <Button HorizontalAlignment="Right" VerticalAlignment="Bottom">+</Button>
+                    </Grid>
+                    
+                   
                     
                 </Border>
     <UserControl.Styles>
