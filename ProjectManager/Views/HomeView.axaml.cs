@@ -42,8 +42,7 @@
                     {
                         dbProject.MyImage = mysender.MyImage; // Zapíšeme cestu přímo do DB objektu
                         DataBaseController.Projectrepositroy.Update(dbProject);
-                        Console.WriteLine("Obrázek úspěšně zapsán do DB kontextu.");
-                        Console.WriteLine($"id daneho projectu je {dbProject.Id}");
+
                     }
                 }
             }

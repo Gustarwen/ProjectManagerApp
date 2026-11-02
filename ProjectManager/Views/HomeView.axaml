@@ -30,7 +30,7 @@
                            <Border Grid.ColumnSpan="5" Padding="150" Classes.finished="{Binding Finished }" x:Name="DragDrop" DragDrop.AllowDrop="True"  DragDrop.Drop="OnDrop">
                             
                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"  Width="300" Height="300">
-                                   <Image Source="{Binding ProjectBitmap}" ></Image>
+                                   <Image Height="150" Width="150" Source="{Binding ProjectBitmap}" ></Image>
                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center"  HorizontalAlignment="Center" />
                                    <Button  HorizontalAlignment="Center"
                                             VerticalAlignment="Center"

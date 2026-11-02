@@ -119,18 +119,24 @@ public partial class CanvasNodesView : UserControl
 
     private void _renderNodes(ProjectData node)
     {
-        task task = new task();
-        task.Add.Click += (a, v) =>
+        task tasks = new task(node);
+
+        tasks.Add.Click += (a, v) =>
         {
             Window root = this.FindAncestorOfType<Window>();
             viewModel.showDialog((CanvasNodesView)this,root, node);
 
         };
-        Canvas.SetLeft(task,node.X);
-        Canvas.SetTop(task,node.Y);
-        task.Name.Text = node.Name;
-        MapCanvas.Children.Add(task);
-        Console.WriteLine($"tahle nodes ma {node.Childerns.Count} deti a to je na pozici {node.X} a {node.Y}");
+        tasks.Delete.Click += (a, v) => {viewModel.DeleteTask(node); onUpdate(); };
+        Canvas.SetLeft(tasks,node.X);
+        Canvas.SetTop(tasks,node.Y);
+        tasks.Name.Text = node.Name;
+        MapCanvas.Children.Add(tasks);
+      
+       
+        
+
+
         foreach (var childern in node.Childerns)
         {
             Line line = new Line()
@@ -233,8 +239,8 @@ public partial class CanvasNodesView : UserControl
     public  void onUpdate()
     {
        
-        Console.WriteLine(viewModel.Project.Id);
-        var freshFirst = ProjectManager.DataTemplates.DataBaseController.Taskrepository.Query()
+       
+        var freshFirst = DataBaseController.Taskrepository.Query()
             .Where(p => (p.ParentId == 0||p.ParentId == null) && p.ProjectId==viewModel.Project.Id).Execute().First();
         
         // 3. Znovu vykreslíme
@@ -251,7 +257,7 @@ public partial class CanvasNodesView : UserControl
         
         
         
-        Console.WriteLine("spusti se toto?");
+      
         InitializeComponent();
         viewModel = DataContext as CanvasNodesViewModel;
 
@@ -263,20 +269,9 @@ public partial class CanvasNodesView : UserControl
             {
                 if (viewModel.Project != null)
                 {
-                    // Teprve v tento moment máme 100% jistotu, jaké ID projektu kreslíme!
-                    Console.WriteLine($"[ÚSPĚCH] Tento canvas bude vykreslovat projekt s ID: {viewModel.Project.Id}");
-                    
-                    // Nyní je to bezpečné, aplikace už nespadne
+                  
                     onUpdate();
                 }
-                else
-                {
-                    Console.WriteLine("[VAROVÁNÍ] DataContext přiřazen, ale vlastnost 'project' uvnitř canvasNodesViewModelu je NULL!");
-                }
-            }
-            else
-            {
-                Console.WriteLine("[VAROVÁNÍ] Přiřazený DataContext není typu canvasNodesViewModel!");
             }
         };
       

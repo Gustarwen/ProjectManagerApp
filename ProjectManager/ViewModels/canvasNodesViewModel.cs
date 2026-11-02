@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Avalonia.Controls;
 using ProjectManager.DataTemplates;
 using ProjectManager.Views;
@@ -20,6 +21,12 @@ public partial class CanvasNodesViewModel:ViewModelBase
         dialog.ShowDialog(root);
         
     }
+
+    public void DeleteTask(ProjectData data)
+    {
+        DataBaseController.DeleteTask(data);
+        
+    }
  
     public  void OnClicked(ProjectData selectedTask)
     {
@@ -34,6 +41,8 @@ public partial class CanvasNodesViewModel:ViewModelBase
         newData.ProjectId = Project.Id;
         Console.WriteLine(Project.Id);
         newData.ParentId = selectedTask.Id;
+        ProjectData parent = DataBaseController.Taskrepository.Query().Where(p=>p.Id==newData.ParentId).Execute().First();
+        newData.Finished = parent.Finished;
         DataBaseController.InsertTask(newData);
 
     }

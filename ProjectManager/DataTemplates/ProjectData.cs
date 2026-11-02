@@ -50,7 +50,7 @@ public partial class ProjectData : ObservableObject
 public partial class Project : ObservableObject
 {
     [property:Property("Image", Flags.String)] [ObservableProperty][NotifyPropertyChangedFor(nameof(ProjectBitmap))]
-    private string _myImage =@"C:\Users\alois\Pictures\catdos.png";
+    private string _myImage ="";
     //id pro každý projekt
     [Property("Id", Flags.Integer | Flags.PrimaryKey | Flags.AutoIncrement)]
     public int Id { get; set; }

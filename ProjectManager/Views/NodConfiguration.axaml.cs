@@ -16,7 +16,7 @@ public partial class NodConfiguration : Window
        
         Accept.Click += (a, p) =>
         {
-            Console.WriteLine("hello...vytvořil jsem ");
+          
             var informations = DataContext as CanvasNodesViewModel;
             ProjectData data = new ProjectData();
             data.ProjectId = selectedTask.ProjectId;
@@ -24,7 +24,7 @@ public partial class NodConfiguration : Window
             data.Name = NameBox.Text;
             data.Date = MyDatePicker.SelectedDate;
             data.Id = selectedTask.Id;
-            Console.WriteLine($"toto je node ktera byla vytvorena {selectedTask.Id} a node dostala {data.ParentId}");
+         
           
             informations.OnClicked(data);
             nodesview.MapCanvas.Children.Clear();
