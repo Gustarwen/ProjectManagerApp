@@ -1,8 +1,9 @@
 ﻿
+using System;
 using System.Collections.Generic;
-
+using System.Linq;
 using Avalonia.Controls;
-
+using Avalonia.Interactivity;
 using ProjectManager.DataTemplates;
 using ProjectManager.ViewModels;
 
@@ -23,7 +24,9 @@ public partial class task : UserControl
         viewmodel.Finished = Data.Finished;
         DataContext = viewmodel;
         data = Data;
-        task.tasks.Add(this);
+        
+   
+        
        
     }
     ~task()

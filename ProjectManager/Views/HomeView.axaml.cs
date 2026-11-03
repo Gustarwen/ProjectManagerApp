@@ -1,5 +1,6 @@
 ﻿    using System;
     using System.Diagnostics;
+    using System.IO;
     using System.Linq;
     using Avalonia;
     using Avalonia.Controls;
@@ -20,20 +21,22 @@
             
         }
 
-        private void OnDrop(object? sender, DragEventArgs e)
+        private async void OnDrop(object? sender, DragEventArgs e)
         {
             if (e.DataTransfer.Formats.Contains(DataFormat.File))
             {
                 var files = e.DataTransfer.TryGetFiles();
+                string directory = @"./images";
+                Directory.CreateDirectory(directory);
                 var path = files?.FirstOrDefault();
                 if (path != null)
                 {
                   
-
+                    File.Copy(path.Path.AbsolutePath,directory+'/'+path.Name,true);
                     var border = sender as Border;
                     var mysender = border?.DataContext as Project;
 
-                    mysender.MyImage = path.Path.LocalPath;
+                    mysender.MyImage = directory+'/' + path.Name;
                     var dbProject = DataBaseController.Projectrepositroy.Query()
                         .Execute()
                         .FirstOrDefault(x => x.Id == mysender.Id);

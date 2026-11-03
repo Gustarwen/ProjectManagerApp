@@ -150,6 +150,14 @@
         <Setter Property="Foreground" Value="white"></Setter>
       
     </Style>
+    
+    <Style Selector="ProgressBar">
+        <Setter Property="Transitions">
+            <Transitions>
+                <DoubleTransition Property="Value" Duration="0:0:0.5" Easing="CubicEaseOut"></DoubleTransition>
+            </Transitions>
+        </Setter>
+    </Style>
 <!-- Add Styles Here -->
     
 </Styles>

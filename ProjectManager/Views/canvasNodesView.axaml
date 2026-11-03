@@ -4,15 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ProjectManager.Views.CanvasNodesView">
-                <Border Name="Container"
+    
+    <Border Name="Container"
                         
-                        Background="Transparent"
-                        PointerPressed="OnPointerPressed"
-                        PointerMoved="OnPointerMoved"
-                        PointerReleased="OnPointerReleased"
-                            PointerWheelChanged="OnWheelChanged"
-                        ClipToBounds="True"
-                        BorderBrush="White">
+            Background="Transparent"
+            PointerPressed="OnPointerPressed"
+            PointerMoved="OnPointerMoved"
+            PointerReleased="OnPointerReleased"
+            PointerWheelChanged="OnWheelChanged"
+            ClipToBounds="True"
+            BorderBrush="White">
                     <Grid>
                         <Canvas HorizontalAlignment="Left" VerticalAlignment="Top" Name="MapCanvas" Width="10000" Height="100000" RenderTransformOrigin="0,0">
                             <Canvas.RenderTransform>
@@ -21,7 +22,7 @@
                             <Button x:Name="Button1" Height="100" Width="100" Canvas.Top="0" Canvas.Left="0"> hello</Button>
                             
                         </Canvas>
-                        <Button HorizontalAlignment="Right" VerticalAlignment="Bottom">+</Button>
+                        <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"></ProgressBar>
                     </Grid>
                     
                    

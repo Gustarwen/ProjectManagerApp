@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
@@ -15,7 +16,7 @@ namespace ProjectManager.Views;
 
 public partial class CanvasNodesView : UserControl
 {
-   
+    public static CanvasNodesView item;
     private bool _pan = false;
     private Point start;
 // Přidej tyto 3 proměnné pro držení přesného stavu transformace:
@@ -114,12 +115,14 @@ public partial class CanvasNodesView : UserControl
         _fixPositionToNodes(root, startovniX);
     
         // 4. KROK: Samotné vykreslení
+        task.tasks.Clear();
         _renderNodes(root);
     }
 
     private void _renderNodes(ProjectData node)
     {
         task tasks = new task(node);
+        
 
         tasks.Add.Click += (a, v) =>
         {
@@ -127,11 +130,13 @@ public partial class CanvasNodesView : UserControl
             viewModel.showDialog((CanvasNodesView)this,root, node);
 
         };
+        
         tasks.Delete.Click += (a, v) => {viewModel.DeleteTask(node); onUpdate(); };
         Canvas.SetLeft(tasks,node.X);
         Canvas.SetTop(tasks,node.Y);
         tasks.Name.Text = node.Name;
         MapCanvas.Children.Add(tasks);
+        task.tasks.Add(tasks);
       
        
         
@@ -242,9 +247,34 @@ public partial class CanvasNodesView : UserControl
        
         var freshFirst = DataBaseController.Taskrepository.Query()
             .Where(p => (p.ParentId == 0||p.ParentId == null) && p.ProjectId==viewModel.Project.Id).Execute().First();
-        
+        int finisher = 0;
+        int sum = 0;
+      
         // 3. Znovu vykreslíme
         createMap(freshFirst);
+        foreach (task myvar in task.tasks)
+        {
+            sum++;
+            if (myvar.data.Finished)
+            {
+                finisher++;
+            }
+        }
+
+        ProgressBar.Value = (double)finisher / sum * 100;
+
+
+    }
+
+    private void ProgressBarAnimation(ProgressBar bar, double value)
+    {
+        
+        while (ProgressBar.Value != value)
+        {
+            bar.Value -= (bar.Value - value)/2;
+            Thread.Sleep(20);
+        }
+        
     }
 
 
@@ -252,7 +282,8 @@ public partial class CanvasNodesView : UserControl
 
     public CanvasNodesView()
     {
-        
+
+        item = this;
         
         
         

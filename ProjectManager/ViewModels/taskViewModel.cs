@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.ComponentModel.__Internals;
 using CommunityToolkit.Mvvm.Input;
 using ProjectManager.DataTemplates;
 using ProjectManager.Views;
@@ -15,25 +13,34 @@ public partial class taskViewModel :ViewModelBase
   [ObservableProperty]
     private bool _finished;
     [RelayCommand]
-    private void Accept(ProjectData task)
+    private void Accept(ProjectData mytask)
     {
         
-        task.Finished = !task.Finished;
-        Finished = task.Finished;
-       var data = DataBaseController.Taskrepository.Query().Where(p => p.Id == task.Id).Execute().First();
-       data.Finished = task.Finished;
+        mytask.Finished = !mytask.Finished;
+        Finished = mytask.Finished;
+        Console.WriteLine("seznam");
+        foreach (var da in task.tasks)
+        {
+            Console.WriteLine($"{da.data.Id}");
+        }
+       var data = DataBaseController.Taskrepository.Query().Where(p => p.Id == mytask.Id).Execute().First();
+       data.Finished = mytask.Finished;
        
         
-        if (task.Finished)
+        if (mytask.Finished)
         {
-            recursiveAccept(task);
+            recursiveAccept(mytask);
         }
         else
         {
-            recursiveUnAccept(task);
+            recursiveUnAccept(mytask);
         }
         
         DataBaseController.Taskrepository.Update(data);
+        int finisher = 0;
+        int sum = 0;
+      
+        CanvasNodesView.item.onUpdate();
    
         
     }
