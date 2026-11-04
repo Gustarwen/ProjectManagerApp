@@ -38,12 +38,14 @@ public partial class CanvasNodesViewModel:ViewModelBase
         ProjectData newData = new ProjectData();
         newData.Name = selectedTask.Name;
         newData.Finished = selectedTask.Finished;
-        newData.ProjectId = Project.Id;
+        newData.Projects.Add(Project.Id);
+        
         Console.WriteLine(Project.Id);
         newData.ParentId = selectedTask.Id;
         ProjectData parent = DataBaseController.Taskrepository.Query().Where(p=>p.Id==newData.ParentId).Execute().First();
         newData.Finished = parent.Finished;
         DataBaseController.InsertTask(newData);
+        
 
     }
     

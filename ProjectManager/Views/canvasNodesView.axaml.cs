@@ -83,9 +83,18 @@ public partial class CanvasNodesView : UserControl
         // Vyčištění plátna před novým vykreslením
         MapCanvas.Children.Clear();
 
-        // 1. KROK: Načteme VŠECHNY uzly pro daný projekt najednou z DB (obrovské zrychlení)
-        List<ProjectData> allNodes = DataBaseController.Taskrepository.Query().Execute()
-            .Where(p => p.ProjectId == firstData.ProjectId).ToList();
+        // 1. KROK: Načteme VŠECHNY fi pro daný projekt najednou z DB (obrovské zrychlení)
+        List<ProjectData> allNodes = new ();
+        foreach (var VARIABLE in firstData.Projects)
+        {
+            foreach(var tasks in DataBaseController.ProjectTaskRepository.Query().Where(p=> p.ProjectId == VARIABLE).Execute())
+            foreach (var nodes in DataBaseController.Taskrepository.Query().Where(p=> p.Id==tasks.TaskId).Execute())
+            {
+                allNodes.Add(nodes);
+            }
+            
+        }
+        
 
         // Najdeme náš skutečný kořenový uzel uvnitř této sady (abychom pracovali se správnou instancí)
         ProjectData root = allNodes.FirstOrDefault(p => p.Id == firstData.Id) ?? firstData;
@@ -245,13 +254,40 @@ public partial class CanvasNodesView : UserControl
     {
        
        
-        var freshFirst = DataBaseController.Taskrepository.Query()
-            .Where(p => (p.ParentId == 0||p.ParentId == null) && p.ProjectId==viewModel.Project.Id).Execute().First();
+        List<ProjectData> freshFirst = DataBaseController.Taskrepository.Query()
+            .Where(p => (p.ParentId == 0||p.ParentId == null)).Execute().ToList();
         int finisher = 0;
         int sum = 0;
       
         // 3. Znovu vykreslíme
-        createMap(freshFirst);
+        ProjectData projectRootNode = null;
+
+        foreach (var node in freshFirst)
+        {
+            // Načteme vazby z DB pro daný uzel
+            var projectTasks = DataBaseController.ProjectTaskRepository.Query()
+                .Where(p => p.TaskId == node.Id)
+                .Execute()
+                .ToList();
+
+            foreach (var VARIABLE in projectTasks)
+            {
+                node.Projects.Add(VARIABLE.ProjectId);
+            }
+
+            // SPRÁVNÉ POROVNÁNÍ: Hledáme, zda ID aktuálního projektu odpovídá nějaké vazbě v node.Projects
+            if (projectTasks.Any(pt => pt.ProjectId == viewModel.Project.Id))
+            {
+                projectRootNode = node;
+                break; // Našli jsme kořenový uzel pro náš projekt, můžeme vyskočit z cyklu
+            }
+        }
+
+        // 3. Pokud jsme uzel našli, vykreslíme mapu
+        if (projectRootNode != null)
+        {
+            createMap(projectRootNode);
+        }
         foreach (task myvar in task.tasks)
         {
             sum++;

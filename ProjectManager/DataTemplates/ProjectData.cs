@@ -17,12 +17,7 @@ public partial class ProjectData : ObservableObject
     //kontrola, jestli je task splněný nebo ne
     [property: Property("Finished", Flags.Integer, 1)] [ObservableProperty]
     private bool _finished = false;
-
-  
     
-    //hodnota spojující každý Task s jeho projektem
-    [Property("project_id")] [ForeignKey(typeof(Project), "Id")]
-    public int ProjectId{get;set;}
     
     //hodnota spojující každý Task s jeho rodičem
     [Property("parent_id")] [ForeignKey(typeof(ProjectData), "Id")] 
@@ -43,8 +38,32 @@ public partial class ProjectData : ObservableObject
     
     
    // datum deadLine Tasku
-    public DateTimeOffset? Date { get; set; } 
+    public DateTimeOffset? Date { get; set; }
+    public List<int> Projects = new List<int>();
+    public ProjectData()
+    {
+        foreach (var project in DataBaseController.ProjectTaskRepository.Query().Where(p => p.TaskId == Id).Execute())
+        {
+            Projects.Add(project.ProjectId);
+        }
+    }
 }
+
+
+[Entity("project_task")]
+
+public partial class Project_Task()
+{
+
+    
+    [Property("TaskId",Flags.PrimaryKey|Flags.Integer)][ForeignKey(typeof(ProjectData), "TaskId")]
+    public int TaskId { get; set; }
+    [Property("ProjectId",Flags.PrimaryKey|Flags.Integer)][ForeignKey(typeof(ProjectData), "ProjectId")]
+    public int ProjectId { get; set; }
+    
+   
+}
+
 //Project
 [Entity("projects")]
 public partial class Project : ObservableObject
