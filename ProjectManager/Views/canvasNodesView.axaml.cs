@@ -21,8 +21,8 @@ public partial class CanvasNodesView : UserControl
     private Point start;
 // Přidej tyto 3 proměnné pro držení přesného stavu transformace:
     private double currentZoom = 1.0;
-    private double offsetX = 0.0;
-    private double offsetY = 0.0;
+    private double offsetX;
+    private double offsetY;
     private double startOffsetX;
     private double startOffsetY;
 
@@ -35,26 +35,24 @@ public partial class CanvasNodesView : UserControl
     private List<ProjectData> currentData = new List<ProjectData>();
     private CanvasNodesViewModel viewModel;
     private Matrix originalMatrix = new  Matrix();
+    public List<ProjectData> Roots = new();
 
     private int _addPositionToNodes(ProjectData firstData,double vrstva)
     {
         firstData.Y = vrstva;
         if (firstData.Childerns.Count == 0)
         {
-            return 500;}
+            return (500);}
         List<int> thedata = new List<int>();
         int sum = 0;
         for (int i = 0; i < firstData.Childerns.Count; i++)
-        
-        {
-            thedata.Add(_addPositionToNodes(firstData.Childerns[i],vrstva + 250));
-            sum += thedata[thedata.Count - 1];
-        }
 
-        for (int o = 0; o < thedata.Count; o++)
         {
+            thedata.Add(_addPositionToNodes(firstData.Childerns[i], vrstva + 250));
+            sum += thedata[thedata.Count - 1];
             
         }
+        
 
         int X = -sum / 2;
  
@@ -78,54 +76,55 @@ public partial class CanvasNodesView : UserControl
         }
         
     }
+
     public void createMap(ProjectData firstData)
     {
         // Vyčištění plátna před novým vykreslením
         MapCanvas.Children.Clear();
 
         // 1. KROK: Načteme VŠECHNY fi pro daný projekt najednou z DB (obrovské zrychlení)
-        List<ProjectData> allNodes = new ();
-        foreach (var VARIABLE in firstData.Projects)
-        {
-            foreach(var tasks in DataBaseController.ProjectTaskRepository.Query().Where(p=> p.ProjectId == VARIABLE).Execute())
-            foreach (var nodes in DataBaseController.Taskrepository.Query().Where(p=> p.Id==tasks.TaskId).Execute())
-            {
-                allNodes.Add(nodes);
-            }
-            
-        }
-        
+        List<ProjectData> allNodes = new();
+       //vytazeni z pameti vsech nodes
+    
+       Queue<ProjectData> NodesQueue = new();
+       NodesQueue.Enqueue(firstData);
+       while (NodesQueue.Count > 0)
+       { 
+            ProjectData currentData =    (NodesQueue.Dequeue());
+           
+           foreach (var child in DataBaseController.Taskrepository.Query().Where(p=>p.ParentId ==currentData.Id).Execute().ToList())
+           {
 
-        // Najdeme náš skutečný kořenový uzel uvnitř této sady (abychom pracovali se správnou instancí)
-        ProjectData root = allNodes.FirstOrDefault(p => p.Id == firstData.Id) ?? firstData;
+               NodesQueue.Enqueue(child);
+               currentData.Childerns.Add(child);
+
+
+           }
+           allNodes.Add(currentData);
+           
+       }
+
+
+        //Najdeme náš skutečný kořenový uzel uvnitř této sady (abychom pracovali se správnou instancí)
+        ProjectData root = allNodes.Where(p=>Roots.Where(f=>f.Id ==p.Id).FirstOrDefault()!=null).First();
 
         // 2. KROK: Sestavení stromu v paměti pomocí fronty (BFS)
         Queue<ProjectData> queue = new Queue<ProjectData>();
         queue.Enqueue(root);
-    
+
         while (queue.Count > 0)
         {
             ProjectData current = queue.Dequeue();
-        
-            // Hledáme v lokálním seznamu v paměti, tím pádem provazujeme stále stejné instance!
-            current.Childerns = allNodes.Where(p => p.ParentId == current.Id).ToList();
-        
-            foreach (var childern in current.Childerns)
-            {
-                queue.Enqueue(childern);
-            }
+            int celkovaSirka = _addPositionToNodes(root, 0);
+
+            // Posuneme kořen doprostřed plátna (např. 1000px), aby levá větev neutekla do záporu
+            double startovniX = Math.Max(1000.0, celkovaSirka / 2.0);
+            _fixPositionToNodes(root, startovniX);
+
+            // 4. KROK: Samotné vykreslení
+            task.tasks.Clear();
+            _renderNodes(root);
         }
-    
-        // 3. KROK: Výpočet pozic (s opravenou matematikou)
-        int celkovaSirka = _addPositionToNodes(root, 0);
-    
-        // Posuneme kořen doprostřed plátna (např. 1000px), aby levá větev neutekla do záporu
-        double startovniX = Math.Max(1000.0, celkovaSirka / 2.0);
-        _fixPositionToNodes(root, startovniX);
-    
-        // 4. KROK: Samotné vykreslení
-        task.tasks.Clear();
-        _renderNodes(root);
     }
 
     private void _renderNodes(ProjectData node)
@@ -254,34 +253,32 @@ public partial class CanvasNodesView : UserControl
     {
        
        
-        List<ProjectData> freshFirst = DataBaseController.Taskrepository.Query()
-            .Where(p => (p.ParentId == 0||p.ParentId == null)).Execute().ToList();
+        
+        
         int finisher = 0;
         int sum = 0;
       
         // 3. Znovu vykreslíme
-        ProjectData projectRootNode = null;
-
-        foreach (var node in freshFirst)
+        ProjectData projectRootNode;
+        Roots.Clear();
+        foreach (var root in DataBaseController.Taskrepository.Query().Where(p => p.ParentId == null||p.ParentId==0).Execute()
+                     .ToList())
         {
-            // Načteme vazby z DB pro daný uzel
-            var projectTasks = DataBaseController.ProjectTaskRepository.Query()
-                .Where(p => p.TaskId == node.Id)
-                .Execute()
-                .ToList();
-
-            foreach (var VARIABLE in projectTasks)
-            {
-                node.Projects.Add(VARIABLE.ProjectId);
-            }
-
-            // SPRÁVNÉ POROVNÁNÍ: Hledáme, zda ID aktuálního projektu odpovídá nějaké vazbě v node.Projects
-            if (projectTasks.Any(pt => pt.ProjectId == viewModel.Project.Id))
-            {
-                projectRootNode = node;
-                break; // Našli jsme kořenový uzel pro náš projekt, můžeme vyskočit z cyklu
-            }
+            Roots.Add(root);
         }
+        
+        foreach (ProjectData root in Roots)
+        {
+            root.loadProjects();
+           
+        }
+        projectRootNode = Roots.Where(p => p.Projects.Contains(viewModel.Project.Id)).FirstOrDefault();
+        if (projectRootNode != null)
+        {
+            Console.WriteLine("toto je list");
+            Console.WriteLine(projectRootNode.Name);
+        }
+       
 
         // 3. Pokud jsme uzel našli, vykreslíme mapu
         if (projectRootNode != null)
@@ -314,20 +311,35 @@ public partial class CanvasNodesView : UserControl
     }
 
 
-
-
+    /// public static CanvasNodesView GetInstance
+    /// if(item == null)
+    ///     item = constructor
+    /// return item
+    public static CanvasNodesView GetInstance()
+    {
+        if (item == null)
+        {
+            return new CanvasNodesView();
+        }
+        else 
+        {
+            return item;
+        }
+        }
+    
+    
     public CanvasNodesView()
     {
+        if(item==null){ item = this;}
+       
 
-        item = this;
-        
-        
-        
-        
-      
+
+
+
         InitializeComponent();
+        
         viewModel = DataContext as CanvasNodesViewModel;
-
+    
         DataContextChanged += (sender, args) =>
         {
             viewModel = this.DataContext as CanvasNodesViewModel;

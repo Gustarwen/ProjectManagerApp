@@ -39,9 +39,10 @@ public partial class ProjectData : ObservableObject
     
    // datum deadLine Tasku
     public DateTimeOffset? Date { get; set; }
-    public List<int> Projects = new List<int>();
-    public ProjectData()
+    public List<int> Projects = new();
+    public void loadProjects()
     {
+       
         foreach (var project in DataBaseController.ProjectTaskRepository.Query().Where(p => p.TaskId == Id).Execute())
         {
             Projects.Add(project.ProjectId);
