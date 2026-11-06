@@ -73,7 +73,7 @@
             Mydata.Insert(0,newData);
             newData=DataBaseController.InsertProject(newData);
             ProjectData NewTask = new ProjectData();
-            NewTask.Projects.Add(newData.Id);
+            NewTask.ProjectId = newData.Id;
             NewTask.Name = newData.Name;
             NewTask.Date = newData.Date;
             DataBaseController.InsertTask(NewTask);

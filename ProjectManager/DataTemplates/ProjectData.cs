@@ -16,8 +16,9 @@ public partial class ProjectData : ObservableObject
     
     //kontrola, jestli je task splněný nebo ne
     [property: Property("Finished", Flags.Integer, 1)] [ObservableProperty]
-    private bool _finished = false;
-    
+    public bool _finished = false;
+    [Property("ProjectId", Flags.Integer)][ForeignKey(typeof(Project), "Id")]
+    public int ProjectId { get; set; }
     
     //hodnota spojující každý Task s jeho rodičem
     [Property("parent_id")] [ForeignKey(typeof(ProjectData), "Id")] 
@@ -29,6 +30,7 @@ public partial class ProjectData : ObservableObject
     
     //děti určitého Tasku
     public List<ProjectData> Childerns = new List<ProjectData>();
+    public List<MainProjectData> JoindedProject = new();
 
     //poloha Tasku pro Canvas
     public double X;
@@ -39,28 +41,41 @@ public partial class ProjectData : ObservableObject
     
    // datum deadLine Tasku
     public DateTimeOffset? Date { get; set; }
-    public List<int> Projects = new();
-    public void loadProjects()
+   
+}
+
+public partial class MainProjectData : ProjectData
+{
+    
+    public bool rolled;
+
+    public MainProjectData(ProjectData project)
     {
-       
-        foreach (var project in DataBaseController.ProjectTaskRepository.Query().Where(p => p.TaskId == Id).Execute())
-        {
-            Projects.Add(project.ProjectId);
-        }
+        this.rolled = true;
+        this.Id = project.Id;
+        this.Name = project.Name;
+        this.Date = project.Date;
+        this.Childerns = project.Childerns;
+        this.JoindedProject = project.JoindedProject;
+        this.ParentId = project.ParentId;
+        this.Y = project.Y;
+        this.X = project.X;
+        this.Date = project.Date;
+        this.ProjectId = project.ProjectId;
     }
 }
 
 
-[Entity("project_task")]
+[Entity("task_task_relationship")]
 
-public partial class Project_Task()
+public partial class Task_Task()
 {
 
     
-    [Property("TaskId",Flags.PrimaryKey|Flags.Integer)][ForeignKey(typeof(ProjectData), "TaskId")]
+    [Property("TaskId1",Flags.PrimaryKey|Flags.Integer)][ForeignKey(typeof(ProjectData), "TaskId")]
     public int TaskId { get; set; }
-    [Property("ProjectId",Flags.PrimaryKey|Flags.Integer)][ForeignKey(typeof(ProjectData), "ProjectId")]
-    public int ProjectId { get; set; }
+    [Property("TaskId2",Flags.PrimaryKey|Flags.Integer)][ForeignKey(typeof(ProjectData), "TaskId")]
+    public int TaskId2 { get; set; }
     
    
 }

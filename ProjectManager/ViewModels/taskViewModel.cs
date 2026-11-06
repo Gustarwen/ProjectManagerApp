@@ -12,6 +12,8 @@ public partial class taskViewModel :ViewModelBase
 
   [ObservableProperty]
     private bool _finished;
+
+    [ObservableProperty] private bool unRolled = false;
     [RelayCommand]
     private void Accept(ProjectData mytask)
     {
@@ -80,5 +82,12 @@ public partial class taskViewModel :ViewModelBase
         { 
             recursiveAccept(data.data);
         }
+    }
+
+    [RelayCommand]
+    private void unRoll()
+    {
+        UnRolled = !UnRolled;
+
     }
 }

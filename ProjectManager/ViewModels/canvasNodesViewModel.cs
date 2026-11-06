@@ -38,7 +38,7 @@ public partial class CanvasNodesViewModel:ViewModelBase
         ProjectData newData = new ProjectData();
         newData.Name = selectedTask.Name;
         newData.Finished = selectedTask.Finished;
-        newData.Projects.Add(Project.Id);
+        newData.ProjectId = Project.Id;
         
         Console.WriteLine(Project.Id);
         newData.ParentId = selectedTask.Id;

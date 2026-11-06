@@ -19,7 +19,7 @@ public partial class NodConfiguration : Window
           
             var informations = DataContext as CanvasNodesViewModel;
             ProjectData data = new ProjectData();
-            data.Projects = selectedTask.Projects;
+            data.ProjectId = selectedTask.ProjectId;
             
             data.Name = NameBox.Text;
             data.Date = MyDatePicker.SelectedDate;
