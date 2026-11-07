@@ -254,7 +254,7 @@ public void createMap(ProjectData firstData)
             _fixPositionToNodes(root, startovniX);
 
             task.tasks.Clear();
-            renderSpecialNode(root);
+            _renderNodes(root);
         }
     }
 
@@ -455,7 +455,11 @@ public void createMap(ProjectData firstData)
     public  void onUpdate()
     {
        
-       
+        if (viewModel?.Project == null)
+        {
+            Console.WriteLine("Nelze aktualizovat mapu: Project je null.");
+            return;
+        }
         
         
         int finisher = 0;
