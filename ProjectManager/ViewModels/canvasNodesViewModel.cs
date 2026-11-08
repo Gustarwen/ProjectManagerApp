@@ -27,7 +27,12 @@ public partial class CanvasNodesViewModel:ViewModelBase
         DataBaseController.DeleteTask(data);
         
     }
- 
+    public event Action? OnUpdate;
+
+    public void OnUpdateFunction()
+    {
+        OnUpdate?.Invoke();
+    }
     public  void OnClicked(ProjectData selectedTask)
     {
        

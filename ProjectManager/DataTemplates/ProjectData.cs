@@ -44,6 +44,7 @@ public partial class ProjectData : ObservableObject
    
 }
 
+[Entity("tasks")]
 public partial class MainProjectData : ProjectData
 {
     
@@ -59,6 +60,7 @@ public partial class MainProjectData : ProjectData
         this.JoindedProject = project.JoindedProject;
         this.ParentId = project.ParentId;
         this.Y = project.Y;
+        this.Finished = project.Finished;
         this.X = project.X;
         this.Date = project.Date;
         this.ProjectId = project.ProjectId;

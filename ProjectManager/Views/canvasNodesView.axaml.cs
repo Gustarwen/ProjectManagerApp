@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using Avalonia;
 using Avalonia.Controls;
@@ -16,12 +17,14 @@ namespace ProjectManager.Views;
 
 public partial class CanvasNodesView : UserControl
 {
-    public static CanvasNodesView item;
-    private bool _pan = false;
 
+    private bool _pan= false;
+    public CanvasNodesView item;
     private Point start;
 
 // Přidej tyto 3 proměnné pro držení přesného stavu transformace:
+//Aktualni problemy. Za 1.: nefunguje oznaceni roota.
+//                   Za 2.: nefunguje pri prehozeni projektu oznaceni jakehokoliv tasku
     private double currentZoom = 1.0;
     private double offsetX;
     private double offsetY;
@@ -237,28 +240,27 @@ public void createMap(ProjectData firstData)
 
 
         //Najdeme náš skutečný kořenový uzel uvnitř této sady (abychom pracovali se správnou instancí)
-        MainProjectData root = Roots.Where(p => p.ProjectId == firstData.ProjectId).First();
-        root.rolled = true;
-
+       
 
         Queue<ProjectData> queue = new Queue<ProjectData>();
-        queue.Enqueue(root);
+        queue.Enqueue(firstData);
 
         while (queue.Count > 0)
         {
             ProjectData current = queue.Dequeue();
-            int celkovaSirka = _addPositionToNodes(root, 0);
+            int celkovaSirka = _addPositionToNodes(firstData, 0);
 
 
             double startovniX = Math.Max(1000.0, celkovaSirka / 2.0);
-            _fixPositionToNodes(root, startovniX);
+            _fixPositionToNodes(firstData, startovniX);
 
             task.tasks.Clear();
-            _renderNodes(root);
+            
+            _renderNodes(firstData);
         }
     }
 
-    private void renderSpecialNode(MainProjectData node)
+private void renderSpecialNode(MainProjectData node)
     {
 
 
@@ -307,7 +309,7 @@ public void createMap(ProjectData firstData)
 
     }
 
-    private void _renderNodes(ProjectData node)
+private void _renderNodes(ProjectData node)
     {
         task tasks = new task(node);
 
@@ -329,6 +331,8 @@ public void createMap(ProjectData firstData)
         tasks.Name.Text = node.Name;
         MapCanvas.Children.Add(tasks);
         task.tasks.Add(tasks);
+        
+        Console.WriteLine($"toto je nove vytvoreny task {tasks.Name.Text}");
 
 
 
@@ -454,8 +458,9 @@ public void createMap(ProjectData firstData)
 
     public  void onUpdate()
     {
+        
        
-        if (viewModel?.Project == null)
+        if (viewModel.Project == null)
         {
             Console.WriteLine("Nelze aktualizovat mapu: Project je null.");
             return;
@@ -526,22 +531,13 @@ public void createMap(ProjectData firstData)
     /// if(item == null)
     ///     item = constructor
     /// return item
-    public static CanvasNodesView GetInstance()
-    {
-        if (item == null)
-        {
-            return new CanvasNodesView();
-        }
-        else 
-        {
-            return item;
-        }
-        }
+ 
+  
     
     
     public CanvasNodesView()
     {
-        if(item==null){ item = this;}
+       
        
 
 
@@ -561,6 +557,7 @@ public void createMap(ProjectData firstData)
                 {
                   
                     onUpdate();
+                    item = this;
                 }
             }
         };

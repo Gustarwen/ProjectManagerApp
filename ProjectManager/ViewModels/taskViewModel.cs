@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ProjectManager.DataTemplates;
@@ -9,6 +10,7 @@ namespace ProjectManager.ViewModels;
 
 public partial class taskViewModel :ViewModelBase
 {
+    private readonly CanvasNodesViewModel _viewModel;
 
   [ObservableProperty]
     private bool _finished;
@@ -19,33 +21,38 @@ public partial class taskViewModel :ViewModelBase
     {
         
         mytask.Finished = !mytask.Finished;
-        Finished = mytask.Finished;
-        Console.WriteLine("seznam");
-        foreach (var da in task.tasks)
-        {
-            Console.WriteLine($"{da.data.Id}");
-        }
-       var data = DataBaseController.Taskrepository.Query().Where(p => p.Id == mytask.Id).Execute().First();
-       data.Finished = mytask.Finished;
+        Console.WriteLine($"stav tasku {mytask.Finished}");
+        
+       
+       
        
         
         if (mytask.Finished)
         {
+            Finished = true;
             recursiveAccept(mytask);
         }
         else
         {
+            Finished = false;
             recursiveUnAccept(mytask);
         }
         
-        DataBaseController.Taskrepository.Update(data);
+        DataBaseController.Taskrepository.Update(mytask);
         int finisher = 0;
         int sum = 0;
-      
-        CanvasNodesView.item.onUpdate();
-   
+
+
+
         
+        
+
+
+
     }
+    
+
+   
 
     private void recursiveUnAccept(ProjectData mytask)
     {
@@ -60,8 +67,9 @@ public partial class taskViewModel :ViewModelBase
             var viewmodel = taskclass.DataContext as taskViewModel;
             viewmodel.Finished =false;
             mytask.Finished = false;
-            Console.WriteLine($"tento task s id {mytask.Id} ma stav {mytask.Finished}");
+        
         DataBaseController.Taskrepository.Update(mytask);
+     
     }
     private void recursiveAccept(ProjectData mytask)
     {

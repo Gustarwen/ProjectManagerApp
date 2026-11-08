@@ -20,6 +20,7 @@ public partial class task : UserControl
         InitializeComponent();
         taskViewModel viewmodel = new taskViewModel();
         Accept.Command = viewmodel.AcceptCommand;
+        Accept.CommandParameter = viewmodel;
         Accept.CommandParameter = Data;
         viewmodel.Finished = Data.Finished;
         DataContext = viewmodel;
