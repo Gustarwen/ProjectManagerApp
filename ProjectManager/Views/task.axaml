@@ -7,11 +7,13 @@
              
              xmlns:vm="clr-namespace:ProjectManager.ViewModels"
              x:DataType="vm:taskViewModel">
-    <Grid  ColumnDefinitions="Auto Auto Auto" RowDefinitions="Auto Auto" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="Delete" Grid.Column="0" Background="{DynamicResource RedFive}" Width="60"  Height="60" Foreground="white" FontSize="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  CornerRadius="30">-</Button>
-        <Border x:Name="NameBorder"  Grid.Column="1" Height="60" Margin="10" Padding="15" Classes.finished="{Binding Finished}"><TextBlock x:Name="Name" >hello jak se mate ja se mam fajnove</TextBlock></Border>
-        <Button Grid.Row="1" Grid.Column="1" x:Name="Accept" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="white" MaxWidth="150" Height="30" HorizontalContentAlignment="Center">Accept</Button>
-        <Button x:Name="Add" Grid.Column="2" Width="60" Height="60" CornerRadius="30" Background="{DynamicResource GreenTwo}" FontSize="40" Foreground="white" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">+</Button>
+    <Grid  ColumnDefinitions="Auto Auto Auto" RowDefinitions="Auto Auto Auto" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Button Grid.Column="1" HorizontalAlignment="Center" Grid.Row="0" x:Name="ConnectButton">Connect</Button>
+        <Button x:Name="Delete" Grid.Row="1" Grid.Column="0" Background="{DynamicResource RedFive}" Width="60"  Height="60" Foreground="white" FontSize="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  CornerRadius="30">-</Button>
+        <Border x:Name="NameBorder" Grid.Row="1"  Grid.Column="1" Height="60" Margin="10" Padding="15" Classes.finished="{Binding Finished}"><TextBlock x:Name="Name" >hello jak se mate ja se mam fajnove</TextBlock></Border>
+        <Button Grid.Row="2" Grid.Column="1"  x:Name="Accept" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="white" MaxWidth="150" Height="30" HorizontalContentAlignment="Center">Accept</Button>
+        
+        <Button Grid.Row="1" x:Name="Add" Grid.Column="2" Width="60" Height="60" CornerRadius="30" Background="{DynamicResource GreenTwo}" FontSize="40" Foreground="white" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">+</Button>
                 
     </Grid>
     <UserControl.Styles>

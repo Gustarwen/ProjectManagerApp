@@ -31,6 +31,7 @@ public partial class ProjectData : ObservableObject
     //děti určitého Tasku
     public List<ProjectData> Childerns = new List<ProjectData>();
     public List<MainProjectData> JoindedProject = new();
+    public string ProjectName { get; set; }="";
 
     //poloha Tasku pro Canvas
     public double X;

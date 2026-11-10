@@ -14,13 +14,22 @@ public partial class CanvasNodesViewModel:ViewModelBase
         Project = selectedProject;
     }
 
-    public void showDialog(CanvasNodesView nodesview,Window root,ProjectData selectedProject)
+    public void showAddDialog(CanvasNodesView nodesview,Window root,ProjectData selectedProject)
     {
         Window dialog = new NodConfiguration(selectedProject,nodesview);
         dialog.DataContext = this;
         dialog.ShowDialog(root);
         
     }
+    public void showConnectionDialog(Window root,ProjectData selectedProject)
+    {
+        Window dialog = new connectNodes(selectedProject);
+        dialog.DataContext = this;
+        dialog.ShowDialog(root);
+        
+        
+    }
+    
 
     public void DeleteTask(ProjectData data)
     {

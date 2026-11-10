@@ -211,10 +211,10 @@ public partial class CanvasNodesView : UserControl
 
             foreach (var special in DataBaseController.ProjectTaskRepository.Query().Where(p=>p.TaskId==currentData.Id).Execute().ToList() )
             {
-              
-                MainProjectData joined = new MainProjectData(DataBaseController.Taskrepository.Query()
-                    .Where(d => d.Id == special.TaskId2).Execute()
-                    .First());
+
+                MainProjectData joined = Roots.Where(d => d.Id == special.TaskId2).First(
+                ); 
+                    ;
                 loadAllNodes(allNodes,joined );
                 currentData.JoindedProject.Add(joined);
             }
@@ -252,6 +252,7 @@ public void createMap(ProjectData firstData)
 
         while (queue.Count > 0)
         {
+            double oldoffset = offsetX + firstData.X * currentZoom;
             ProjectData current = queue.Dequeue();
             int celkovaSirka = _addPositionToNodes(firstData, 0);
 
@@ -262,6 +263,12 @@ public void createMap(ProjectData firstData)
             task.tasks.Clear();
             
             _renderNodes(firstData);
+            if (MapCanvas.RenderTransform is MatrixTransform matrix)
+            {
+                matrix.Matrix = new Matrix(currentZoom, 0, 0, currentZoom, oldoffset-firstData.X*currentZoom, offsetY);
+                offsetX = oldoffset - firstData.X * currentZoom;
+
+            }
            
         }
     }
@@ -319,11 +326,15 @@ private void _renderNodes(ProjectData node)
     {
         task tasks = new task(node);
 
-
+        tasks.ConnectButton.Click += (a, v) =>
+        {
+            Window root = this.FindAncestorOfType<Window>();
+            viewModel.showConnectionDialog( root, node);
+        };
         tasks.Add.Click += (a, v) =>
         {
             Window root = this.FindAncestorOfType<Window>();
-            viewModel.showDialog((CanvasNodesView)this, root, node);
+            viewModel.showAddDialog((CanvasNodesView)this, root, node);
 
         };
 

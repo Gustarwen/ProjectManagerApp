@@ -22,6 +22,7 @@ public partial class task : UserControl
         Accept.Command = viewmodel.AcceptCommand;
         Accept.CommandParameter = viewmodel;
         Accept.CommandParameter = Data;
+
         viewmodel.Finished = Data.Finished;
         DataContext = viewmodel;
         data = Data;
@@ -30,6 +31,8 @@ public partial class task : UserControl
         
        
     }
+
+
     ~task()
     {
         task.tasks.Remove(this);
