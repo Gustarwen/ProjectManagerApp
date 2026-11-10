@@ -39,13 +39,13 @@ public partial class CanvasNodesViewModel:ViewModelBase
 
 // Spusťte insert uvnitř try-catch, jak máte teď
 
-        Console.WriteLine("dostal jsem se do bodu kdy insertnu task");
+      
         ProjectData newData = new ProjectData();
         newData.Name = selectedTask.Name;
         newData.Finished = selectedTask.Finished;
         newData.ProjectId = Project.Id;
         
-        Console.WriteLine(Project.Id);
+    
         newData.ParentId = selectedTask.Id;
         ProjectData parent = DataBaseController.Taskrepository.Query().Where(p=>p.Id==newData.ParentId).Execute().First();
         newData.Finished = parent.Finished;

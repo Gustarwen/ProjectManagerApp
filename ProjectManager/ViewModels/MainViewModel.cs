@@ -34,7 +34,6 @@ public partial class MainViewModel : ViewModelBase
     private void GoToQaA()
     {
         CurrentPage = _qaa;
-        Console.WriteLine("Nacetl se QaA.");
     }
     
 

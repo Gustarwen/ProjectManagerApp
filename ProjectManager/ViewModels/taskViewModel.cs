@@ -21,7 +21,7 @@ public partial class taskViewModel :ViewModelBase
     {
         
         mytask.Finished = !mytask.Finished;
-        Console.WriteLine($"stav tasku {mytask.Finished}");
+
         
        
        
@@ -37,6 +37,7 @@ public partial class taskViewModel :ViewModelBase
             Finished = false;
             recursiveUnAccept(mytask);
         }
+        CanvasNodesView.item.onUpdate();
         
         DataBaseController.Taskrepository.Update(mytask);
         int finisher = 0;
@@ -59,7 +60,14 @@ public partial class taskViewModel :ViewModelBase
        
         if (mytask.ParentId != null)
         {
-            ProjectData parent = task.tasks.Where(p => p.data.Id == mytask.ParentId).First().data;
+            task parenttask = task.tasks.Where(p => p.data.Id == mytask.ParentId).FirstOrDefault();
+            ProjectData parent = null;
+            if (parenttask != null)
+            {
+                 parent= parenttask.data;
+            }
+            
+           
             if (parent != null) recursiveUnAccept(parent);
         }
         
@@ -93,9 +101,13 @@ public partial class taskViewModel :ViewModelBase
     }
 
     [RelayCommand]
-    private void unRoll()
+    private void unRoll(MainProjectData data)
     {
         UnRolled = !UnRolled;
+        data.rolled = !data.rolled;
+        Console.WriteLine($"this is state of data {data.rolled}");
+        CanvasNodesView.item.onUpdate();
+        
 
     }
 }

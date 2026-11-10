@@ -19,7 +19,7 @@ public partial class CanvasNodesView : UserControl
 {
 
     private bool _pan= false;
-    public CanvasNodesView item;
+    public static CanvasNodesView item;
     private Point start;
 
 // Přidej tyto 3 proměnné pro držení přesného stavu transformace:
@@ -40,7 +40,10 @@ public partial class CanvasNodesView : UserControl
     private List<ProjectData> currentData = new List<ProjectData>();
     private CanvasNodesViewModel viewModel;
     private Matrix originalMatrix = new Matrix();
+    
     public List<MainProjectData> Roots = new();
+    
+    public List<MainProjectData> Joined;
 
     private int _addPositionToNodes(ProjectData firstData, double vrstva)
     {
@@ -192,6 +195,8 @@ public partial class CanvasNodesView : UserControl
         while (NodesQueue.Count > 0)
         {
             ProjectData currentData = (NodesQueue.Dequeue());
+            currentData.JoindedProject.Clear();
+            currentData.Childerns.Clear();
 
 
             foreach (var child in DataBaseController.Taskrepository.Query().Where(p => p.ParentId == currentData.Id)
@@ -233,7 +238,7 @@ public void createMap(ProjectData firstData)
         // 1. KROK: Načteme VŠECHNY fi pro daný projekt najednou z DB (obrovské zrychlení)
         List<ProjectData> allNodes=new();
         loadAllNodes(allNodes, firstData);
-        Console.WriteLine(allNodes.Count);
+
         //vytazeni z pameti vsech nodes
 
         
@@ -257,6 +262,7 @@ public void createMap(ProjectData firstData)
             task.tasks.Clear();
             
             _renderNodes(firstData);
+           
         }
     }
 
@@ -332,7 +338,7 @@ private void _renderNodes(ProjectData node)
         MapCanvas.Children.Add(tasks);
         task.tasks.Add(tasks);
         
-        Console.WriteLine($"toto je nove vytvoreny task {tasks.Name.Text}");
+
 
 
 
@@ -456,15 +462,21 @@ private void _renderNodes(ProjectData node)
 
     }
 
+    private void InitializeRoots()
+    {
+        Roots.Clear();
+        foreach (var root in DataBaseController.Taskrepository.Query().Where(p => p.ParentId == null || p.ParentId == 0).Execute().ToList())
+        {
+                
+            Roots.Add(new MainProjectData(root));
+        }
+    }
+
     public  void onUpdate()
     {
-        
-       
-        if (viewModel.Project == null)
-        {
-            Console.WriteLine("Nelze aktualizovat mapu: Project je null.");
-            return;
-        }
+
+
+        if (viewModel.Project == null) return;
         
         
         int finisher = 0;
@@ -472,28 +484,14 @@ private void _renderNodes(ProjectData node)
       
         // 3. Znovu vykreslíme
         MainProjectData projectRootNode;
-        Roots.Clear();
-        foreach (var root in DataBaseController.Taskrepository.Query().Where(p => p.ParentId == null || p.ParentId == 0)
-                     .Execute()
-                     .ToList())
-        {
-            
-
-            Roots.Add(new MainProjectData(root));
-        }
+       
+           
         
-        Console.WriteLine(Roots.Count);
+
+
 
         projectRootNode = Roots.Where(p => p.ProjectId == viewModel.Project.Id).FirstOrDefault();
-        if (projectRootNode != null)
-        {
-            Console.WriteLine("toto je list");
-            Console.WriteLine(projectRootNode.Name);
-        }
-        else
-        {
-            Console.WriteLine("ne je list");
-        }
+
        
 
         // 3. Pokud jsme uzel našli, vykreslíme mapu
@@ -544,6 +542,7 @@ private void _renderNodes(ProjectData node)
 
 
         InitializeComponent();
+        InitializeRoots();
         
         viewModel = DataContext as CanvasNodesViewModel;
     
@@ -555,9 +554,11 @@ private void _renderNodes(ProjectData node)
             {
                 if (viewModel.Project != null)
                 {
+                    
                   
                     onUpdate();
                     item = this;
+                    
                 }
             }
         };
