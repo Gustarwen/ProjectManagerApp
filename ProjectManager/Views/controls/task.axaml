@@ -17,6 +17,6 @@
                 
     </Grid>
     <UserControl.Styles>
-        <StyleInclude Source="../styles/nodestyle.axaml"></StyleInclude>
+        <StyleInclude Source="../../styles/nodestyle.axaml"></StyleInclude>
     </UserControl.Styles>
 </UserControl>

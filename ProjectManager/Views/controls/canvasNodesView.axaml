@@ -13,9 +13,11 @@
             PointerReleased="OnPointerReleased"
             PointerWheelChanged="OnWheelChanged"
             ClipToBounds="True"
+            Height="600"
+            Width="600"
             BorderBrush="White">
                     <Grid>
-                        <Canvas HorizontalAlignment="Left" VerticalAlignment="Top" Name="MapCanvas" Width="10000" Height="100000" RenderTransformOrigin="0,0">
+                        <Canvas HorizontalAlignment="Left" VerticalAlignment="Top" Name="MapCanvas"   RenderTransformOrigin="0,0">
                             <Canvas.RenderTransform>
                                 <MatrixTransform ></MatrixTransform>
                             </Canvas.RenderTransform> 
@@ -23,13 +25,14 @@
                             
                         </Canvas>
                         <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"></ProgressBar>
+                        <TextBlock x:Name="Progress" TextAlignment="Center" VerticalAlignment="Bottom" >Hello world</TextBlock>
                     </Grid>
                     
                    
                     
                 </Border>
     <UserControl.Styles>
-        <StyleInclude Source="../styles/style.axaml"></StyleInclude>
+        <StyleInclude Source="../../styles/style.axaml"></StyleInclude>
     </UserControl.Styles>
     
 </UserControl>

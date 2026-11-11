@@ -23,9 +23,30 @@ public partial class CanvasNodesViewModel:ViewModelBase
     }
     public void showConnectionDialog(Window root,ProjectData selectedProject)
     {
-        Window dialog = new connectNodes(selectedProject);
-        dialog.DataContext = this;
-        dialog.ShowDialog(root);
+        connectNodesViewModel viewModel = new();
+        viewModel.SelectedTask = selectedProject;
+        connectNodes dialog = new connectNodes();
+        
+        foreach (var task in DataBaseController.Taskrepository.Query().Execute())
+        {
+            if (task == null) return;
+            if (task.Id != selectedProject.Id)
+            {
+
+                DataTemplates.Project project  = DataBaseController.Projectrepositroy.Query()
+                    .Where(p => p.Id == task.ProjectId).Execute()
+                    .FirstOrDefault();
+                if (project != null)
+                    viewModel.Tasks.Add(task);
+            }
+
+
+        }
+     
+    
+        dialog.DataContext = viewModel;
+        Window dialog2 = dialog;
+        dialog2.ShowDialog(root);
         
         
     }

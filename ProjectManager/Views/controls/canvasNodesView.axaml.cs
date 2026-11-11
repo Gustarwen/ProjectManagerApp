@@ -211,10 +211,30 @@ public partial class CanvasNodesView : UserControl
 
             foreach (var special in DataBaseController.ProjectTaskRepository.Query().Where(p=>p.TaskId==currentData.Id).Execute().ToList() )
             {
+                MainProjectData joined = new(new ProjectData());
+                if (Roots.Where(p => p.Id == special.TaskId2).FirstOrDefault() == null)
+                {
+                    ProjectData taskToJoin = DataBaseController.Taskrepository.Query()
+                        .Where(p => p.Id == special.TaskId2).Execute().Single();
+                    if (taskToJoin == null)
+                    {
+                        return;
+                    }
 
-                MainProjectData joined = Roots.Where(d => d.Id == special.TaskId2).First(
-                ); 
-                    ;
+                    joined = new(taskToJoin);
+
+                }
+                else
+                {
+                    joined = Roots.Where(p => p.Id == special.TaskId2).FirstOrDefault();}
+               
+                Roots.Add(joined);
+                ProjectData connection = DataBaseController.Taskrepository.Query().Where(p => p.Id == special.TaskId)
+                    .Execute().FirstOrDefault();
+                if (joined == null||connection == null||joined.ProjectId==connection.ProjectId) return;
+                
+                                
+                
                 loadAllNodes(allNodes,joined );
                 currentData.JoindedProject.Add(joined);
             }
@@ -291,7 +311,7 @@ private void renderSpecialNode(MainProjectData node)
                     StrokeThickness = 10
 
                 };
-                line.Bind(Line.StrokeProperty, new DynamicResourceExtension("redone"));
+                line.Bind(Line.StrokeProperty, new DynamicResourceExtension("redfour"));
 
 
                 MapCanvas.Children.Add(line);
@@ -308,7 +328,7 @@ private void renderSpecialNode(MainProjectData node)
                     StrokeThickness = 10
 
                 };
-                line.Bind(Line.StrokeProperty, new DynamicResourceExtension("redone"));
+                line.Bind(Line.StrokeProperty, new DynamicResourceExtension("redfour"));
 
 
                 MapCanvas.Children.Add(line);
@@ -364,7 +384,7 @@ private void _renderNodes(ProjectData node)
                 StrokeThickness = 10
 
             };
-            line.Bind(Line.StrokeProperty, new DynamicResourceExtension("redone"));
+            line.Bind(Line.StrokeProperty, new DynamicResourceExtension("redfour"));
 
 
             MapCanvas.Children.Add(line);
@@ -381,7 +401,7 @@ private void _renderNodes(ProjectData node)
                 StrokeThickness = 10
 
             };
-            line.Bind(Line.StrokeProperty, new DynamicResourceExtension("redone"));
+            line.Bind(Line.StrokeProperty, new DynamicResourceExtension("redfour"));
 
 
             MapCanvas.Children.Add(line);
@@ -441,6 +461,7 @@ private void _renderNodes(ProjectData node)
 
     private void OnWheelChanged(object sender, PointerWheelEventArgs e)
     {
+        e.Handled = true;
         if (MapCanvas.RenderTransform is not MatrixTransform transform)
             return;
         
@@ -520,6 +541,7 @@ private void _renderNodes(ProjectData node)
         }
 
         ProgressBar.Value = (double)finisher / sum * 100;
+        Progress.Text = ((double)finisher / sum * 100).ToString("0") + "%";
 
 
     }

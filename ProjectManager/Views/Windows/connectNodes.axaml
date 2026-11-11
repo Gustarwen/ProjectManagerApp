@@ -13,7 +13,7 @@
                                 <Grid ColumnDefinitions="* * *" Height="30">
                                         <TextBlock Grid.Column="0" Text="{Binding Name}" ></TextBlock>
                                         <TextBlock Grid.Column="1" Text="{Binding ProjectName}"></TextBlock>
-                                        <Button Grid.Column="2" Command="{Binding $parent[ListBox].DataContext.AddConnectionCommand, x:DataType=vm:HomeViewModel}" >Connect</Button>
+                                        <Button Grid.Column="2" Command="{Binding $parent[ListBox].DataContext.AddConnectionCommand, x:DataType=vm:HomeViewModel}" CommandParameter="{Binding}" >Connect</Button>
                                         
                                         
                                 </Grid>

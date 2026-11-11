@@ -8,7 +8,7 @@
              x:DataType="vm:HomeViewModel"
              xmlns:view="clr-namespace:ProjectManager.Views">
     <UserControl.Styles>
-        <StyleInclude Source="../styles/style.axaml"></StyleInclude>
+        <StyleInclude Source="../../styles/style.axaml"></StyleInclude>
     </UserControl.Styles>
     <Grid RowDefinitions="Auto,Auto,Auto,*">
         <TextBox x:Name = "Name" Grid.Row="0" Text="{Binding Names}" Watermark="Name"></TextBox>

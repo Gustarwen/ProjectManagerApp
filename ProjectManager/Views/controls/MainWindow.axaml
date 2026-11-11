@@ -11,7 +11,7 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="ProjectManager">
         <Window.Styles>
-            <StyleInclude Source="../styles/style.axaml"></StyleInclude>
+            <StyleInclude Source="../../styles/style.axaml"></StyleInclude>
         </Window.Styles>
     <Design.DataContext>
       

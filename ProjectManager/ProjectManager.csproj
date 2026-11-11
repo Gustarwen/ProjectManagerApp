@@ -29,4 +29,55 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Views\Windows\connectNodes.axaml.cs">
+        <DependentUpon>connectNodes.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\Windows\NodConfiguration.axaml.cs">
+        <DependentUpon>NodConfiguration.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\Windows\SettingsView.axaml.cs">
+        <DependentUpon>SettingsView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\controls\canvasNodesView.axaml.cs">
+        <DependentUpon>canvasNodesView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\controls\HomeView.axaml.cs">
+        <DependentUpon>HomeView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\controls\MainProjectNode.axaml.cs">
+        <DependentUpon>MainProjectNode.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\controls\MainWindow.axaml.cs">
+        <DependentUpon>MainWindow.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\controls\ProjectBoardView.axaml.cs">
+        <DependentUpon>ProjectBoardView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\controls\QaAView.axaml.cs">
+        <DependentUpon>QaAView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\controls\statistics.axaml.cs">
+        <DependentUpon>statistics.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\controls\task.axaml.cs">
+        <DependentUpon>task.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\MyCanvas\piegraphView.axaml.cs">
+        <DependentUpon>piegraphView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
 </Project>

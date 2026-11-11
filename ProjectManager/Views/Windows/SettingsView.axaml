@@ -16,6 +16,6 @@
                 <Button Grid.Column="3" Margin="10"  HorizontalContentAlignment="Center" Height="50" Width="50" CornerRadius="25" Classes="green" Click = "Green"></Button>
         </Grid>
         <Window.Styles>
-                <StyleInclude Source="../styles/style.axaml"></StyleInclude>
+                <StyleInclude Source="../../styles/style.axaml"></StyleInclude>
         </Window.Styles>
 </Window>
