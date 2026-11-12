@@ -28,7 +28,7 @@ public partial class piegraphView : UserControl
                 lines.Add(new Line
                 {
                     Stroke = Brushes.Blue,
-                    StrokeThickness = 5,
+                    StrokeThickness = 25,
                     ZIndex = 1,
                     StartPoint = new Point(Math.Cos(startAngle) * MyPie.Width/2 + MyPie.Width/2, Math.Sin(startAngle) * MyPie.Height/2 + MyPie.Height/2),
                     EndPoint = new Point(Math.Cos(endAngle) * MyPie.Width/2 + MyPie.Width/2, Math.Sin(endAngle) * MyPie.Height/2 + MyPie.Height/2)
@@ -45,7 +45,7 @@ public partial class piegraphView : UserControl
                 lines.Add(new Line
                 {
                     Stroke = Brushes.Red,
-                    StrokeThickness = 5,
+                    StrokeThickness = 25,
                     ZIndex = 2,
                     StartPoint = new Point(Math.Cos(startAngle-90.0/360.0*Math.PI*2) * MyPie.Width/2 + MyPie.Width/2, Math.Sin(startAngle-90.0/360.0*Math.PI*2) * MyPie.Height/2 + MyPie.Height/2),
                     EndPoint = new Point(Math.Cos(endAngle-90.0/360.0*Math.PI*2) * MyPie.Width/2 + MyPie.Width/2, Math.Sin(endAngle-90.0/360.0*Math.PI*2) * MyPie.Height/2 + MyPie.Height/2)
