@@ -9,11 +9,16 @@
              >
     <ScrollViewer VerticalScrollBarVisibility="Visible">
         <StackPanel>
-            <Border x:Name="DashBoard"  MaxWidth="300">
+            <Border x:Name="DashBoard">
                 <WrapPanel>
-                    
-                    <ContentControl  Content="{Binding Graph}" Margin="10" Height="100" Width="600"> </ContentControl>
+                    <Grid RowDefinitions="Auto Auto" VerticalAlignment="Top" Height="300">
+                        <ContentControl VerticalAlignment="Top"  Content="{Binding Graph}" Margin="10" Height="50" Width="300"> </ContentControl>
+                        <ContentControl Grid.Row="1" VerticalAlignment="Top"  Content="{Binding Graph}" Margin="10" Height="50" Width="300"> </ContentControl>
+                    </Grid>
+                  
                     <ContentControl  Content="{Binding Piegraph}" Margin="10" Height="200" Width="200"></ContentControl>
+                   
+                    <ContentControl  Content="{Binding Blockgraph}" Margin="10" Height="300" Width="300"></ContentControl>
                     
                 </WrapPanel>
                 

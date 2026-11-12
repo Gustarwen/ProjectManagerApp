@@ -23,7 +23,8 @@ public partial class graphView : UserControl
                 Width = 10,
                 Height = 10,
                 StrokeThickness = 5,
-                Stroke = Brushes.Blue
+                Stroke = Brushes.Blue,
+                ZIndex = 2
             };
             Canvas.SetLeft(ellipse, points[i].X);
             Canvas.SetTop(ellipse, points[i].Y);
@@ -100,7 +101,7 @@ public partial class graphView : UserControl
             else
             {
                  point = new Point((double)i / (double)graphData.Count * Graph.Width+10,
-                    (double)((double)graphData[i] - min) / (max - min) * Graph.Height+10);
+                     Graph.Height-((double)graphData[i] - min) / (max - min) * Graph.Height+5);
             }
             points.Add(point);
             GeneratePoints(points);
