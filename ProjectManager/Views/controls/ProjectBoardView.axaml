@@ -8,11 +8,20 @@
              x:DataType="vm:ProjectBoardViewModel"
              >
     <ScrollViewer VerticalScrollBarVisibility="Visible">
-        <Grid  RowDefinitions="* Auto">
-            <ContentControl Grid.Row="0" Content="{Binding Graph}"></ContentControl>
-            <Button>super</Button>
-            <ContentControl Grid.Row="1" Content="{Binding Selected }"></ContentControl>
-        </Grid>
+        <StackPanel>
+            <Border x:Name="DashBoard"  MaxWidth="300">
+                <WrapPanel>
+                    
+                    <ContentControl  Content="{Binding Graph}" Margin="10" Height="100" Width="600"> </ContentControl>
+                    <ContentControl  Content="{Binding Piegraph}" Margin="10" Height="200" Width="200"></ContentControl>
+                    
+                </WrapPanel>
+                
+                
+            </Border>
+            
+            <ContentControl  Content="{Binding Selected }"></ContentControl>
+        </StackPanel>
     </ScrollViewer>
    
    

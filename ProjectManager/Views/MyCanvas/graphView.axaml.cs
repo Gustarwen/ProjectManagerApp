@@ -11,7 +11,7 @@ namespace ProjectManager.Views;
 
 public partial class graphView : UserControl
 {
-    public List<int> graphData = new (){1,5,2,5,10,5,2,6,9,8};
+    public List<int> graphData = new (){1,5,10,8,9,2,5,2,7,1,5,10,8,9,2,5,2,7,1,5,10,8,9,2,5,2,7,1,5,10,8,9,2,5,2,7};
     private List<Line> lines;
 
     private void GeneratePoints(List<Point> points)
@@ -27,6 +27,7 @@ public partial class graphView : UserControl
             };
             Canvas.SetLeft(ellipse, points[i].X);
             Canvas.SetTop(ellipse, points[i].Y);
+            ToolTip.SetTip(ellipse,$"position (X,Y): ({points[i].X},{graphData[i]})");
             Graph.Children.Add(ellipse);
         }
         
@@ -60,27 +61,25 @@ public partial class graphView : UserControl
                 Stroke = Brushes.Black,
                 StrokeThickness = 3
             };
-            for (int i = 0; i < p.Count - 4; i++)
+            for (int i = 0; i < p.Count - 3; i++)
             {
-                for (int t = 1; t <= 50; t++)
+                // Jdeme od 0 do 50 (u posledního segmentu včetně 50, aby křivka dojela až do konce)
+                int steps = 50;
+                for (int step = 0; step <= steps; step++)
                 {
-                    double t1 = (t - 1) / 50.0;
-                    double t2 = t / 50.0;
-                    
-                    double y1 = 0.5 * ((2 * p[i + 1].Y) + (-p[i].Y + p[i + 2].Y) * t1 +
-                                       (2 * p[i].Y - 5 * p[i + 1].Y + 4 * p[i + 2].Y - p[i + 3].Y) * t1 * t1 +
-                                       (-p[i].Y + 3 * p[i + 1].Y - 3 * p[i + 2].Y + p[i + 3].Y) * t1 * t1 * t1);
+                    double t = step / (double)steps;
+                    double t2 = t * t;
+                    double t3 = t2 * t;
 
-                    double y2 = 0.5 * ((2 * p[i + 1].Y) + (-p[i].Y + p[i + 2].Y) * t2 +
-                                       (2 * p[i].Y - 5 * p[i + 1].Y + 4 * p[i + 2].Y - p[i + 3].Y) * t2 * t2 +
-                                       (-p[i].Y + 3 * p[i + 1].Y - 3 * p[i + 2].Y + p[i + 3].Y) * t2 * t2 * t2);
-                    
-                    double x1 = p[i + 1].X + (p[i + 2].X - p[i + 1].X) * t1;
-                    double x2 = p[i + 1].X + (p[i + 2].X - p[i + 1].X) * t2;
+                    double x = 0.5 * ((2 * p[i + 1].X) + (-p[i].X + p[i + 2].X) * t +
+                                      (2 * p[i].X - 5 * p[i + 1].X + 4 * p[i + 2].X - p[i + 3].X) * t2 +
+                                      (-p[i].X + 3 * p[i + 1].X - 3 * p[i + 2].X + p[i + 3].X) * t3);
 
+                    double y = 0.5 * ((2 * p[i + 1].Y) + (-p[i].Y + p[i + 2].Y) * t +
+                                      (2 * p[i].Y - 5 * p[i + 1].Y + 4 * p[i + 2].Y - p[i + 3].Y) * t2 +
+                                      (-p[i].Y + 3 * p[i + 1].Y - 3 * p[i + 2].Y + p[i + 3].Y) * t3);
 
-                    polyline.Points.Add(new Point(x1, y1));
-                    polyline.Points.Add(new Point(x2, y2));
+                    polyline.Points.Add(new Point(x, y));
                 }
             }
             Graph.Children.Add(polyline);
@@ -100,18 +99,31 @@ public partial class graphView : UserControl
             if(max==min){  point = new Point((double)i/(double)graphData.Count*Graph.Width, Graph.Height/2);}
             else
             {
-                 point = new Point((double)i / (double)graphData.Count * Graph.Width,
-                    (double)((double)graphData[i] - min) / (max - min) * Graph.Height);
+                 point = new Point((double)i / (double)graphData.Count * Graph.Width+10,
+                    (double)((double)graphData[i] - min) / (max - min) * Graph.Height+10);
             }
             points.Add(point);
             GeneratePoints(points);
-            generateLines(points);
+           
             
         }
+        generateLines(points);
     }
     public graphView()
     {
         InitializeComponent();
-        generateGraph();
+        this.SizeChanged += (s, e) =>
+        {
+            if (this.Bounds.Height > 0 && this.Bounds.Width > 0)
+            {
+                Graph.Height = this.Bounds.Height;
+                Graph.Width = this.Bounds.Width;
+                generateGraph();
+        
+                
+            }
+           
+        };
+
     }
 }

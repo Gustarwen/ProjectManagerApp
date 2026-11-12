@@ -58,13 +58,25 @@ public partial class piegraphView : UserControl
     public piegraphView()
     {
         InitializeComponent();
-        GraphVisual();
-        
-        foreach (Line line in lines)
+        this.SizeChanged += (s, e) =>
         {
-            Console.WriteLine(line.StartPoint.X + "," + line.StartPoint.Y+" color "+line.Stroke);
-            MyPie.Children.Add(line);
-        }
+            if (this.Bounds.Height > 0 && this.Bounds.Width > 0)
+            {
+                MyPie.Height = this.Bounds.Height;
+                MyPie.Width = this.Bounds.Width;
+                GraphVisual();
+        
+                foreach (Line line in lines)
+                {
+                    Console.WriteLine(line.StartPoint.X + "," + line.StartPoint.Y+" color "+line.Stroke);
+            
+                    MyPie.Children.Add(line);
+                }
+            }
+           
+        };
+
+       
         
     }
 }

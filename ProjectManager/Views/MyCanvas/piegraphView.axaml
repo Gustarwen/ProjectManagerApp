@@ -6,11 +6,11 @@
              x:DataType="vm:piegraphViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ProjectManager.Views.piegraphView">
-    <StackPanel>
+    
         
-        <Canvas x:Name="MyPie" Width="200" Height="200" Background="LightGray"/>
+        <Canvas x:Name="MyPie"   Background="LightGray"/>
             
         
-    </StackPanel>
+    
 
 </UserControl>

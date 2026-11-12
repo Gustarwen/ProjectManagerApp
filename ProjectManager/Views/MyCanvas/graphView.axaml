@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ProjectManager.Views.graphView">
-        <Canvas x:Name="Graph" Height="300" Width="600" Background="AntiqueWhite">
+        <Canvas x:Name="Graph"  Background="AntiqueWhite">
             
         </Canvas>
 </UserControl>
