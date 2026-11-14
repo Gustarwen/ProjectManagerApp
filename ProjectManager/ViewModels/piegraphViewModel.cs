@@ -1,6 +1,9 @@
-﻿namespace ProjectManager.ViewModels;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-public class piegraphViewModel : ViewModelBase
+namespace ProjectManager.ViewModels;
+
+public partial class piegraphViewModel : ViewModelBase
 {
-    
+    [ObservableProperty]
+    private double alpha;
 }

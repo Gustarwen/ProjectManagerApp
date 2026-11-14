@@ -16,11 +16,13 @@ public partial class NodConfiguration : Window
        
         Accept.Click += (a, p) =>
         {
-          
+           
             var informations = DataContext as CanvasNodesViewModel;
+            if (MyDatePicker.SelectedDate == null||NameBox.Text == null) return;
             ProjectData data = new ProjectData();
+            data.deadLine =(DateTimeOffset)MyDatePicker.SelectedDate;
             data.ProjectId = selectedTask.ProjectId;
-            
+            data.start =DateTime.Now;
             data.Name = NameBox.Text;
             data.Date = MyDatePicker.SelectedDate;
             data.Id = selectedTask.Id;

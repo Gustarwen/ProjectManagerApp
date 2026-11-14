@@ -39,6 +39,13 @@
         {
             Mydata.Remove(data);
            DataBaseController.DeleteProject(data);
+           foreach (var task in DataBaseController.Taskrepository.Query().Where(p => p.ProjectId == data.Id).Execute())
+           {
+               
+           }
+
+           DataBaseController.Taskrepository.DeleteMany(p=>p.ProjectId == data.Id);
+           
         }
         
         [RelayCommand]

@@ -29,6 +29,7 @@
     <Style Selector="Border.finished">
         <Setter Property="Background" Value="Green"></Setter>
     </Style>
+    <Style Selector="Border.afterdeadline"></Style>
    <!--delete button-->
     
    <!--add button-->

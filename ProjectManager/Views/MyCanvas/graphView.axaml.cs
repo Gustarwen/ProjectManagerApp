@@ -11,7 +11,7 @@ namespace ProjectManager.Views;
 
 public partial class graphView : UserControl
 {
-    public List<int> graphData = new (){1,5,10,8,9,2,5,2,7,1,5,10,8,9,2,5,2,7,1,5,10,8,9,2,5,2,7,1,5,10,8,9,2,5,2,7};
+    public List<int> graphData = new (){1,5};
     private List<Line> lines;
 
     private void GeneratePoints(List<Point> points)
@@ -88,7 +88,7 @@ public partial class graphView : UserControl
 
         
     }
-    private void generateGraph()
+    public void generateGraph()
     {
         List<Point> points = new();
         int min = graphData.Min();

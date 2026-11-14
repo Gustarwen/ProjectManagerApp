@@ -71,12 +71,12 @@
         <DependentUpon>statistics.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
-      <Compile Update="Views\controls\task.axaml.cs">
-        <DependentUpon>task.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
       <Compile Update="Views\MyCanvas\piegraphView.axaml.cs">
         <DependentUpon>piegraphView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\MyCanvas\task.axaml.cs">
+        <DependentUpon>task.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
     </ItemGroup>

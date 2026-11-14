@@ -22,6 +22,7 @@ public partial class CanvasNodesView : UserControl
     public static CanvasNodesView item;
     private Point start;
 
+    public Action Update;
 // Přidej tyto 3 proměnné pro držení přesného stavu transformace:
 //Aktualni problemy. Za 1.: nefunguje oznaceni roota.
 //                   Za 2.: nefunguje pri prehozeni projektu oznaceni jakehokoliv tasku
@@ -215,7 +216,7 @@ public partial class CanvasNodesView : UserControl
                 if (Roots.Where(p => p.Id == special.TaskId2).FirstOrDefault() == null)
                 {
                     ProjectData taskToJoin = DataBaseController.Taskrepository.Query()
-                        .Where(p => p.Id == special.TaskId2).Execute().Single();
+                        .Where(p => p.Id == special.TaskId2).Execute().FirstOrDefault();
                     if (taskToJoin == null)
                     {
                         return;
@@ -226,6 +227,7 @@ public partial class CanvasNodesView : UserControl
                 }
                 else
                 {
+                
                     joined = Roots.Where(p => p.Id == special.TaskId2).FirstOrDefault();}
                
                 Roots.Add(joined);
@@ -279,7 +281,7 @@ public void createMap(ProjectData firstData)
 
             double startovniX = Math.Max(1000.0, celkovaSirka / 2.0);
             _fixPositionToNodes(firstData, startovniX);
-
+            
             task.tasks.Clear();
             
             _renderNodes(firstData);
@@ -344,8 +346,9 @@ private void renderSpecialNode(MainProjectData node)
 
 private void _renderNodes(ProjectData node)
     {
+        
         task tasks = new task(node);
-
+    
         tasks.ConnectButton.Click += (a, v) =>
         {
             Window root = this.FindAncestorOfType<Window>();
@@ -368,6 +371,7 @@ private void _renderNodes(ProjectData node)
         tasks.Name.Text = node.Name;
         MapCanvas.Children.Add(tasks);
         task.tasks.Add(tasks);
+        
         
 
 
@@ -506,7 +510,8 @@ private void _renderNodes(ProjectData node)
 
     public  void onUpdate()
     {
-
+        viewModel.OnUpdateFunction();
+    
 
         if (viewModel.Project == null) return;
         
@@ -516,8 +521,14 @@ private void _renderNodes(ProjectData node)
       
         // 3. Znovu vykreslíme
         MainProjectData projectRootNode;
-       
-           
+
+        foreach (var root in Roots)
+        {
+            if (root == null)
+            {
+                Roots.Remove(root);
+            }
+        }
         
 
 
@@ -542,7 +553,7 @@ private void _renderNodes(ProjectData node)
 
         ProgressBar.Value = (double)finisher / sum * 100;
         Progress.Text = ((double)finisher / sum * 100).ToString("0") + "%";
-
+        Update?.Invoke();
 
     }
 
@@ -581,6 +592,7 @@ private void _renderNodes(ProjectData node)
     
         DataContextChanged += (sender, args) =>
         {
+           
             viewModel = this.DataContext as CanvasNodesViewModel;
 
             if (viewModel != null)

@@ -22,6 +22,8 @@ public partial class taskViewModel :ViewModelBase
         
         mytask.Finished = !mytask.Finished;
 
+        mytask.accept = DateTime.Now;
+        
         
        
        

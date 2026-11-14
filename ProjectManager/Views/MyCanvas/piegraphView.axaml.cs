@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+using ProjectManager.ViewModels;
 
 namespace ProjectManager.Views;
 public partial class piegraphView : UserControl
@@ -14,8 +15,9 @@ public partial class piegraphView : UserControl
     private List<Line> lines = new();
         
 
-        private void GraphVisual()
+    public void GraphVisual(double thisalpha)
         {
+            alpha = thisalpha;
             MyPie.Children.Clear();
             double thickness = 25;
             double size = this.Bounds.Height;
@@ -87,7 +89,14 @@ public partial class piegraphView : UserControl
             {
                 MyPie.Height = this.Bounds.Height;
                 MyPie.Width = this.Bounds.Width;
-                GraphVisual();
+                if (DataContext is piegraphViewModel vm)
+                {
+                    
+                    vm.PropertyChanged+=(a, b) => GraphVisual(vm.Alpha);
+                    GraphVisual(vm.Alpha);
+                   
+                }
+             
         
                 
             }

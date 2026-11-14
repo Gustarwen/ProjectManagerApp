@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using Durable;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.JavaScript;
 using Avalonia.Media.Imaging;
 
 namespace ProjectManager.DataTemplates;
@@ -13,6 +14,9 @@ public partial class ProjectData : ObservableObject
     //vytvoří id pro tasky
     [Property("Id", Flags.Integer | Flags.PrimaryKey | Flags.AutoIncrement)] 
     public int Id { get; set; }
+        
+    [Property("DeadLine")]
+    public DateTimeOffset deadLine { get; set; }
     
     //kontrola, jestli je task splněný nebo ne
     [property: Property("Finished", Flags.Integer, 1)] [ObservableProperty]
@@ -23,11 +27,14 @@ public partial class ProjectData : ObservableObject
     //hodnota spojující každý Task s jeho rodičem
     [Property("parent_id")] [ForeignKey(typeof(ProjectData), "Id")] 
     public int? ParentId{get;set;}
-    
+
+    [Property("created")]
+    public DateTime start;
     //jméno Tasku
     [Property("Name",Flags.String,64)]
     public string Name { get; set; } = "Untitled";
-    
+
+    [Property("accept")] public DateTimeOffset accept;
     //děti určitého Tasku
     public List<ProjectData> Childerns = new List<ProjectData>();
     public List<MainProjectData> JoindedProject = new();

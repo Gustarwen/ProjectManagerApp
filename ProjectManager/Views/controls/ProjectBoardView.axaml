@@ -16,9 +16,9 @@
                         <ContentControl Grid.Row="1" VerticalAlignment="Top"  Content="{Binding Graph}" Margin="10" Height="50" Width="300"> </ContentControl>
                     </Grid>
                   
-                    <ContentControl  Content="{Binding Piegraph}" Margin="10" Height="200" Width="200"></ContentControl>
+                    <ContentControl x:Name = "MyAccept"  Content="{Binding Piegraph}" Margin="10" Height="200" Width="200"></ContentControl>
                    
-                    <ContentControl  Content="{Binding Blockgraph}" Margin="10" Height="300" Width="300"></ContentControl>
+                    <ContentControl x:Name="AcceptInTime"  Content="{Binding Blockgraph}" Margin="10" Height="300" Width="300"></ContentControl>
                     
                 </WrapPanel>
                 
