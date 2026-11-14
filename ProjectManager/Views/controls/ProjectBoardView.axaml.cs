@@ -25,6 +25,7 @@ public partial class ProjectBoardView : UserControl
                 pie.Alpha = data;
             }
         };
+        
       
 
 

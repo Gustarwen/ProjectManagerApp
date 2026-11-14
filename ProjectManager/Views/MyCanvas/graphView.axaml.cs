@@ -6,6 +6,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+using ProjectManager.ViewModels;
 
 namespace ProjectManager.Views;
 
@@ -33,7 +34,6 @@ public partial class graphView : UserControl
         }
         
     }
-
     private void generateLines(List<Point> points)
     {
         
@@ -88,8 +88,9 @@ public partial class graphView : UserControl
 
         
     }
-    public void generateGraph()
+    public void generateGraph(List<int>thisdata)
     {
+        graphData = thisdata;
         List<Point> points = new();
         int min = graphData.Min();
         int max = graphData.Max();
@@ -119,11 +120,19 @@ public partial class graphView : UserControl
             {
                 Graph.Height = this.Bounds.Height;
                 Graph.Width = this.Bounds.Width;
-                generateGraph();
+                
+                
         
                 
             }
            
+        };
+        this.DataContextChanged += (a,v) =>
+        {
+            if (DataContext is graphViewModel vm)
+            {
+                generateGraph(vm.datas);
+            }
         };
 
     }
