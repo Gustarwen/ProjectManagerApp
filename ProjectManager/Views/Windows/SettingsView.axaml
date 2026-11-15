@@ -18,7 +18,7 @@
                 </Grid>
                 
                 
-                <Button Click="ConnectToRider"></Button>
+                <Button x:Name="ConnectToDb" Click="ConnectToRider"></Button>
         </StackPanel>
         
         <Window.Styles>

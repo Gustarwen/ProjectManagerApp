@@ -15,6 +15,18 @@ public partial class SettingsView : Window
     public SettingsView()
     {
         InitializeComponent();
+       var fileToDb =Path.Combine( Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"JetBrains");
+       List<string> pathsToRider = Directory.GetDirectories(fileToDb,"Rider*").ToList();
+       
+       if (File.Exists(Path.Combine(pathsToRider.FirstOrDefault(),"my-rider-plugin.db")))
+       {
+           ConnectToDb.Content = "Your Db is already connected";
+       }
+       else
+       {
+           ConnectToDb.Content = "Wanna connect ProjectManager with Rider?";
+       }
+      
         
         
     }
@@ -68,32 +80,44 @@ public partial class SettingsView : Window
     private void Orange(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         LinearGradientBrush brush = new LinearGradientBrush();
-        
+
         Application.Current.Resources["redone"] = (Color)Application.Current.Resources["OrangeOne"];
         Application.Current.Resources["redtwo"] = (Color)Application.Current.Resources["OrangeTwo"];
         Application.Current.Resources["redthree"] = (Color)Application.Current.Resources["OrangeThree"];
         Application.Current.Resources["redfour"] = (Color)Application.Current.Resources["OrangeFour"];
         brush.GradientStops.Add(new GradientStop((Color)Application.Current.Resources["redone"], 0));
         brush.GradientStops.Add(new GradientStop(Colors.Black, 1));
-        brush.StartPoint = new (0,0,RelativeUnit.Relative);
-        brush.EndPoint=new (0,1,RelativeUnit.Relative);
+        brush.StartPoint = new(0, 0, RelativeUnit.Relative);
+        brush.EndPoint = new(0, 1, RelativeUnit.Relative);
         Application.Current.Resources["BackgroundLinearGradient"] = brush;
     }
+    
+
     private void ConnectToRider(object?sender,Avalonia.Interactivity.RoutedEventArgs e)
     {
 
         var filepath =Path.Combine( Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"JetBrains");
         List<string> paths = Directory.GetDirectories(filepath, "Rider*").ToList();
-        var zipfile = Path.Combine(AppContext.BaseDirectory,"Plugin","PluginForRider.zip");
+        var zipfile = Path.Combine(AppContext.BaseDirectory,"Plugin","ProjectManagerPlugin.zip");
         foreach (string path in paths)
         {
-            if (Directory.Exists(Path.Combine(path,"plugins", "PluginForRider")))
+            if (Directory.Exists(Path.Combine(path,"plugins","ProjectManagerPlugin")))
             {
                 Console.WriteLine("existuje jiz spojena slozka s riderem");
                 return;
             }
-            System.IO.Compression.ZipFile.ExtractToDirectory(zipfile,Path.Combine(path,"plugins","PluginForRider"));
-            
+            System.IO.Compression.ZipFile.ExtractToDirectory(zipfile,Path.Combine(path,"plugins"));
+            var fileToDb =Path.Combine( Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"JetBrains");
+            List<string> pathsToRider = Directory.GetDirectories(fileToDb,"Rider*").ToList();
+       
+            if (Directory.Exists(Path.Combine(pathsToRider.FirstOrDefault(),"plugins","ProjectManagerPlugin")))
+            {
+                ConnectToDb.Content = "Your Db is already connected";
+            }
+            else
+            {
+                ConnectToDb.Content = "Wanna connect ProjectManager with Rider?";
+            }
             
         }
         
