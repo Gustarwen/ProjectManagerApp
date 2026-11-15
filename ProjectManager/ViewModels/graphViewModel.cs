@@ -8,12 +8,6 @@ public partial class graphViewModel:ViewModelBase
 {
     public Action onDatasChanged;
 
-    public List<int> datas
-    {
-        get;
-    
-
-    set=>onDatasChanged?.Invoke();
-    }
+    [ObservableProperty] private List<int> _datas = new();
 
 }

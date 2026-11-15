@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+using System.IO;
+using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 
 namespace ProjectManager.Views;
 
@@ -11,6 +15,7 @@ public partial class SettingsView : Window
     public SettingsView()
     {
         InitializeComponent();
+        
         
     }
 
@@ -73,6 +78,25 @@ public partial class SettingsView : Window
         brush.StartPoint = new (0,0,RelativeUnit.Relative);
         brush.EndPoint=new (0,1,RelativeUnit.Relative);
         Application.Current.Resources["BackgroundLinearGradient"] = brush;
+    }
+    private void ConnectToRider(object?sender,Avalonia.Interactivity.RoutedEventArgs e)
+    {
+
+        var filepath =Path.Combine( Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"JetBrains");
+        List<string> paths = Directory.GetDirectories(filepath, "Rider*").ToList();
+        var zipfile = Path.Combine(AppContext.BaseDirectory,"Plugin","PluginForRider.zip");
+        foreach (string path in paths)
+        {
+            if (Directory.Exists(Path.Combine(path,"plugins", "PluginForRider")))
+            {
+                Console.WriteLine("existuje jiz spojena slozka s riderem");
+                return;
+            }
+            System.IO.Compression.ZipFile.ExtractToDirectory(zipfile,Path.Combine(path,"plugins","PluginForRider"));
+            
+            
+        }
+        
     }
 
 }

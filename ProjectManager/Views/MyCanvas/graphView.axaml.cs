@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
-using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using ProjectManager.ViewModels;
 
@@ -90,8 +88,11 @@ public partial class graphView : UserControl
     }
     public void generateGraph(List<int>thisdata)
     {
+        Graph.Children.Clear();
         graphData = thisdata;
+        if (graphData == null) return;
         List<Point> points = new();
+        if(graphData.Count < 1) return;
         int min = graphData.Min();
         int max = graphData.Max();
        
@@ -131,7 +132,11 @@ public partial class graphView : UserControl
         {
             if (DataContext is graphViewModel vm)
             {
-                generateGraph(vm.datas);
+                vm.PropertyChanged += (e, v) =>
+                {
+                    generateGraph(vm.Datas);
+                };
+                generateGraph(vm.Datas);
             }
         };
 

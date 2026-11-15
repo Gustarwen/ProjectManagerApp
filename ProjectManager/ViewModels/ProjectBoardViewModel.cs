@@ -3,7 +3,6 @@
     using System.Linq;
     using CommunityToolkit.Mvvm.ComponentModel;
     using ProjectManager.DataTemplates;
-    using ProjectManager.Views;
 
 
     namespace ProjectManager.ViewModels;
@@ -23,33 +22,36 @@
             if (Piegraph is piegraphViewModel pie)
                 pie.Alpha = ratio * 2 * Math.PI;
 
-            List<DateTimeOffset> times = new();
-            int d = 0;
-            DateTimeOffset actuall;
-            foreach (var task in tasks)
-            {
-                if (task.accept == null) continue;
-               times.Add(task.accept);
-            }
-
-            List<int> data = new();
-            actuall = times.Order().FirstOrDefault();
-            foreach (var time in times.Order())
-            {
-                if (time > actuall)
-                {
-                    data.Add(d);
-                    d = 0;
-                    continue;
-                }
-
-                d++;
-            }
+            var data = tasks
+                .Where(t => t.Finished)
+                .GroupBy(t => t.accept.Date)
+                .OrderBy(g => g.Key)
+                .Select(g => g.Count())
+                .ToList();
 
             if (Graph is graphViewModel graph)
             {
-                graph.datas.Clear();
-                graph.datas.AddRange(data);
+                if (data == null) return;
+                if (graph.Datas.Count == data.Count)
+                {
+                    bool ret = false;
+                    for (int i = 0; i < data.Count; i++)
+                    {
+                        if (data[i] == graph.Datas[i])
+                        {
+                            continue;
+                        }
+
+                        ret = true;
+                    }
+
+                    if (ret == false)
+                    {
+                        return;
+                    }
+                }
+                Console.WriteLine($"data: {data.Count} -> {string.Join(",", data)}");
+                graph.Datas=data;
             }
             
         }
@@ -57,6 +59,11 @@
         
         public ProjectBoardViewModel(Project project)
         {
+            if (Graph is graphViewModel graph)
+            {
+                graph.PropertyChanged += (e, v) => { RefreshProgress(); };
+            }
+
             this.project = project;
             Selected = new CanvasNodesViewModel(project);
             if (Selected is CanvasNodesViewModel canvas)

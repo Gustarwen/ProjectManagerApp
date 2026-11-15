@@ -34,7 +34,8 @@ public partial class ProjectData : ObservableObject
     [Property("Name",Flags.String,64)]
     public string Name { get; set; } = "Untitled";
 
-    [Property("accept")] public DateTimeOffset accept;
+    [Property("accept")] public DateTimeOffset accept { get; set; }
+
     //děti určitého Tasku
     public List<ProjectData> Childerns = new List<ProjectData>();
     public List<MainProjectData> JoindedProject = new();
