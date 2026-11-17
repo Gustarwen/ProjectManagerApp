@@ -1,0 +1,39 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ProjectManager.Views.controls.ProjectView">
+             <Border CornerRadius="20" Background="#F8F9FA" ClipToBounds="True" Height="400" Width="300">
+                 <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  >
+                     <Grid>
+                         <Border  Background="#ADB5BD" Height="190"></Border>
+                         <Border Background="#2563EB" Height="25" Width="90" HorizontalAlignment="Left" Margin="20" VerticalAlignment="Top" CornerRadius="20"><TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="#F8F9FA">In Progress</TextBlock></Border>
+                     </Grid>
+                     
+                     <TextBlock TextAlignment="Center" FontWeight="Medium" FontSize="18">Project</TextBlock>
+                     <Grid Height="130" Background="#E9ECEF" ColumnDefinitions="* *">
+                         <Border Background="#CED4DA" BorderBrush="#ADB5BD" BorderThickness="5" CornerRadius="5">
+                             <TextBlock VerticalAlignment="Center" TextAlignment="Center">20.5.2026</TextBlock>
+                         </Border>
+                         <ScrollViewer Grid.Column="1">
+                             <Border  Background="#CED4DA" BorderBrush="#ADB5BD" BorderThickness="5" CornerRadius="5" ClipToBounds="True">
+                                 <StackPanel>
+                                     <Border Background="#ADB5BD" Height="20" BorderThickness="2" BorderBrush="#6C757D"><TextBlock TextAlignment="Center">git</TextBlock></Border>
+                                     <Border Background="#ADB5BD" Height="20" BorderThickness="2" BorderBrush="#6C757D"><TextBlock TextAlignment="Center">git</TextBlock></Border>
+                                     <Border Background="#ADB5BD" Height="20" BorderThickness="2" BorderBrush="#6C757D"><TextBlock TextAlignment="Center">just</TextBlock></Border>
+                                     <Border Background="#ADB5BD" Height="20" BorderThickness="2" BorderBrush="#6C757D"><TextBlock TextAlignment="Center">fit</TextBlock></Border>
+                                     <Border Background="#ADB5BD" Height="20" BorderThickness="2" BorderBrush="#6C757D"><TextBlock TextAlignment="Center">beat</TextBlock></Border>
+                                     <Border Background="#ADB5BD" Height="20" BorderThickness="2" BorderBrush="#6C757D"><TextBlock TextAlignment="Center">life</TextBlock></Border>
+                                     <Border Background="#ADB5BD" Height="20" BorderThickness="2" BorderBrush="#6C757D"><TextBlock TextAlignment="Center">git</TextBlock></Border>
+                                     <Border Background="#ADB5BD" Height="20" BorderThickness="2" BorderBrush="#6C757D"><TextBlock TextAlignment="Center">git</TextBlock></Border>
+                                 </StackPanel>
+                             </Border>
+                         </ScrollViewer>
+                        
+                         
+                     </Grid>
+                     <ProgressBar  Margin="0 20" Height="6" Value="70" ShowProgressText="false" Foreground="DodgerBlue" Background="DarkGray"></ProgressBar>
+                 </StackPanel>
+             </Border>
+</UserControl>
