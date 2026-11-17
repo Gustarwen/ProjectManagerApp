@@ -28,7 +28,7 @@ public partial class blockGraphView : UserControl
                 Fill = Brushes.Red
             };
             Canvas.SetLeft(rect, width*i);
-            Canvas.SetBottom(rect, 10);
+            Canvas.SetBottom(rect, 0);
             BlockGraph.Children.Add(rect);
             ToolTip.SetTip(rect, graphData[i].ToString());
             

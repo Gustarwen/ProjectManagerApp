@@ -2,7 +2,82 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:localv="clr-namespace:ProjectManager.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ProjectManager.Views.Home2View">
+        <Border Background="#F8F9FA">
+            <Grid RowDefinitions="* * Auto" ColumnDefinitions="Auto *">
+                <StackPanel Width="100">
+                   
+                </StackPanel>
+                <Border Grid.Column="1" Background="#DEE2E6" BorderBrush="#ADB5BD" BorderThickness="4 1"></Border>
+                <Border Grid.Column="1" Grid.Row="1" Background="#DEE2E6" BorderBrush="#ADB5BD" BorderThickness="4 1" ClipToBounds="True">
+                    <Grid ColumnDefinitions="* *">
+                        <ScrollViewer Grid.Column="0">
+                        <StackPanel HorizontalAlignment="Stretch">
+                            <TextBlock Margin="10"> Tasks</TextBlock>
+                            <Border BorderBrush="Blue" BorderThickness=" 0 1 0 0">
+                                <Grid ColumnDefinitions="Auto * Auto">
+                                    <CheckBox></CheckBox>
+                                    <TextBlock VerticalAlignment="Center" Grid.Column="1">some random task</TextBlock>
+                                    <TextBlock VerticalAlignment="Center" Grid.Column="2" Margin="0 0 10 0">pozitri</TextBlock>
+                                </Grid>
+                            </Border>
+                            <Border BorderBrush="Blue" BorderThickness=" 0 1 0 0">
+                                <Grid ColumnDefinitions="Auto * Auto">
+                                    <CheckBox></CheckBox>
+                                    <TextBlock VerticalAlignment="Center" Grid.Column="1">some random task</TextBlock>
+                                    <TextBlock VerticalAlignment="Center" Grid.Column="2" Margin="0 0 10 0">pozitri</TextBlock>
+                                </Grid>
+                            </Border>
+                            <Border BorderBrush="Blue" BorderThickness=" 0 1 0 0">
+                                <Grid ColumnDefinitions="Auto * Auto">
+                                    <CheckBox></CheckBox>
+                                    <TextBlock VerticalAlignment="Center" Grid.Column="1">some random task</TextBlock>
+                                    <TextBlock VerticalAlignment="Center" Grid.Column="2" Margin="0 0 10 0">pozitri</TextBlock>
+                                </Grid>
+                            </Border>
+                            <Border BorderBrush="Blue" BorderThickness=" 0 1 0 0">
+                                <Grid ColumnDefinitions="Auto * Auto">
+                                    <CheckBox></CheckBox>
+                                    <TextBlock VerticalAlignment="Center" Grid.Column="1">some random task</TextBlock>
+                                    <TextBlock VerticalAlignment="Center" Grid.Column="2" Margin="0 0 10 0">pozitri</TextBlock>
+                                </Grid>
+                            </Border><Border BorderBrush="Blue" BorderThickness=" 0 1 0 0">
+                                <Grid ColumnDefinitions="Auto * Auto">
+                                    <CheckBox></CheckBox>
+                                    <TextBlock VerticalAlignment="Center" Grid.Column="1">some random task</TextBlock>
+                                    <TextBlock VerticalAlignment="Center" Grid.Column="2" Margin="0 0 10 0">pozitri</TextBlock>
+                                </Grid>
+                            </Border>
+                            
+                            
+                        </StackPanel>
+                        </ScrollViewer>
+                         <localv:blockGraphView Margin="10 0" Grid.Column="1"></localv:blockGraphView>
+                    </Grid>
+                </Border>
+                <!--projects list-->
+
+                <Border Grid.Column="1" Grid.Row="2" Background="#DEE2E6" BorderBrush="#ADB5BD" BorderThickness="4 1">
+                    <StackPanel>
+                    <Grid ColumnDefinitions="Auto * Auto">
+                        <TextBlock>ahoj</TextBlock>
+                        <Button Grid.Column="2">ahoj</Button>
+                    </Grid>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                        <StackPanel Orientation="Horizontal">
+                            <Viewbox Margin="10 5"><localv:ProjectCardView /></Viewbox>
+                            <Viewbox Margin="10 5"><localv:ProjectCardView /></Viewbox>
+                            <Viewbox Margin="10 5"><localv:ProjectCardView /></Viewbox>
+                            <Viewbox Margin="10 5"><localv:ProjectCardView /></Viewbox>
+                            <Viewbox Margin="10 5"><localv:ProjectCardView /></Viewbox>
+                            <Viewbox Margin="10 5"><localv:ProjectCardView /></Viewbox>
+                        </StackPanel>
+                    </ScrollViewer>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
         
 </UserControl>
