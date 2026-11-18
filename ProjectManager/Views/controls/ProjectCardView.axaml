@@ -4,26 +4,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ProjectManager.Views.ProjectCardView">
-
-    <Border BoxShadow="0 2 8 0 #30000000" Background="#F8F9FA" Width="220" Height="160" CornerRadius="20" ClipToBounds="True">
+    <Button Background="Transparent" x:Name ="GoToProject">
+    <Border BoxShadow="0 2 8 0 #30000000" Background="#F8F9FA" Width="220" Height="160" CornerRadius="20" ClipToBounds="True" Margin="5">
             <StackPanel >
                 <Grid>
-                    <Image Height="50" Source="../../Images/noImageIcon.png"></Image>
-                    <Border Background="#6196FF" Height="30" CornerRadius="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12" Padding="5"><TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#F8F9FA">In Progress</TextBlock></Border>
+                    <Image x:Name="ProjectImage" Height="50" ></Image>
+                    <Border x:Name="State" Background="#0077b6" Height="30" CornerRadius="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12" Padding="5"><TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#F8F9FA">In Progress</TextBlock></Border>
                 </Grid>
-               
-                <TextBlock TextAlignment="Center" FontSize="18">Project</TextBlock>
+                   
+                <TextBlock x:Name="Name" TextAlignment="Center" FontSize="18">Project</TextBlock>
                 <Grid ColumnDefinitions="* *"  Height="70">
-                   <Border Grid.Column="0" VerticalAlignment="Center">
-                       <TextBlock TextAlignment="Center">hello</TextBlock>
-                   </Border>
+                    <Border Grid.Column="0" VerticalAlignment="Center">
+                        <TextBlock TextAlignment="Center">hello</TextBlock>
+                    </Border>
                     <Border Grid.Column="1" VerticalAlignment="Center">
                         <TextBlock TextAlignment="Center">fellow</TextBlock>
                     </Border>
                 </Grid>
-               
-                <ProgressBar VerticalAlignment="Bottom"  Value="75"></ProgressBar>
+                   
+                <ProgressBar x:Name="ProgressBar" Foreground="#0077b6" VerticalAlignment="Bottom"  Value="75"></ProgressBar>
             </StackPanel >
         </Border>
+    </Button>
+   
 
 </UserControl>

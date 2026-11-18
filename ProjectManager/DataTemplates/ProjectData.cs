@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using Durable;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.InteropServices.JavaScript;
 using Avalonia.Media.Imaging;
 
@@ -119,7 +120,7 @@ public partial class Project : ObservableObject
         get
         {
             if(string.IsNullOrEmpty(MyImage)||!System.IO.File.Exists(MyImage))
-                return null;
+                return new Bitmap(Path.Combine("Images","noImageIcon.png"));
             try
             {
                 return new Bitmap(MyImage);

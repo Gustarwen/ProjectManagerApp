@@ -25,7 +25,7 @@ public partial class blockGraphView : UserControl
             {
                 Width = width-10,
                 Height = (double)graphData[i]/max*this.Bounds.Height,
-                Fill = Brushes.Red
+                Fill = Brush.Parse("#0077b6")
             };
             Canvas.SetLeft(rect, width*i);
             Canvas.SetBottom(rect, 0);
