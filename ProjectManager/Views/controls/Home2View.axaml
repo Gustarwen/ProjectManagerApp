@@ -5,8 +5,12 @@
              xmlns:localv="clr-namespace:ProjectManager.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ProjectManager.Views.Home2View">
-        <Border Background="#F8F9FA">
-            <Grid RowDefinitions="* * Auto" ColumnDefinitions="Auto *">
+    <UserControl.Styles>
+        <StyleInclude Source="../../styles/HomeViewStyle.axaml"></StyleInclude>
+    </UserControl.Styles>
+    <Border Background="#F8F9FA">
+ 
+        <Grid RowDefinitions="* * Auto" ColumnDefinitions="Auto *">
                 <StackPanel Width="100">
                    
                 </StackPanel>
@@ -15,7 +19,7 @@
                     <Grid ColumnDefinitions="* *">
                         <ScrollViewer Grid.Column="0">
                         <StackPanel  x:Name = "TaskPanel" HorizontalAlignment="Stretch">
-                            <TextBlock Margin="10"> Tasks</TextBlock>
+                            <TextBlock Margin="10" Foreground="Black"> Tasks</TextBlock>
                          
                             
                             
@@ -34,12 +38,13 @@
                     </Grid>
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                         <StackPanel x:Name = "ProjectPanel" Orientation="Horizontal">
-                           
+                         
                         </StackPanel>
                     </ScrollViewer>
                     </StackPanel>
                 </Border>
             </Grid>
         </Border>
+
         
 </UserControl>

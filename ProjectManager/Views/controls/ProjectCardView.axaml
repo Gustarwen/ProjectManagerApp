@@ -4,28 +4,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ProjectManager.Views.ProjectCardView">
-    <Button Background="Transparent" x:Name ="GoToProject">
-    <Border BoxShadow="0 2 8 0 #30000000" Background="#F8F9FA" Width="220" Height="160" CornerRadius="20" ClipToBounds="True" Margin="5">
-            <StackPanel >
-                <Grid>
-                    <Image x:Name="ProjectImage" Height="50" ></Image>
-                    <Border x:Name="State" Background="#0077b6" Height="30" CornerRadius="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12" Padding="5"><TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#F8F9FA">In Progress</TextBlock></Border>
-                </Grid>
+    <Button x:Name="GoToProject" Background="Transparent" Padding="3">
+   <Viewbox>
+
+       <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Background="#F8F9FA" Width="220" Height="180"  ClipToBounds="True" Padding="0" BorderThickness="0" x:Name="ProjectBorder">
+           <StackPanel>
+               <Grid>
+                   <!-- Místo <Image> použijeme Border s kulatými horními rohy -->
+                  <Image x:Name="ProjectBitMap" Stretch="UniformToFill" MaxHeight="60"></Image>
+                            
+                   <Border x:Name="State" Background="#0077b6" Height="40" CornerRadius="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12" Padding="5"><TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#F8F9FA">In Progress</TextBlock></Border>
+               </Grid>
                    
-                <TextBlock x:Name="Name" TextAlignment="Center" FontSize="18">Project</TextBlock>
-                <Grid ColumnDefinitions="* *"  Height="70">
-                    <Border Grid.Column="0" VerticalAlignment="Center">
-                        <TextBlock TextAlignment="Center">hello</TextBlock>
-                    </Border>
-                    <Border Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock TextAlignment="Center">fellow</TextBlock>
-                    </Border>
-                </Grid>
+               <TextBlock x:Name="Name" TextAlignment="Center" Foreground="Black" FontSize="18">Project</TextBlock>
+               <Grid ColumnDefinitions="* *"  Height="70">
+                   <Border Grid.Column="0" VerticalAlignment="Center">
+                       <TextBlock TextAlignment="Center" Foreground="Black">hello</TextBlock>
+                   </Border>
+                   <Border Grid.Column="1" VerticalAlignment="Center">
+                       <TextBlock TextAlignment="Center" Foreground="Black">fellow</TextBlock>
+                   </Border>
+               </Grid>
                    
-                <ProgressBar x:Name="ProgressBar" Foreground="#0077b6" VerticalAlignment="Bottom"  Value="75"></ProgressBar>
-            </StackPanel >
-        </Border>
-    </Button>
+               <ProgressBar  x:Name="ProgressBar" Foreground="#0077b6" VerticalAlignment="Bottom"  Value="75"></ProgressBar>
+           </StackPanel >
+        
+       </Border>
+
+       
+   </Viewbox>
+   </Button>
+    
    
+   <UserControl.Styles>
+       <StyleInclude Source="../../styles/HomeViewStyle.axaml"></StyleInclude>
+   </UserControl.Styles>
 
 </UserControl>

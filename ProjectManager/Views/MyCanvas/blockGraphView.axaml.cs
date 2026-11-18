@@ -14,8 +14,9 @@ public partial class blockGraphView : UserControl
 
     public void GenerateGraph()
     {
-       
+        BlockGraph.Children.Clear();
         double width = this.Bounds.Width/(graphData.Count);
+        if(width<12){width=12;}
         int max = graphData.Max();
         for (int i = 0; i < graphData.Count; i++)
         {
@@ -24,6 +25,7 @@ public partial class blockGraphView : UserControl
             Rectangle rect = new Rectangle()
             {
                 Width = width-10,
+                MinWidth = 12,
                 Height = (double)graphData[i]/max*this.Bounds.Height,
                 Fill = Brush.Parse("#0077b6")
             };

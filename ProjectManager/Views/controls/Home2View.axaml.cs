@@ -4,6 +4,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Styling;
+using Avalonia.VisualTree;
 using ProjectManager.DataTemplates;
 using ProjectManager.ViewModels;
 
@@ -16,9 +17,10 @@ public partial class Home2View : UserControl
         foreach (var project in DataBaseController.Projectrepositroy.Query().Execute())
         {
             ProjectCardView projecrRepresenter = new ProjectCardView(project.Id,project.Name,project.ProjectBitmap);
-            
-        
-            ProjectPanel.Children.Add(projecrRepresenter);
+
+          Viewbox box = new Viewbox();
+          box.Child = projecrRepresenter;
+            ProjectPanel.Children.Add(box);
         }
     }
 
@@ -40,16 +42,22 @@ public partial class Home2View : UserControl
             taskGrid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));
             CheckBox taskCheckBox = new CheckBox();
             taskCheckBox.IsChecked = task.Finished;
-            taskViewModel vm = new taskViewModel();
-            taskCheckBox.DataContext = vm;
-            taskCheckBox.Command = vm.AcceptCommand;
-            taskCheckBox.CommandParameter = task;
+            taskCheckBox.BorderBrush =Brushes.Black;
+          ;
+
+          taskCheckBox.Click += (a, v) =>
+          {
+                task.Finished = !task.Finished;
+                DataBaseController.Taskrepository.Update(task);
+          };
             Grid.SetColumn(taskCheckBox, 0);
             TextBlock taskName = new TextBlock();
             taskName.Text = task.Name;
+            taskName.Foreground = Brushes.Black;
             Grid.SetColumn(taskName, 1);
             TextBlock taskAccept = new TextBlock();
             taskAccept.Text = task.accept.Date.ToLongDateString();
+            taskAccept.Foreground = Brushes.Black;
             Grid.SetColumn(taskAccept, 2);
             
             
@@ -68,6 +76,11 @@ public partial class Home2View : UserControl
         InitializeComponent();
         InitializeProjects();
         InitializeTasks();
-        
+        AddProject.Click += (a, v) =>
+        {
+            MainWindow mainWindow = this.FindAncestorOfType<MainWindow>();
+            AddProject dialog = new AddProject();
+        };
+
     }
 }

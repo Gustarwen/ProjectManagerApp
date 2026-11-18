@@ -1,6 +1,10 @@
-﻿namespace ProjectManager.ViewModels;
+﻿using CommunityToolkit.Mvvm.Input;
+using ProjectManager.DataTemplates;
 
-public class Home2ViewModel:ViewModelBase
+namespace ProjectManager.ViewModels;
+
+public partial class Home2ViewModel:ViewModelBase
 {
-    
+  
+   
 }
