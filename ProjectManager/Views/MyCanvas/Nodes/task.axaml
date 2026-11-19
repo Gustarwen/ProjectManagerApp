@@ -7,16 +7,26 @@
              
              xmlns:vm="clr-namespace:ProjectManager.ViewModels"
              x:DataType="vm:taskViewModel">
-    <Grid  ColumnDefinitions="Auto Auto Auto" RowDefinitions="Auto Auto Auto" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button Grid.Column="1" HorizontalAlignment="Center" Grid.Row="0" x:Name="ConnectButton">Connect</Button>
-        <Button x:Name="Delete" Grid.Row="1" Grid.Column="0" Background="{DynamicResource RedFive}" Width="60"  Height="60" Foreground="white" FontSize="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  CornerRadius="30">-</Button>
-        <Border x:Name="NameBorder" Grid.Row="1"  Grid.Column="1" Height="60" Margin="10" Padding="15" Classes.finished="{Binding Finished}"><TextBlock x:Name="Name" >hello jak se mate ja se mam fajnove</TextBlock></Border>
-        <Button Grid.Row="2" Grid.Column="1"  x:Name="Accept" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="white" MaxWidth="150" Height="30" HorizontalContentAlignment="Center">Accept</Button>
-        
-        <Button Grid.Row="1" x:Name="Add" Grid.Column="2" Width="60" Height="60" CornerRadius="30" Background="{DynamicResource GreenTwo}" FontSize="40" Foreground="white" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">+</Button>
+    <Grid  Height="50" Width="150">
+        <Border BorderBrush="#4895ef" BorderThickness="2" Background="#3a0ca3"/>
+        <TextBlock TextAlignment="Center" VerticalAlignment="Center" x:Name = "Name"/>
+        <Grid.ContextFlyout>
+          
+            <MenuFlyout  >
                 
+                <MenuItem Header="Import file..."   />
+                <MenuItem Header="Connect onto other..."  x:Name="ConnectButton" />
+                <MenuItem Header="Mark as Issue"    />
+                <MenuItem Header="Mark as Milestone"   />
+                <MenuItem Header="Mark as Finished" x:Name = "Accept"  />
+                <Separator/>
+                <MenuItem Header="Open"          />
+                <MenuItem Header="Create" x:Name="Add"></MenuItem>
+                <MenuItem Header="Delete"      x:Name="Delete"   />
+            </MenuFlyout>
+        </Grid.ContextFlyout>
+           
+       
     </Grid>
-    <UserControl.Styles>
-        <StyleInclude Source="../../../styles/nodestyle.axaml"></StyleInclude>
-    </UserControl.Styles>
+
 </UserControl>

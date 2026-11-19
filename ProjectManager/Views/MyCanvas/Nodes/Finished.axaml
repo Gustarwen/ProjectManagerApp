@@ -1,0 +1,28 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ProjectManager.Views.Finished">
+    <Grid  Height="50" Width="150">
+        <Border BorderBrush="#38b000" BorderThickness="2" Background="#004b23"/>
+        <TextBlock TextAlignment="Center" VerticalAlignment="Center" x:Name = "Name"/>
+        <Grid.ContextFlyout>
+          
+            <MenuFlyout  >
+                
+                <MenuItem Header="Import file..."   />
+                <MenuItem Header="Connect onto other..."  x:Name="ConnectButton" />
+                <MenuItem Header="Mark as Issue"    />
+                <MenuItem Header="Mark as Milestone"   />
+                <MenuItem Header="Mark as In Progress.." x:Name = "Accept"  />
+                <Separator/>
+                <MenuItem Header="Open"          />
+                <MenuItem Header="Create" x:Name="Add"></MenuItem>
+                <MenuItem Header="Delete"      x:Name="Delete"   />
+            </MenuFlyout>
+        </Grid.ContextFlyout>
+           
+       
+    </Grid>
+</UserControl>

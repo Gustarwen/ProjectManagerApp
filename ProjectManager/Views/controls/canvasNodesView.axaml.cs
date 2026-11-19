@@ -12,6 +12,7 @@ using Avalonia.Media;
 using Avalonia.VisualTree;
 using ProjectManager.DataTemplates;
 using ProjectManager.ViewModels;
+using ProjectManager.Views;
 
 namespace ProjectManager.Views;
 
@@ -345,10 +346,21 @@ private void renderSpecialNode(MainProjectData node)
     }
 
 private void _renderNodes(ProjectData node)
+{
+    task tasks;
+    if (node.Finished == true)
     {
+        tasks = new Issue(node);
+    }
+    else
+    {
+        tasks = new task(node);
+    }
         
-        task tasks = new task(node);
-    
+             
+     
+       
+
         tasks.ConnectButton.Click += (a, v) =>
         {
             Window root = this.FindAncestorOfType<Window>();
@@ -412,6 +424,8 @@ private void _renderNodes(ProjectData node)
             renderSpecialNode(special);
         }
     }
+
+
 
 
 

@@ -4,18 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ProjectManager.Views.Issue">
-    <Grid Width="200" RowDefinitions="* Auto" Height="90">
-        <Grid ColumnDefinitions="Auto *">
-            <Ellipse Fill="#370617" Height="20" Width="20" Stroke="#e85d04" StrokeThickness="2"></Ellipse>
-            <Rectangle Grid.Column="1"
-                   
-                       Stretch="Fill"
-                       Fill="#370617"
-                       Opacity="0.75"
-                       Stroke="#e85d04" StrokeThickness="2"
-                       StrokeJoin="Round"/>
-        </Grid>
-       
+    <Grid Width="200" RowDefinitions="* Auto" Height="90" >
+        
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="#ef233c" BorderThickness="5" CornerRadius="20" ClipToBounds="True" Padding="5" Background="#6a040f">
+            <Grid ColumnDefinitions="Auto *">
+                <Ellipse Grid.Column="0" Height="20" Width="20" Stroke="#ef233c" StrokeThickness="4" Margin="5"/>
+                <Ellipse Grid.Column="0" Height="9" Width="9" Fill="#ef233c" StrokeThickness="4" />
+                <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Hidden" >
+                    <TextBlock Foreground="white" VerticalAlignment="Center" TextAlignment="Center" Text="Issue with adding some random file"></TextBlock>
+                </ScrollViewer>
+            </Grid>
+           
+        </Border>
         
         
      
@@ -28,12 +28,14 @@
             <MenuFlyout  >
                 
                 <MenuItem Header="Import file..."   />
-                <MenuItem Header="Mark as Issue"    />
+                <MenuItem Header="Connect onto other..."  x:Name="ConnectButton" />
+                <MenuItem Header="Mark as In Progress.."    />
                 <MenuItem Header="Mark as Milestone"   />
+                <MenuItem Header="Mark as Finished" x:Name = "Accept"  />
                 <Separator/>
                 <MenuItem Header="Open"          />
-                <MenuItem Header="Create"></MenuItem>
-                <MenuItem Header="Delete"         />
+                <MenuItem Header="Create" x:Name="Add"></MenuItem>
+                <MenuItem Header="Delete"      x:Name="Delete"   />
             </MenuFlyout>
         </Grid.ContextFlyout>
         

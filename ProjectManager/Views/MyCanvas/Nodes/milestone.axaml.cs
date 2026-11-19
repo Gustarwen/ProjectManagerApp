@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace ProjectManager.Views;
 
-public partial class sleepingNode : UserControl
+public partial class milestone : UserControl
 {
-    public sleepingNode()
+    public milestone()
     {
         InitializeComponent();
     }
