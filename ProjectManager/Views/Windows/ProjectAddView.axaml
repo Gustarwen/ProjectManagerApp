@@ -8,15 +8,19 @@
         x:Class="ProjectManager.Views.Windows.ProjectAddView"
         Height="200"
         Width="100"
-        Title="ProjectAdd">
+        Title="ProjectAdd"
+        xmlns:vm="clr-namespace:ProjectManager.ViewModels"
+        x:DataType="vm:ProjectAddViewModel"
+        >
     <StackPanel>
         <CalendarDatePicker 
-                          
+                            x:Name="DeadLineDate"
                             SelectedDateFormat="Custom"
                             CustomDateFormatString="d. M. yyyy"
                             HorizontalAlignment="Stretch"
                             Watermark="Vyberte termín" />
-        <TextBox></TextBox>
+        <TextBox x:Name="ProjectName"></TextBox>
+        <Button HorizontalAlignment="Center" x:Name="Button"   >Add This Project</Button>
         
         
         

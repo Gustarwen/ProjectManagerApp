@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Avalonia;
+using Avalonia.Animation;
+using Avalonia.Animation.Easings;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
+using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using ProjectManager.ViewModels;
@@ -12,9 +15,9 @@ public partial class piegraphView : UserControl
 {
     public double alpha = 120.0/360.0*(Math.PI*2);
 
-    private List<Line> lines = new();
-        
 
+
+   
     public void GraphVisual(double thisalpha)
         {
             alpha = thisalpha;
@@ -58,10 +61,15 @@ public partial class piegraphView : UserControl
                 Stroke = Brushes.Red,
                 StrokeThickness = thickness,
                 ZIndex = 2,
+                StrokeJoin =  PenLineJoin.Round,
+                StrokeLineCap =  PenLineCap.Round,
+
             };
+   
+           
             for (int i = 0; i < alphaSteps; i++)
             {
-                double startAngle = i * fullCircle / steps;
+                double startAngle = i * fullCircle / steps-Math.PI/2;
                 
                 /*lines.Add(new Line
                 {
@@ -75,7 +83,22 @@ public partial class piegraphView : UserControl
                 polyLine.Points.Add(new Point( center + Math.Cos(startAngle)*radius,center + Math.Sin(startAngle)*radius));
                 
             }
+
+            var label = new TextBlock
+            {
+                Text = $"{alpha / fullCircle * 100:0} %",
+                FontSize = 32,
+                FontWeight = FontWeight.Bold,
+                Foreground = Brushes.White,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+            };
+
+            var labelHost = new Grid { Width = size, Height = size, Children = { label } };
+// Canvas.Left a Top jsou výchozí 0, takže se překryje přesně s kruhem
+
             MyPie.Children.Add(polyLine);
+            MyPie.Children.Add(labelHost);
         }
 
         
@@ -102,6 +125,7 @@ public partial class piegraphView : UserControl
             }
            
         };
+       
 
        
         

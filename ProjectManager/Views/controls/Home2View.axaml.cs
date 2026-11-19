@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using System;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
@@ -7,6 +8,7 @@ using Avalonia.Styling;
 using Avalonia.VisualTree;
 using ProjectManager.DataTemplates;
 using ProjectManager.ViewModels;
+using ProjectManager.Views.Windows;
 
 namespace ProjectManager.Views;
 
@@ -36,6 +38,7 @@ public partial class Home2View : UserControl
         foreach (var task in DataBaseController.Taskrepository.Query().Execute())
         {
             Border taskRepresenter = new Border();
+            taskRepresenter.CornerRadius = new CornerRadius(0);
             Grid taskGrid = new Grid();
             taskGrid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));
             taskGrid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
@@ -48,6 +51,7 @@ public partial class Home2View : UserControl
           taskCheckBox.Click += (a, v) =>
           {
                 task.Finished = !task.Finished;
+                task.accept = DateTime.Now;
                 DataBaseController.Taskrepository.Update(task);
           };
             Grid.SetColumn(taskCheckBox, 0);
@@ -78,8 +82,12 @@ public partial class Home2View : UserControl
         InitializeTasks();
         AddProject.Click += (a, v) =>
         {
+            
             MainWindow mainWindow = this.FindAncestorOfType<MainWindow>();
-            AddProject dialog = new AddProject();
+            Window dialog = new ProjectAddView();
+            dialog.ShowDialog(mainWindow);
+            
+         //tady vytvor novy dialog
         };
 
     }

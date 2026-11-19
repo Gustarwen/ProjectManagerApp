@@ -10,15 +10,15 @@
     </UserControl.Styles>
     <Border Background="#F8F9FA">
  
-        <Grid RowDefinitions="* * Auto" ColumnDefinitions="Auto *">
+        <Grid RowDefinitions="* * Auto">
                 <StackPanel Width="100">
                    
                 </StackPanel>
-                <Border Grid.Column="1" Background="#DEE2E6" BorderBrush="#ADB5BD" BorderThickness="4 1"></Border>
-                <Border  Grid.Column="1" Grid.Row="1" Background="#DEE2E6" BorderBrush="#ADB5BD" BorderThickness="4 1" ClipToBounds="True">
+                <Border  Background="#DEE2E6" BorderBrush="#ADB5BD" BorderThickness="4 1"></Border>
+                <Border   Grid.Row="1" Background="#DEE2E6" BorderBrush="#ADB5BD" BorderThickness="4 1" ClipToBounds="True">
                     <Grid ColumnDefinitions="* *">
-                        <ScrollViewer Grid.Column="0">
-                        <StackPanel  x:Name = "TaskPanel" HorizontalAlignment="Stretch">
+                        <ScrollViewer Padding="20" Grid.Column="0">
+                        <StackPanel x:Name = "TaskPanel" HorizontalAlignment="Stretch">
                             <TextBlock Margin="10" Foreground="Black"> Tasks</TextBlock>
                          
                             

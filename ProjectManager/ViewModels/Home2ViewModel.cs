@@ -5,6 +5,6 @@ namespace ProjectManager.ViewModels;
 
 public partial class Home2ViewModel:ViewModelBase
 {
-  
-   
+
+
 }
