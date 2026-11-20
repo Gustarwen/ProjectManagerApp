@@ -2,15 +2,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="clr-namespace:ProjectManager.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="ProjectManager.Views.MyCanvas.InfoCard">
-    <Border Background="#E5F0FF" Height="200" Width="400" BoxShadow="4 6 20 0 #000E24" CornerRadius="50">
+             x:Class="ProjectManager.Views.InfoCard">
+    <UserControl.Styles>
+        <Style Selector="Border.card">
+            <Setter Property="Background" Value="#E5F0FF"/>
+            <Setter Property="CornerRadius" Value="24"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="BoxShadow" Value="0 4 20 0 #30000E24"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BoxShadowsTransition Property="BoxShadow" Duration="0:0:0.15"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Border.card:pointerover">
+            <Setter Property="BoxShadow" Value="0 8 28 0 #50000E24"/>
+        </Style>
+        <Style Selector="TextBlock.label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Opacity" Value="0.7"/>
+            <Setter Property="Foreground" Value="#000E24"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Styles>
+    <Border Height="220" Width="440">
+    <Border Background="{Binding $parent[views:InfoCard].BackgroundProperty}" Height="200" Width="400" BoxShadow="4 6 20 0 #000E24" CornerRadius="50">
         <Viewbox >
             <StackPanel >
-            <TextBlock TextAlignment="Center" Foreground="#FF0000">5</TextBlock>
-            <TextBlock Foreground="#FF3333">Issues</TextBlock>
+            <TextBlock TextAlignment="Center" Foreground="{Binding $parent[views:InfoCard].Accent}"  Text="{Binding $parent[views:InfoCard].NumberValue}"></TextBlock>
+            <TextBlock Foreground="{Binding $parent[views:InfoCard].Title}" Text="{Binding $parent[views:InfoCard].TitleText}"/>
             </StackPanel>
         </Viewbox>
        
     </Border>
+    </Border>
+
 </UserControl>

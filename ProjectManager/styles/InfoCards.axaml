@@ -1,0 +1,11 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm ="clr-namespace:ProjectManager.Views">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <vm:InfoCard></vm:InfoCard>
+        </Border>
+    </Design.PreviewWith>
+
+    <!-- Add Styles Here -->
+</Styles>

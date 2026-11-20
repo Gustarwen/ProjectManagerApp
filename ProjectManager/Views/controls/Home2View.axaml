@@ -12,66 +12,32 @@
  
         <Grid RowDefinitions="* * Auto">
 
-                <Border  Background="#CCE0FF" >
-                    <Grid ColumnDefinitions="* * *" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                <Border  Background="#CCE0FF" ClipToBounds="True" >
+                    
           
                        
                     
-                        
-                        <Viewbox Grid.Column="0" Stretch="Uniform">
-                            <Grid Width="400" Height="250">
-                                <Border Margin="50" BoxShadow="4 6 50 -10 #000E24"
-                                        Background="#E5F0FF" CornerRadius="30">
-                                    <Grid RowDefinitions="* *">
-                                        <Viewbox>
-                                            <TextBlock>5</TextBlock>
-                                        </Viewbox>
-                                        <Viewbox Grid.Row="1" VerticalAlignment="Bottom" Margin="10">
-                                            <TextBlock Text="finished tasks"/>
-                                        </Viewbox>
-                                    </Grid>
-                                </Border>
-                            </Grid>
-                        </Viewbox>
-                        <Viewbox Grid.Column="1" Stretch="Uniform">
-                            <Grid Width="400" Height="250">
-                                <Border Margin="50" BoxShadow="4 6 50 -10 #000E24"
-                                        Background="#E5F0FF" CornerRadius="30">
-                                    <Grid RowDefinitions="* *">
-                                        <Viewbox>
-                                            <TextBlock>5</TextBlock>
-                                        </Viewbox>
-                                        <Viewbox Grid.Row="1" VerticalAlignment="Bottom" Margin="10">
-                                            <TextBlock Text="finished tasks"/>
-                                        </Viewbox>
-                                    </Grid>
-                                </Border>
-                            </Grid>
-                        </Viewbox>
-                        <Viewbox Grid.Column="2" Stretch="Uniform">
-                            <Grid Width="400" Height="250">
-                                <Border Margin="50" BoxShadow="4 6 50 -10 #000E24"
-                                        Background="#E5F0FF" CornerRadius="30">
-                                    <Grid RowDefinitions="* *">
-                                        <Viewbox>
-                                            <TextBlock>5</TextBlock>
-                                        </Viewbox>
-                                        <Viewbox Grid.Row="1" VerticalAlignment="Bottom" Margin="10">
-                                            <TextBlock Text="finished tasks"/>
-                                        </Viewbox>
-                                    </Grid>
-                                </Border>
-                            </Grid>
-                        </Viewbox>
+                        <UniformGrid Rows="1" ColumnSpacing="16" Margin="20 10" MaxWidth="900" MinWidth="600">
+                            <Viewbox Grid.Column="0" >
+                                <localv:InfoCard Accent="#990000" BackgroundProperty="#FF6666" TitleText="Issues" NumberValue="1" Title="#660000"/>
+                            </Viewbox>
+                            <Viewbox Grid.Column="1"  >
+                                <localv:InfoCard Accent="#003304" BackgroundProperty="#66FF73" TitleText="Finished" NumberValue="1" Title="#003304"/>
+                            </Viewbox>
+                            <Viewbox Grid.Column="2"  >
+                                <localv:InfoCard Accent="#002466" BackgroundProperty="#99C2FF" TitleText="In Progress" NumberValue="1" Title="#002466"/>
+                            </Viewbox>
+                        </UniformGrid>
+                       
                         
                        
                         
 
-                    </Grid>
+                
                 </Border>
-                <Border   Grid.Row="1" Background="#E5F0FF"  ClipToBounds="True">
+                <Border   Grid.Row="1" Background="#E5F0FF"  ClipToBounds="True" MinWidth="800">
                     <Grid ColumnDefinitions="* *">
-                        <Viewbox Margin="0 20" Stretch="Uniform">
+                        <Viewbox Margin="0 20" Stretch="Uniform" MinWidth="600" MaxHeight="900">
                             <Border BorderBrush="Black" BorderThickness="1" CornerRadius="50" Height="900" Width="900 " Padding="10">
                                 <localv:piegraphView ></localv:piegraphView>
                             </Border>
