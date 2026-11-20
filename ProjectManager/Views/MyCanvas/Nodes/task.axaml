@@ -10,14 +10,15 @@
     <Grid  Height="50" Width="150">
         <Border BorderBrush="#4895ef" BorderThickness="2" Background="#3a0ca3"/>
         <TextBlock TextAlignment="Center" VerticalAlignment="Center" x:Name = "Name"/>
+        
         <Grid.ContextFlyout>
           
             <MenuFlyout  >
                 
                 <MenuItem Header="Import file..."   />
                 <MenuItem Header="Connect onto other..."  x:Name="ConnectButton" />
-                <MenuItem Header="Mark as Issue"    />
-                <MenuItem Header="Mark as Milestone"   />
+                <MenuItem Header="Mark as Issue"   x:Name="MarkAsIssue" />
+                <MenuItem Header="Mark as Milestone" x:Name="MarkMilestone"   />
                 <MenuItem Header="Mark as Finished" x:Name = "Accept"  />
                 <Separator/>
                 <MenuItem Header="Open"          />

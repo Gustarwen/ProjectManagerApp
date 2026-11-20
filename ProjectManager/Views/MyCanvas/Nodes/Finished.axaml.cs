@@ -15,13 +15,17 @@ public partial class Finished : task
         InitializeComponent();
         taskViewModel viewmodel = new taskViewModel();
         Accept.Command = viewmodel.AcceptCommand;
-        Accept.CommandParameter = viewmodel;
+     
         Accept.CommandParameter = Data;
 
         viewmodel.Finished = Data.Finished;
         DataContext = viewmodel;
         data = Data;
         Name.Text = Data.Name;
+        MarkMilestone.Command = viewmodel.MarkAsMilestoneCommand;
+        MarkMilestone.CommandParameter = Data;
+        MarkAsIssue.Command = viewmodel.MarkAsIssueCommand;
+        MarkAsIssue.CommandParameter = Data;
     }
     
 

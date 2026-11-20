@@ -7,6 +7,21 @@
     <Grid Height="250" Width="200" RowDefinitions="* Auto">
         <Polygon Height="200" Width="200" Points="0 5,5 10,10 5, 5 0" StrokeThickness="5" Stroke="#bc00dd" Fill="#5a189a" Opacity="0.75" Stretch="Fill"></Polygon>
         <TextBlock Text="V 1.0" FontSize="25" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center"/>
+        <Grid.ContextFlyout>
+          
+            <MenuFlyout  >
+                
+                <MenuItem Header="Import file..."   />
+                <MenuItem Header="Connect onto other..."  x:Name="ConnectButton" />
+                <MenuItem Header="Mark as In Progress.."  x:Name="MarkAsInProgress"  />
+                <MenuItem Header="Mark as Issue"  x:Name="MarkAsIssue" />
+                <MenuItem Header="Mark as Finished" x:Name = "Accept"  />
+                <Separator/>
+                <MenuItem Header="Open"          />
+                <MenuItem Header="Create" x:Name="Add"></MenuItem>
+                <MenuItem Header="Delete"      x:Name="Delete"   />
+            </MenuFlyout>
+        </Grid.ContextFlyout>
     </Grid>
        
    

@@ -8,7 +8,7 @@ namespace ProjectManager.Views.Windows;
 
 public partial class ProjectAddView : Window
 {
-    public ProjectAddView()
+    public ProjectAddView(Home2View view)
     {
         InitializeComponent();
         Button.Click += (e, v) =>
@@ -33,7 +33,7 @@ public partial class ProjectAddView : Window
             MainProjectData mainprojectData = new MainProjectData(projectData);
             DataBaseController.Taskrepository.Create(projectData);
             Console.WriteLine("projekt byl pridan");
-           
+           view.InitializeProjects();
             this.Close();
         };
 

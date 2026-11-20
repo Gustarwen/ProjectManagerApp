@@ -53,6 +53,28 @@ public partial class taskViewModel :ViewModelBase
 
 
     }
+
+    [RelayCommand]
+    private void MarkAsMilestone(ProjectData data)
+    {
+        data.Type = 'M';
+        DataBaseController.Taskrepository.Update(data);
+        CanvasNodesView.item.onUpdate();
+    }
+    [RelayCommand]
+    private void MarkAsInProgress(ProjectData data)
+    {
+        data.Type = 'N';
+        DataBaseController.Taskrepository.Update(data);
+        CanvasNodesView.item.onUpdate();
+    }
+    [RelayCommand]
+    private void MarkAsIssue(ProjectData data)
+    {
+        data.Type = 'I';
+        DataBaseController.Taskrepository.Update(data);
+        CanvasNodesView.item.onUpdate();
+    }
     
 
    

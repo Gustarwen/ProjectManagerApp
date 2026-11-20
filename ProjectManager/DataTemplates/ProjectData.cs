@@ -31,6 +31,9 @@ public partial class ProjectData : ObservableObject
 
     [Property("created")]
     public DateTime start;
+    
+    [Property("type")]
+    public char Type { get; set; }
     //jméno Tasku
     [Property("Name",Flags.String,64)]
     public string Name { get; set; } = "Untitled";

@@ -14,8 +14,11 @@ namespace ProjectManager.Views;
 
 public partial class Home2View : UserControl
 {
-    private void InitializeProjects()
+    public void InitializeProjects()
     {
+        ProjectPanel.Children.Clear();
+        HomeViewModel viewmodel = new HomeViewModel();
+   
         foreach (var project in DataBaseController.Projectrepositroy.Query().Execute())
         {
             ProjectCardView projecrRepresenter = new ProjectCardView(project.Id,project.Name,project.ProjectBitmap);
@@ -23,6 +26,16 @@ public partial class Home2View : UserControl
           Viewbox box = new Viewbox();
           box.Child = projecrRepresenter;
             ProjectPanel.Children.Add(box);
+
+            projecrRepresenter.Delete.Click +=(i,v)=>
+            {
+                DataBaseController.Projectrepositroy.Delete(project);
+                foreach (var task in DataBaseController.Taskrepository.Query().Where(p=>p.ProjectId==project.Id).Execute())
+                {
+                    DataBaseController.Taskrepository.Delete(task);
+                }
+                InitializeProjects();
+            };
         }
     }
 
@@ -84,8 +97,9 @@ public partial class Home2View : UserControl
         {
             
             MainWindow mainWindow = this.FindAncestorOfType<MainWindow>();
-            Window dialog = new ProjectAddView();
+            Window dialog = new ProjectAddView(this);
             dialog.ShowDialog(mainWindow);
+            
             
          //tady vytvor novy dialog
         };

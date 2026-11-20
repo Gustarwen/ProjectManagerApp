@@ -347,15 +347,26 @@ private void renderSpecialNode(MainProjectData node)
 
 private void _renderNodes(ProjectData node)
 {
-    task tasks;
-    if (node.Finished == true)
+    
+    task tasks = new task(node);
+    switch (node.Type)
     {
-        tasks = new Issue(node);
+        case 'N': if (node.Finished == true)
+            {
+                tasks = new Finished(node);
+            }
+            else
+            {
+                tasks = new task(node);
+            }
+
+            break;
+        case 'I': tasks = new Issue(node); break;
+        case 'M': tasks = new milestone(node); break;
     }
-    else
-    {
-        tasks = new task(node);
-    }
+
+    
+   
         
              
      

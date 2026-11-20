@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Utils;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
@@ -43,11 +45,44 @@ public partial class ProjectCardView : UserControl
             (double)DataBaseController.Taskrepository.Query().Where(p => p.ProjectId == id && p.Finished == true)
                 .Execute().Count() / DataBaseController.Taskrepository.Query().Where(p => p.ProjectId == id).Execute()
                 .Count() * 100;
-
+    
   
+   
         
         Console.WriteLine(value);
         ProgressBar.Value = value;
+      
        
+    }
+    private async void OnDrop(object? sender, DragEventArgs e)
+    {
+        if (e.DataTransfer.Formats.Contains(DataFormat.File))
+        {
+            var files = e.DataTransfer.TryGetFiles();
+            string directory = @"./images";
+            Directory.CreateDirectory(directory);
+            var path = files?.FirstOrDefault();
+            if (path != null)
+            {
+                  
+                File.Copy(path.Path.AbsolutePath,directory+'/'+path.Name,true);
+
+
+              
+                var dbProject = DataBaseController.Projectrepositroy.Query()
+                    .Execute()
+                    .FirstOrDefault(x => x.Id == Id);
+                                
+                if (dbProject != null)
+                {
+                    dbProject.MyImage = directory+'/' + path.Name; // Zapíšeme cestu přímo do DB objektu
+                    ProjectBitMap.Source = new Bitmap(dbProject.MyImage);
+                    
+                    
+                    DataBaseController.Projectrepositroy.Update(dbProject);
+
+                }
+            }
+        }
     }
 }

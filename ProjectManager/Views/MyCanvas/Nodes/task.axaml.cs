@@ -26,6 +26,11 @@ public partial class task : UserControl
         viewmodel.Finished = Data.Finished;
         DataContext = viewmodel;
         data = Data;
+        MarkMilestone.Command = viewmodel.MarkAsMilestoneCommand;
+        MarkMilestone.CommandParameter = Data;
+        MarkAsIssue.Command = viewmodel.MarkAsIssueCommand;
+        MarkAsIssue.CommandParameter = Data;
+      
         
    
         

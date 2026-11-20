@@ -19,5 +19,9 @@ public partial class Issue : task
         viewmodel.Finished = Data.Finished;
         DataContext = viewmodel;
         data = Data;
+        MarkMilestone.Command = viewmodel.MarkAsMilestoneCommand;
+        MarkMilestone.CommandParameter = Data;
+        MarkAsInProgress.Command = viewmodel.MarkAsInProgressCommand;
+        MarkAsInProgress.CommandParameter = Data;
     }
 }
