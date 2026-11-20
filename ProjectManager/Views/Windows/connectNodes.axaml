@@ -2,22 +2,88 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:vm="clr-namespace:ProjectManager.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="420"
         x:Class="ProjectManager.Views.connectNodes"
-        xmlns:vm = "clr-namespace:ProjectManager.ViewModels"
         x:DataType="vm:connectNodesViewModel"
-        Title="connectNodes">
-        <ListBox ItemsSource="{Binding Tasks}">
+        Title="Connect tasks"
+        Width="480" Height="420"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner"
+        SystemDecorations="None"
+        Background="Transparent"
+        TransparencyLevelHint="Transparent">
+
+    <Window.Styles>
+        <Style Selector="Button.primary">
+            <Setter Property="Background" Value="#0077b6"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="14 6"/>
+        </Style>
+        <Style Selector="Button.primary:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#005f92"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.ghost">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#000E24"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+        <Style Selector="ListBoxItem">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0 0 0 8"/>
+        </Style>
+    </Window.Styles>
+
+    <!-- vnější Border = vzhled okna (zaoblení + stín) -->
+    <Border Margin="12" Background="#E5F0FF" CornerRadius="16"
+            BoxShadow="0 6 24 0 #40000E24" ClipToBounds="True">
+        <Grid RowDefinitions="Auto * Auto">
+
+            <!-- hlavička, za ni se okno přesouvá -->
+            <Border x:Name="Header" Background="#CCE0FF" Padding="20 14">
+                <Grid ColumnDefinitions="* Auto">
+                    <StackPanel>
+                        <TextBlock Text="Connect tasks" FontSize="18" FontWeight="SemiBold"
+                                   Foreground="#000E24"/>
+                        <TextBlock Text="Choose a task to link with the selected one"
+                                   FontSize="12" Opacity="0.6" Foreground="#000E24"/>
+                    </StackPanel>
+                    <Button Grid.Column="1" Classes="ghost" Content="✕"
+                            VerticalAlignment="Top" Click="Close_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- seznam -->
+            <ListBox Grid.Row="1" Margin="16" Background="Transparent"
+                     ItemsSource="{Binding Tasks}">
                 <ListBox.ItemTemplate>
-                        <DataTemplate>
-                                <Grid ColumnDefinitions="* * *" Height="30">
-                                        <TextBlock Grid.Column="0" Text="{Binding Name}" ></TextBlock>
-                                        <TextBlock Grid.Column="1" Text="{Binding ProjectName}"></TextBlock>
-                                        <Button Grid.Column="2" Command="{Binding $parent[ListBox].DataContext.AddConnectionCommand, x:DataType=vm:HomeViewModel}" CommandParameter="{Binding}" >Connect</Button>
-                                        
-                                        
-                                </Grid>
-                        </DataTemplate>
+                    <DataTemplate>
+                        <Border Background="White" CornerRadius="10" Padding="12 8">
+                            <Grid ColumnDefinitions="* Auto Auto" Height="36">
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold"
+                                               Foreground="#000E24"
+                                               TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock Text="{Binding ProjectName}" FontSize="11"
+                                               Opacity="0.6" Foreground="#000E24"/>
+                                </StackPanel>
+                                <Button Grid.Column="2" Classes="primary" Content="Connect"
+                                        VerticalAlignment="Center"
+                                        Command="{Binding $parent[ListBox].DataContext.AddConnectionCommand, x:DataType=vm:HomeViewModel}"
+                                        CommandParameter="{Binding}"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
                 </ListBox.ItemTemplate>
-        </ListBox>
+            </ListBox>
+
+            <!-- patička -->
+            <Border Grid.Row="2" Padding="16 10" BorderBrush="#ADB5BD" BorderThickness="0 1 0 0">
+                <Button Classes="ghost" Content="Done" HorizontalAlignment="Right"
+                        Click="Close_Click"/>
+            </Border>
+        </Grid>
+    </Border>
 </Window>

@@ -123,7 +123,7 @@ public partial class Project : ObservableObject
         get
         {
             if(string.IsNullOrEmpty(MyImage)||!System.IO.File.Exists(MyImage))
-                return new Bitmap(Path.Combine("Images","noImageIcon.png"));
+                return new Bitmap(Path.Combine("Images","mainImage.png"));
             try
             {
                 return new Bitmap(MyImage);

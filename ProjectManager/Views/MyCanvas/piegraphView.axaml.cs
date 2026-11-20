@@ -17,19 +17,20 @@ public partial class piegraphView : UserControl
 
 
 
+
    
     public void GraphVisual(double thisalpha)
         {
             alpha = thisalpha;
             MyPie.Children.Clear();
-            double thickness = 25;
+            double thickness = 75;
             double size = this.Bounds.Height;
             double center = size / 2.0;
             double fullCircle = 2 * Math.PI;
             int steps = 360; // 1 step per degree is plenty
             Ellipse ellipse = new()
             {
-                Stroke = Brushes.Blue,
+                Stroke = Brush.Parse("#CCE0FF"),
                 StrokeThickness = thickness,
                 ZIndex = 1,
             };
@@ -58,7 +59,7 @@ public partial class piegraphView : UserControl
             int alphaSteps = (int)(alpha * steps / fullCircle);
             Polyline polyLine = new()
             {
-                Stroke = Brushes.Red,
+                Stroke = Brush.Parse("#0066FF"),
                 StrokeThickness = thickness,
                 ZIndex = 2,
                 StrokeJoin =  PenLineJoin.Round,
@@ -87,14 +88,16 @@ public partial class piegraphView : UserControl
             var label = new TextBlock
             {
                 Text = $"{alpha / fullCircle * 100:0} %",
-                FontSize = 32,
+                FontSize = size*0.25,
+                Foreground = Brushes.Black,
                 FontWeight = FontWeight.Bold,
-                Foreground = Brushes.White,
+               
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
             };
 
-            var labelHost = new Grid { Width = size, Height = size, Children = { label } };
+            var labelHost = new Grid() { Width = size, Height = size,Children = { label }};
+         
 // Canvas.Left a Top jsou výchozí 0, takže se překryje přesně s kruhem
 
             MyPie.Children.Add(polyLine);
@@ -114,15 +117,16 @@ public partial class piegraphView : UserControl
                 MyPie.Width = this.Bounds.Width;
                 if (DataContext is piegraphViewModel vm)
                 {
-                    
+                  
                     vm.PropertyChanged+=(a, b) => GraphVisual(vm.Alpha);
                     GraphVisual(vm.Alpha);
                    
                 }
              
         
-                
+                GraphVisual(alpha);
             }
+            
            
         };
        

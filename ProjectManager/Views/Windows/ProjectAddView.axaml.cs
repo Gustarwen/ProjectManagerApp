@@ -34,6 +34,7 @@ public partial class ProjectAddView : Window
             DataBaseController.Taskrepository.Create(projectData);
             Console.WriteLine("projekt byl pridan");
            view.InitializeProjects();
+
             this.Close();
         };
 
