@@ -10,22 +10,27 @@
     </UserControl.Styles>
     <Border Background="#E5F0FF">
  
-        <Grid RowDefinitions="* * Auto">
+        <Grid RowDefinitions="Auto * * Auto">
 
-                <Border  Background="#CCE0FF" ClipToBounds="True" >
+                <Border>
+                    <Viewbox Width="80">
+                        <TextBlock>Good Morning</TextBlock>
+                    </Viewbox>
+                </Border>
+                <Border Grid.Row="1"  Background="#CCE0FF" ClipToBounds="True" >
                     
           
                        
                     
                         <UniformGrid Rows="1" ColumnSpacing="16" Margin="20 10" MaxWidth="900" MinWidth="600">
                             <Viewbox Grid.Column="0" >
-                                <localv:InfoCard Accent="#990000" BackgroundProperty="#FF6666" TitleText="Issues" NumberValue="1" Title="#660000"/>
+                                <localv:InfoCard Accent="#990000" BackgroundProperty="#E5F0FF" TitleText="Issues" NumberValue="1" Title="#660000"/>
                             </Viewbox>
                             <Viewbox Grid.Column="1"  >
-                                <localv:InfoCard Accent="#003304" BackgroundProperty="#66FF73" TitleText="Finished" NumberValue="1" Title="#003304"/>
+                                <localv:InfoCard Accent="#003304" BackgroundProperty="#E5F0FF" TitleText="Finished" NumberValue="1" Title="#003304"/>
                             </Viewbox>
                             <Viewbox Grid.Column="2"  >
-                                <localv:InfoCard Accent="#002466" BackgroundProperty="#99C2FF" TitleText="In Progress" NumberValue="1" Title="#002466"/>
+                                <localv:InfoCard Accent="#002466" BackgroundProperty="#E5F0FF" TitleText="In Progress" NumberValue="1" Title="#002466"/>
                             </Viewbox>
                         </UniformGrid>
                        
@@ -35,16 +40,19 @@
 
                 
                 </Border>
-                <Border   Grid.Row="1" Background="#E5F0FF"  ClipToBounds="True" MinWidth="800">
-                    <Grid ColumnDefinitions="* *">
-                        <Viewbox Margin="0 20" Stretch="Uniform" MinWidth="600" MaxHeight="900">
-                            <Border BorderBrush="Black" BorderThickness="1" CornerRadius="50" Height="900" Width="900 " Padding="10">
+                <Border   Grid.Row="2" Background="#E5F0FF"  ClipToBounds="True" MinWidth="800">
+                    <Grid ColumnDefinitions="* Auto *">
+                        <StackPanel x:Name="TaskPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            
+                        </StackPanel>
+                        <Viewbox Grid.Column="1" Margin="0 20" Stretch="Uniform" MinWidth="600" MaxHeight="900">
+                            <Border  BorderBrush="Black" BorderThickness="1" CornerRadius="50" Height="900" Width="900 "  Padding="10">
                                 <localv:piegraphView ></localv:piegraphView>
                             </Border>
                         </Viewbox>
-                        <Viewbox Grid.Column="1" Margin="0 20" Stretch="Fill">
+                        <Viewbox Grid.Column="2" Margin="0 20"  MaxWidth="500">
                             
-                                <ContentControl BorderBrush="Black" BorderThickness="1" CornerRadius="5" Height="300" Width="600 ">
+                                <ContentControl BorderBrush="Black" BorderThickness="1" CornerRadius="5" Height="300"  Width="600 ">
                                     <localv:blockGraphView Margin="10 5 0 5" Grid.Column="1"></localv:blockGraphView>
                                 </ContentControl>
                                
@@ -57,7 +65,7 @@
                 </Border>
                 <!--projects list-->
 
-                <Border Grid.Column="1" Grid.Row="2" Background="#DEE2E6" BorderBrush="#ADB5BD" BorderThickness="4 1">
+                <Border  Grid.Row="3" Background="#DEE2E6" BorderBrush="#ADB5BD" BorderThickness="4 1">
                     <StackPanel>
                     <Grid  ColumnDefinitions="Auto * Auto">
                         <TextBlock>projects</TextBlock>

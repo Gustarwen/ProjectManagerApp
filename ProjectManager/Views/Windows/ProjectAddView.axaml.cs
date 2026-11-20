@@ -6,6 +6,8 @@ using ProjectManager.DataTemplates;
 
 namespace ProjectManager.Views.Windows;
 
+
+//for those who will read this text... i created this part in midnight (correctly 11:54 PM) i know...i am not a graphic...so pls...ui wouldnt look better
 public partial class ProjectAddView : Window
 {
     public ProjectAddView(Home2View view)
@@ -34,6 +36,7 @@ public partial class ProjectAddView : Window
             DataBaseController.Taskrepository.Create(projectData);
             Console.WriteLine("projekt byl pridan");
            view.InitializeProjects();
+           view.InitializeTasks();
 
             this.Close();
         };

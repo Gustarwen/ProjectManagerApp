@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
@@ -14,6 +15,40 @@ namespace ProjectManager.Views;
 
 public partial class Home2View : UserControl
 {
+    public void InitializeTasks()
+    {
+        TaskPanel.Children.Clear();
+        foreach (var task in DataBaseController.Taskrepository.Query().Execute().OrderBy(p=>p.Date))
+        {
+            if (TaskPanel.Children.Count <= 4)
+            {
+                Border taskRepresenter = new Border()
+                {
+                    BorderThickness = new Thickness(2,0,0,0),
+                    BorderBrush = Brush.Parse("#0047CC"),
+                    
+                };
+                Grid grid = new Grid();
+                grid.ColumnDefinitions.Add(new ColumnDefinition(1,GridUnitType.Auto));
+                grid.ColumnDefinitions.Add(new ColumnDefinition(1,GridUnitType.Star));
+                grid.ColumnDefinitions.Add(new ColumnDefinition(1,GridUnitType.Star));
+                CheckBox check = new CheckBox();
+                Grid.SetColumn(check,0);
+                TextBlock name = new TextBlock();
+                name.Text = task.Name;
+                Grid.SetColumn(name,1);
+                
+                TextBlock deadline = new TextBlock();
+                deadline.Text = task.Date.ToString();
+                Grid.SetColumn(deadline,2);
+                
+                taskRepresenter.Child = grid;
+                
+                grid.Children.Add(taskRepresenter);
+                
+            }
+        }
+    }
     public void InitializeProjects()
     {
         ProjectPanel.Children.Clear();
@@ -35,6 +70,7 @@ public partial class Home2View : UserControl
                     DataBaseController.Taskrepository.Delete(task);
                 }
                 InitializeProjects();
+                InitializeTasks();
 
             };
         }
@@ -45,6 +81,7 @@ public partial class Home2View : UserControl
     {
         InitializeComponent();
         InitializeProjects();
+        InitializeTasks();
 
         AddProject.Click += (a, v) =>
         {
