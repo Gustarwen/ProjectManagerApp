@@ -11,7 +11,7 @@ public partial class MainViewModel : ViewModelBase
 {
     [ObservableProperty] public partial string Greeting { get; set; } = "Welcome to Avalonia!";
     
-    private  Home2ViewModel _home = new ();
+    private  homeTestViewModel _home = new ();
     [ObservableProperty]private  QaAViewModel _qaa = new();
    
     [ObservableProperty] private ViewModelBase _currentPage;

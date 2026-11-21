@@ -22,7 +22,9 @@ public partial class ProjectCardView : UserControl
 
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
+        if (Id == null) return;
         MainWindow mainWindow = this.FindAncestorOfType<MainWindow>();
+        if (mainWindow == null) return;
         if (mainWindow.DataContext is MainViewModel vm)
         {
             GoToProject.Command = vm.GoToProjectBoardCommand;
@@ -52,6 +54,13 @@ public partial class ProjectCardView : UserControl
         Console.WriteLine(value);
         ProgressBar.Value = value;
       
+       
+    }
+    public ProjectCardView()
+    {
+      
+        InitializeComponent();
+
        
     }
     private async void OnDrop(object? sender, DragEventArgs e)

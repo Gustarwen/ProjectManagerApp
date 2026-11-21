@@ -1,0 +1,66 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ProjectManager.Views.homeTestView"
+             xmlns:local = "clr-namespace:ProjectManager.Views">
+    <Grid Background="red" RowDefinitions="Auto * Auto">
+        <!-- welcome sign -->
+        <Viewbox  Stretch="Uniform" Width="300">
+            <TextBlock TextAlignment="Center"> Good Morning</TextBlock>
+        </Viewbox>
+        
+        
+        <Grid Grid.Row="1" Grid.ColumnDefinitions="* *">
+            <!-- tasks -->
+            <Border  Background="blue" ClipToBounds="True" CornerRadius="20" Margin="10">
+                <StackPanel>
+                    <Viewbox Height="30">
+                        <TextBlock Text="Tasks"></TextBlock>
+                        
+                    </Viewbox>
+                    
+                    <Viewbox Stretch="Uniform">
+                    <local:TasksView></local:TasksView>
+                    </Viewbox>
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="2"  Background="yellow" CornerRadius="20" Margin="10" ClipToBounds="True" VerticalAlignment="Bottom">
+                <StackPanel>
+                    <Viewbox Height="30"><TextBlock>Statistics</TextBlock></Viewbox>
+                    
+                        <Grid ColumnDefinitions="* *">
+                            <Viewbox  Margin="20" VerticalAlignment="Bottom" Stretch="Uniform">
+                            <local:blockGraphView Height="100" Width="150"></local:blockGraphView>
+                            </Viewbox>
+                            <Viewbox Grid.Column="1" Margin="20" Stretch="Uniform">
+                                <local:piegraphView Height="500" Width="500"></local:piegraphView>
+                            </Viewbox>
+                            
+                        </Grid>
+                    
+                </StackPanel>
+            </Border>
+        </Grid>
+            
+       
+        
+        <!-- projects -->
+        <Border Grid.Row="2" Height="150" CornerRadius="20" Margin="10" Background="aqua">
+            <StackPanel >
+                <Viewbox Height="30">
+                <TextBlock Text="Projects" ></TextBlock>
+                </Viewbox>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Spacing="50" VerticalAlignment="Bottom" Height="100">
+                
+                <local:ProjectCardView ></local:ProjectCardView>
+                <local:ProjectCardView ></local:ProjectCardView>
+                <local:ProjectCardView ></local:ProjectCardView>
+                <local:ProjectCardView ></local:ProjectCardView>
+                
+            </StackPanel>
+            </StackPanel>
+        </Border >
+    </Grid>
+</UserControl>

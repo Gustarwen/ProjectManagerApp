@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.InteropServices.JavaScript;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
@@ -18,7 +20,7 @@ public partial class Home2View : UserControl
     public void InitializeTasks()
     {
         TaskPanel.Children.Clear();
-        foreach (var task in DataBaseController.Taskrepository.Query().Execute().OrderBy(p=>p.Date))
+        foreach (var task in DataBaseController.Taskrepository.Query().Execute())
         {
             if (TaskPanel.Children.Count <= 4)
             {
@@ -28,23 +30,43 @@ public partial class Home2View : UserControl
                     BorderBrush = Brush.Parse("#0047CC"),
                     
                 };
-                Grid grid = new Grid();
+                Grid grid = new Grid()
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch
+                };
                 grid.ColumnDefinitions.Add(new ColumnDefinition(1,GridUnitType.Auto));
                 grid.ColumnDefinitions.Add(new ColumnDefinition(1,GridUnitType.Star));
                 grid.ColumnDefinitions.Add(new ColumnDefinition(1,GridUnitType.Star));
-                CheckBox check = new CheckBox();
+                CheckBox check = new CheckBox()
+                {
+                    IsChecked = task.Finished
+                };
+                check.Click += (a, v) => {
+                    task.Finished=!task.Finished;
+                    if (task.Finished)
+                    {
+                        task.accept = DateTime.Now;
+                    }
+                    
+                    
+                    DataBaseController.Taskrepository.Update(task);
+                    InitializeProjects();
+                };
                 Grid.SetColumn(check,0);
+                grid.Children.Add(check);
                 TextBlock name = new TextBlock();
                 name.Text = task.Name;
                 Grid.SetColumn(name,1);
+                grid.Children.Add(name);
                 
                 TextBlock deadline = new TextBlock();
                 deadline.Text = task.Date.ToString();
+                grid.Children.Add(deadline);
                 Grid.SetColumn(deadline,2);
                 
                 taskRepresenter.Child = grid;
                 
-                grid.Children.Add(taskRepresenter);
+            TaskPanel.Children.Add(taskRepresenter);
                 
             }
         }
