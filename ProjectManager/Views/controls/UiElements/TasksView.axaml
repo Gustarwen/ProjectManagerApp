@@ -1,0 +1,44 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="300"
+             xmlns:local = "clr-namespace:ProjectManager.Views"
+             x:Class="ProjectManager.Views.TasksView">
+   <Grid RowDefinitions="Auto *" >
+    
+       <Grid ColumnDefinitions="Auto Auto Auto Auto * Auto" VerticalAlignment="Top">
+          
+           <Button>all</Button>
+           <Button Grid.Column="1">issues</Button>
+           <Button Grid.Column="2">milestones</Button>
+           <Button Grid.Column="3">in progress</Button>
+        
+               <Button Grid.Column="5"  Classes="Add" FontWeight="ExtraBold" FontSize="100">+</Button>
+        
+           
+           
+  
+     </Grid>
+       <Border Grid.Row="1" ClipToBounds="True">
+           
+           <ScrollViewer VerticalScrollBarVisibility="Visible">
+       <StackPanel Spacing="10" x:Name="TaskPanel">
+        
+           <local:TaskCardView CornerRadius="0"></local:TaskCardView>
+           <local:TaskCardView CornerRadius="0"></local:TaskCardView>
+           <local:TaskCardView CornerRadius="0"></local:TaskCardView>
+           <local:TaskCardView CornerRadius="0"></local:TaskCardView>
+           <local:TaskCardView CornerRadius="0"></local:TaskCardView>
+           <local:TaskCardView CornerRadius="0"></local:TaskCardView>
+           <local:TaskCardView CornerRadius="0"></local:TaskCardView>
+
+       </StackPanel>
+       </ScrollViewer>
+       </Border>
+   </Grid>
+    
+    <UserControl.Styles>
+        <StyleInclude Source="../../../styles/TaskStyles.axaml"></StyleInclude>
+    </UserControl.Styles>
+</UserControl>

@@ -69,16 +69,20 @@
         <DependentUpon>QaAView.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
-      <Compile Update="Views\controls\statistics.axaml.cs">
-        <DependentUpon>statistics.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
       <Compile Update="Views\MyCanvas\piegraphView.axaml.cs">
         <DependentUpon>piegraphView.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
       <Compile Update="Views\MyCanvas\Nodes\task.axaml.cs">
         <DependentUpon>task.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\controls\UiElements\TasksView.axaml.cs">
+        <DependentUpon>TasksView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\controls\UiElements\ProjectCardView.axaml.cs">
+        <DependentUpon>ProjectCardView.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
     </ItemGroup>

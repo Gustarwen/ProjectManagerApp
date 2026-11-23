@@ -7,7 +7,7 @@
     <Button x:Name="GoToProject" Background="Transparent" Padding="3">
    <Viewbox>
 
-       <Border DragDrop.AllowDrop="True" DragDrop.Drop = "OnDrop" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Background="#F8F9FA" Width="220" Height="180"  ClipToBounds="True" Padding="0" BorderThickness="0" x:Name="ProjectBorder">
+       <Border CornerRadius="20" DragDrop.AllowDrop="True" DragDrop.Drop = "OnDrop" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Background="#F8F9FA" Width="220" Height="180"  ClipToBounds="True" Padding="0" BorderThickness="0" x:Name="ProjectBorder">
            
             <Border.ContextFlyout>
                 <MenuFlyout>
@@ -44,7 +44,7 @@
     
    
    <UserControl.Styles>
-       <StyleInclude Source="../../styles/HomeViewStyle.axaml"></StyleInclude>
+       <StyleInclude Source="../../../styles/HomeViewStyle.axaml"></StyleInclude>
    </UserControl.Styles>
 
 </UserControl>

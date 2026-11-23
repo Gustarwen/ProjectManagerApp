@@ -15,7 +15,8 @@
         <Setter Property="Background" Value="#CCE0FF"></Setter>
         <Setter Property="Foreground" Value="#001433"></Setter>
         <Setter Property="CornerRadius" Value="20"></Setter>
-        <Setter Property="MinWidth" Value="70"></Setter>
+        <Setter Property="MinWidth" Value="80"></Setter>
+        <Setter Property="MinHeight" Value="30"></Setter>
         <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
         <Setter Property="Cursor" Value="Hand"></Setter>
         <Setter Property="Margin" Value="20"></Setter>

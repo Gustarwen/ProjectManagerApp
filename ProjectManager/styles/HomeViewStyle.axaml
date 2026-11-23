@@ -1,9 +1,10 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:ProjectManager.Views">
     <Design.PreviewWith>
         <Border Padding="20">
-            <!-- Add Controls for Previewer Here -->
-            <Button>Ahoj</Button>
+           
+
         </Border>
     </Design.PreviewWith>
     <Style Selector="Button:pointerover /template/ ContentPresenter">
@@ -11,6 +12,13 @@
         <Setter Property="BorderBrush" Value="Transparent"></Setter>
         
     </Style>
-    
+    <Style Selector="TextBlock">
+        <Setter Property="Foreground" Value="#0052CC"></Setter>
+    </Style>
+    <Style Selector="Border">
+        <Setter Property="CornerRadius" Value="50"></Setter>
+        <Setter Property="Background" Value="#F7FAFF"></Setter>
+        <Setter Property="Padding" Value="15 0"></Setter>
+    </Style>
     <!-- Add Styles Here -->
 </Styles>
