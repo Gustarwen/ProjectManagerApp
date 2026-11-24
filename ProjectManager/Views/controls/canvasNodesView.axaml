@@ -13,15 +13,14 @@
             PointerReleased="OnPointerReleased"
             PointerWheelChanged="OnWheelChanged"
             ClipToBounds="True"
-            Height="600"
-            Width="600"
+
             BorderBrush="White">
                     <Grid>
                         <Canvas HorizontalAlignment="Left" VerticalAlignment="Top" Name="MapCanvas"   RenderTransformOrigin="0,0">
                             <Canvas.RenderTransform>
                                 <MatrixTransform ></MatrixTransform>
                             </Canvas.RenderTransform> 
-                            <Button x:Name="Button1" Height="100" Width="100" Canvas.Top="0" Canvas.Left="0"> hello</Button>
+              
                             
                         </Canvas>
                         <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"></ProgressBar>

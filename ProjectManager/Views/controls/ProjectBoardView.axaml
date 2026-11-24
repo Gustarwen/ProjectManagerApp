@@ -9,27 +9,23 @@
              x:DataType="vm:ProjectBoardViewModel"
              
              >
-    <ScrollViewer VerticalScrollBarVisibility="Visible">
-        <StackPanel>
-            <Border x:Name="DashBoard">
-                <WrapPanel>
-                    <Grid RowDefinitions="Auto Auto" VerticalAlignment="Top" Height="300">
-                        <ContentControl VerticalAlignment="Top"  Content="{Binding Graph}" Margin="10" Height="50" Width="300"> </ContentControl>
-                        <ContentControl Grid.Row="1" VerticalAlignment="Top"  Content="{Binding Graph}" Margin="10" Height="50" Width="300"> </ContentControl>
-                    </Grid>
-                  
-                    <ContentControl x:Name = "MyAccept"  Content="{Binding Piegraph}" Margin="10" Height="200" Width="200"></ContentControl>
-                   
-                    <ContentControl x:Name="AcceptInTime"  Content="{Binding Blockgraph}" Margin="10" Height="300" Width="300"></ContentControl>
-                    
-                </WrapPanel>
-                
-                
+
+        <Grid ColumnDefinitions="* *" RowDefinitions="2* 3*" Background="#E5F0FF" MinWidth="200">
+            <Border ClipToBounds="True" >
+                  <Viewbox >
+                    <ContentControl x:Name = "MyAccept"  Content="{Binding Piegraph}" Margin="10" Height="500" Width="500"></ContentControl>
+                  </Viewbox>
             </Border>
+            <Border Grid.Column="1" Background="#99C2FF" ClipToBounds="True">
+            <Viewbox>
+                    <ContentControl  x:Name="AcceptInTime"  Content="{Binding Blockgraph}" Margin="10" Height="300" Width="300"></ContentControl>
+            </Viewbox>
+            </Border>
+           
             
-            <ContentControl  Content="{Binding Selected }"></ContentControl>
-        </StackPanel>
-    </ScrollViewer>
+            <ContentControl Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"  Content="{Binding Selected }"></ContentControl>
+        </Grid>
+
    
    
         

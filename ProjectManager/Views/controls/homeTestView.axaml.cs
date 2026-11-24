@@ -3,8 +3,10 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+using Avalonia.VisualTree;
 using ProjectManager.DataTemplates;
 using ProjectManager.ViewModels;
+using ProjectManager.Views.Windows;
 
 namespace ProjectManager.Views;
 
@@ -61,10 +63,10 @@ public partial class homeTestView : UserControl
         InitializeTasks();
         switch (DateTime.Now.Hour)
         {
-           
+           case <5: welcome.Text = "Good Night"; break;
             case <12: welcome.Text = "Good Morning"; break;
             case <18: welcome.Text = "Good Afternoon"; break;
-            default: welcome.Text = "Good Night"; break;
+            default: welcome.Text = "Good Evening"; break;
         }
         this.SizeChanged += (s, e) =>
         {
@@ -79,5 +81,21 @@ public partial class homeTestView : UserControl
                 Grid.SetColumnSpan(TaskBorder,1);
             }
         };
+        PieisStillPie.SizeChanged += (e, v) =>
+        {
+            Console.WriteLine($"{Bounds.Height} h X {Bounds.Width} w");
+        };
+        projectAdd.Click += (a, v) =>
+        {
+        
+            
+                MainWindow mainWindow = this.FindAncestorOfType<MainWindow>();
+                Window dialog = new ProjectAddView(this);
+                dialog.ShowDialog(mainWindow);
+            
+            
+                //tady vytvor novy dialog
+            };
+     
     }
 }

@@ -105,16 +105,7 @@ public partial class Home2View : UserControl
         InitializeProjects();
         InitializeTasks();
 
-        AddProject.Click += (a, v) =>
-        {
-            
-            MainWindow mainWindow = this.FindAncestorOfType<MainWindow>();
-            Window dialog = new ProjectAddView(this);
-            dialog.ShowDialog(mainWindow);
-            
-            
-         //tady vytvor novy dialog
-        };
+     
 
     }
 }

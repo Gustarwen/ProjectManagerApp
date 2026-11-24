@@ -10,7 +10,7 @@ namespace ProjectManager.Views;
 
 public partial class graphView : UserControl
 {
-    public List<int> graphData = new (){1,5};
+    public List<int> graphData = new (){1,5,54,54,4,54,4,54,5,1,1,1,4,7,4,1,14,144,5,4,2};
     private List<Line> lines;
 
     private void GeneratePoints(List<Point> points)
@@ -121,7 +121,8 @@ public partial class graphView : UserControl
             {
                 Graph.Height = this.Bounds.Height;
                 Graph.Width = this.Bounds.Width;
-                
+                generateGraph(graphData);
+             
                 
         
                 
@@ -139,6 +140,8 @@ public partial class graphView : UserControl
                 generateGraph(vm.Datas);
             }
         };
+        
+        
 
     }
 }

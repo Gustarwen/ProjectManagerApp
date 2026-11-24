@@ -6,7 +6,7 @@
              x:Class="ProjectManager.Views.homeTestView"
              xmlns:local = "clr-namespace:ProjectManager.Views" Padding="10">
 
-    <Grid RowDefinitions="Auto 3* 2*" Background="White">
+    <Grid RowDefinitions="Auto 3* 2*" Background="White" ClipToBounds="True">
         <!-- welcome sign -->
         <Viewbox  Stretch="Uniform" Width="300">
             <TextBlock TextAlignment="Center" x:Name="welcome" > Good Morning</TextBlock>
@@ -36,7 +36,7 @@
                     <Viewbox  Grid.Row="1"  Margin="30" >
                         <local:blockGraphView Height="200" Width="150"></local:blockGraphView>
                     </Viewbox>
-                    <Viewbox Grid.Row="1" Grid.Column="1"  Margin="30" >
+                    <Viewbox Grid.Row="1" Grid.Column="1"  Margin="30"  x:Name="PieisStillPie">
                         <local:piegraphView Width="500" Height="500"></local:piegraphView>
                     </Viewbox>
                 </Grid>
@@ -49,8 +49,8 @@
         <Border Grid.Row="2"  Margin="10" ClipToBounds="True" MinHeight="200">
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
             <Grid RowDefinitions="Auto *" >
-              
-                <TextBlock FontSize="30" Text="Projects" ></TextBlock>
+              <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20" x:Name="projectAdd">add</Button>
+                <TextBlock FontSize="30" Text="Projects" TextAlignment="Center" ></TextBlock>
             
                 <StackPanel Grid.Row="1"  Orientation="Horizontal" HorizontalAlignment="Stretch" Spacing="50" VerticalAlignment="Top" x:Name="ProjectPanels">
     

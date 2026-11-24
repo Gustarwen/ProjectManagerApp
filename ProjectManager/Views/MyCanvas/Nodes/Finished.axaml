@@ -5,7 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ProjectManager.Views.Finished">
     <Grid  Height="50" Width="150">
-        <Border BorderBrush="#38b000" BorderThickness="2" Background="#004b23"/>
+        <Border BorderBrush="#003303" BorderThickness="2" Background="#CCFFCF"/>
         <TextBlock TextAlignment="Center" VerticalAlignment="Center" x:Name = "Name"/>
         <Grid.ContextFlyout>
           

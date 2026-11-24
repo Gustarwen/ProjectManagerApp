@@ -18,8 +18,8 @@
       
         <vm:MainViewModel />
     </Design.DataContext>
-<Grid RowDefinitions="*">
-    <Border Height="20" CornerRadius="10"></Border>
+<Grid RowDefinitions="*" ClipToBounds="True">
+    <Border Height="20" CornerRadius="10" ></Border>
     <Grid Grid.Row="0"  RowDefinitions="Auto,Auto,*,auto" ColumnDefinitions="200,*" >
       
            

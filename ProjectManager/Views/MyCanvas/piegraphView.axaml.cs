@@ -126,6 +126,7 @@ public partial class piegraphView : UserControl
         
                 GraphVisual(alpha);
             }
+           
             
            
         };

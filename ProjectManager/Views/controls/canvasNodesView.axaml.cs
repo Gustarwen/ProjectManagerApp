@@ -301,7 +301,22 @@ private void renderSpecialNode(MainProjectData node)
 
 
 
-        MainProjectNode myNode = new MainProjectNode(node);
+        task myNode = new task(node);
+        switch (node.Type)
+        {
+            case 'N': if (node.Finished == true)
+                {
+                    myNode = new Finished(node);
+                }
+                else
+                {
+                    myNode = new task(node);
+                }
+
+                break;
+            case 'I': myNode = new Issue(node); break;
+            case 'M': myNode = new milestone(node); break;
+        }
         if (node.rolled)
         {
             foreach (var normal in node.Childerns)

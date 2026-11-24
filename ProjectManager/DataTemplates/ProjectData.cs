@@ -48,6 +48,8 @@ public partial class ProjectData : ObservableObject
     //poloha Tasku pro Canvas
     public double X;
     public double Y;
+    public double startX;
+    public double startY;
 
 
     

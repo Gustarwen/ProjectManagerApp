@@ -6,10 +6,10 @@
              x:Class="ProjectManager.Views.Issue">
     <Grid Width="200" RowDefinitions="* Auto" Height="90" >
         
-        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="#ef233c" BorderThickness="5" CornerRadius="20" ClipToBounds="True" Padding="5" Background="#6a040f">
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="#660000" BorderThickness="5" CornerRadius="20" ClipToBounds="True" Padding="5" Background="#FFCCCC">
             <Grid ColumnDefinitions="Auto *">
-                <Ellipse Grid.Column="0" Height="20" Width="20" Stroke="#ef233c" StrokeThickness="4" Margin="5"/>
-                <Ellipse Grid.Column="0" Height="9" Width="9" Fill="#ef233c" StrokeThickness="4" />
+                <Ellipse Grid.Column="0" Height="20" Width="20" Stroke="#660000" StrokeThickness="4" Margin="5"/>
+                <Ellipse Grid.Column="0" Height="9" Width="9" Fill="#660000" StrokeThickness="4" />
                 <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Hidden" >
                     <TextBlock Foreground="white" VerticalAlignment="Center" TextAlignment="Center" Text="Issue with adding some random file"></TextBlock>
                 </ScrollViewer>

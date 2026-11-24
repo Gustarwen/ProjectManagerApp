@@ -106,6 +106,7 @@ public partial class taskViewModel :ViewModelBase
     private void recursiveAccept(ProjectData mytask)
     {
         mytask.Finished = true;
+        if (mytask == null) return;
         DataBaseController.Taskrepository.Update(mytask);
         task viewtask = task.tasks.FirstOrDefault(p=>p.data.Id == mytask.Id);
         if (viewtask != null)

@@ -20,6 +20,7 @@ public partial class NodConfiguration : Window
             var informations = DataContext as CanvasNodesViewModel;
             if (MyDatePicker.SelectedDate == null||NameBox.Text == null) return;
             ProjectData data = new ProjectData();
+            data.Type = 'N';
             data.deadLine =(DateTimeOffset)MyDatePicker.SelectedDate;
             data.ProjectId = selectedTask.ProjectId;
             data.start =DateTime.Now;
