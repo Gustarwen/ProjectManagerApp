@@ -11,7 +11,7 @@
                 <Ellipse Grid.Column="0" Height="20" Width="20" Stroke="#660000" StrokeThickness="4" Margin="5"/>
                 <Ellipse Grid.Column="0" Height="9" Width="9" Fill="#660000" StrokeThickness="4" />
                 <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Hidden" >
-                    <TextBlock Foreground="white" VerticalAlignment="Center" TextAlignment="Center" Text="Issue with adding some random file"></TextBlock>
+                    <TextBlock  VerticalAlignment="Center" TextAlignment="Center" Text="Issue with adding some random file"></TextBlock>
                 </ScrollViewer>
             </Grid>
            

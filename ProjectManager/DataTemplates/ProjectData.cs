@@ -50,6 +50,8 @@ public partial class ProjectData : ObservableObject
     public double Y;
     public double startX;
     public double startY;
+    public double endX;
+    public double endY;
 
 
     

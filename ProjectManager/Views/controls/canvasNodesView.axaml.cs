@@ -296,6 +296,30 @@ public void createMap(ProjectData firstData)
         }
     }
 
+    private Polyline generateLine(Point a, Point b, Point c, Point d)
+    {
+        Polyline polyline = new();
+        
+        for (int i = 0; i < 100; i++)
+        {
+            double t = (double)i/100.0;
+            double t2 = t * t;
+            double t3 = t2 * t;
+            double x = 0.5 * ((2 * b.X) + (-a.X + c.X) * t +
+                              (2 * a.X - 5 * b.X + 4 * c.X - d.X) * t2 +
+                              (-a.X + 3 * b.X - 3 * c.X + d.X) * t3);
+
+            double y = 0.5 * ((2 * b.Y) + (-a.Y + c.Y) * t +
+                              (2 * a.Y - 5 * b.Y + 4 * c.Y - d.Y) * t2 +
+                              (-a.Y + 3 * b.Y - 3 * c.Y + d.Y) * t3);
+
+            polyline.Points.Add(new Point(x, y));
+            
+        }
+        polyline.Points.Add(d);
+        return polyline;
+    }
+
 private void renderSpecialNode(MainProjectData node)
     {
 
@@ -321,14 +345,10 @@ private void renderSpecialNode(MainProjectData node)
         {
             foreach (var normal in node.Childerns)
             {
-                Line line = new Line()
-                {
-                    StartPoint = new Point(node.X + 125, node.Y + 25),
-                    EndPoint = new Point(normal.X + 125, normal.Y + 25),
-                    ZIndex = -1,
-                    StrokeThickness = 10
-
-                };
+                int ooX = 0;
+                int ooY = 10;
+                
+               Polyline line = generateLine(new Point(node.X,node.Y), new(node.X+ooX,node.Y+ooY), new(normal.X - ooX,normal.Y-ooY), new(normal.X,normal.Y));
                 line.Bind(Line.StrokeProperty, new DynamicResourceExtension("redfour"));
 
 
@@ -418,14 +438,10 @@ private void _renderNodes(ProjectData node)
 
         foreach (var normal in node.Childerns)
         {
-            Line line = new Line()
-            {
-                StartPoint = new Point(node.X + 125, node.Y + 25),
-                EndPoint = new Point(normal.X + 125, normal.Y + 25),
-                ZIndex = -1,
-                StrokeThickness = 10
-
-            };
+            int ooX = 0;
+            int ooY = 100;
+                
+            Polyline line = generateLine(new Point(node.X,node.Y), new(node.X+ooX,node.Y+ooY), new(normal.X - ooX,normal.Y-ooY), new(normal.X,normal.Y));
             line.Bind(Line.StrokeProperty, new DynamicResourceExtension("redfour"));
 
 
