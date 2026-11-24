@@ -3,42 +3,58 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="300"
-             xmlns:local = "clr-namespace:ProjectManager.Views"
+             xmlns:local="clr-namespace:ProjectManager.Views"
              x:Class="ProjectManager.Views.TasksView">
-   <Grid RowDefinitions="Auto *" >
-    
-       <Grid ColumnDefinitions="Auto Auto Auto Auto * Auto" VerticalAlignment="Top">
-          
-           <Button>all</Button>
-           <Button Grid.Column="1">issues</Button>
-           <Button Grid.Column="2">milestones</Button>
-           <Button Grid.Column="3">in progress</Button>
-        
-               <Button Grid.Column="5"  Classes="Add" FontWeight="ExtraBold" FontSize="100">+</Button>
-        
-           
-           
-  
-     </Grid>
-       <Border Grid.Row="1" ClipToBounds="True">
-           
-           <ScrollViewer VerticalScrollBarVisibility="Visible">
-       <StackPanel Spacing="10" x:Name="TaskPanel">
-        
-           <local:TaskCardView CornerRadius="0"></local:TaskCardView>
-           <local:TaskCardView CornerRadius="0"></local:TaskCardView>
-           <local:TaskCardView CornerRadius="0"></local:TaskCardView>
-           <local:TaskCardView CornerRadius="0"></local:TaskCardView>
-           <local:TaskCardView CornerRadius="0"></local:TaskCardView>
-           <local:TaskCardView CornerRadius="0"></local:TaskCardView>
-           <local:TaskCardView CornerRadius="0"></local:TaskCardView>
 
-       </StackPanel>
-       </ScrollViewer>
-       </Border>
-   </Grid>
-    
+    <Grid RowDefinitions="Auto *" RowSpacing="12">
+
+        <!-- header: filters left, add button right -->
+        <Grid ColumnDefinitions="* Auto">
+            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                <ToggleButton Classes="filter" IsChecked="True" Content="All"/>
+                <ToggleButton Classes="filter" Content="Issues"/>
+                <ToggleButton Classes="filter" Content="Milestones"/>
+                <ToggleButton Classes="filter" Content="In progress"/>
+            </StackPanel>
+
+            <Button Grid.Column="1" Classes="Add" Content="+"
+                    ToolTip.Tip="Add task"/>
+        </Grid>
+
+        <!-- list -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Spacing="8" Margin="0 0 8 0" x:Name="TaskPanel">
+                <local:TaskCardView/>
+                <local:TaskCardView/>
+                <local:TaskCardView/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+
     <UserControl.Styles>
-        <StyleInclude Source="../../../styles/TaskStyles.axaml"></StyleInclude>
+        <StyleInclude Source="../../../styles/TaskStyles.axaml"/>
+
+        <Style Selector="ToggleButton.filter">
+            <Setter Property="Padding" Value="14 4"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+        <Style Selector="ToggleButton.filter /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#E6F0FF"/>
+        </Style>
+        <Style Selector="ToggleButton.filter:checked /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#0052CC"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button.Add">
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
     </UserControl.Styles>
 </UserControl>

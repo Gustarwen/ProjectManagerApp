@@ -4,18 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="450"
              x:Class="ProjectManager.Views.homeTestView"
-             xmlns:local = "clr-namespace:ProjectManager.Views">
+             xmlns:local = "clr-namespace:ProjectManager.Views" Padding="10">
+
     <Grid RowDefinitions="Auto 3* 2*" Background="White">
         <!-- welcome sign -->
         <Viewbox  Stretch="Uniform" Width="300">
-            <TextBlock TextAlignment="Center" > Good Morning</TextBlock>
+            <TextBlock TextAlignment="Center" x:Name="welcome" > Good Morning</TextBlock>
         </Viewbox>
         
         
         <Grid Grid.Row="1" ColumnDefinitions="3* 2*">
             <!-- tasks -->
             <Border   ClipToBounds="True"  Margin="10" x:Name="TaskBorder"  MinWidth="300">
-                <Grid RowDefinitions="Auto *" >
+                <Grid RowDefinitions="Auto *">
                  
                    
                         <TextBlock TextAlignment="Center" FontSize="30" DockPanel.Dock="Top" Classes="cardTitle" Text="Tasks"/>
@@ -29,16 +30,16 @@
            
                 </Grid>
             </Border>
-            <Border Grid.Column="2"   Margin="10" ClipToBounds="True" VerticalAlignment="Bottom" x:Name="Statistics">
-                <DockPanel MinWidth="300">
-                    <TextBlock DockPanel.Dock="Top" FontSize="30" TextAlignment="Center">Statistics</TextBlock>
-                    <Viewbox  DockPanel.Dock="Left" Margin="30"  Height="200" Width="150">
+            <Border Grid.Column="2"   Margin="10" ClipToBounds="True" VerticalAlignment="Top" x:Name="Statistics">
+                <Grid ColumnDefinitions="* *" RowDefinitions="Auto *" MinWidth="300">
+                    <TextBlock Grid.ColumnSpan="2" DockPanel.Dock="Top" FontSize="30" TextAlignment="Center">Statistics</TextBlock>
+                    <Viewbox  Grid.Row="1"  Margin="30" >
                         <local:blockGraphView Height="200" Width="150"></local:blockGraphView>
                     </Viewbox>
-                    <Viewbox DockPanel.Dock="Right" Margin="30" Height="150" Width="150" >
+                    <Viewbox Grid.Row="1" Grid.Column="1"  Margin="30" >
                         <local:piegraphView Width="500" Height="500"></local:piegraphView>
                     </Viewbox>
-                </DockPanel>
+                </Grid>
             </Border>
         </Grid>
             
@@ -46,12 +47,12 @@
         
         <!-- projects -->
         <Border Grid.Row="2"  Margin="10" ClipToBounds="True" MinHeight="200">
-            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
             <Grid RowDefinitions="Auto *" >
               
                 <TextBlock FontSize="30" Text="Projects" ></TextBlock>
             
-                <StackPanel Grid.Row="1"  Orientation="Horizontal" HorizontalAlignment="Stretch" Spacing="50" VerticalAlignment="Bottom" x:Name="ProjectPanels">
+                <StackPanel Grid.Row="1"  Orientation="Horizontal" HorizontalAlignment="Stretch" Spacing="50" VerticalAlignment="Top" x:Name="ProjectPanels">
     
                 
             </StackPanel>
@@ -59,6 +60,7 @@
             </ScrollViewer>
         </Border >
     </Grid>
+
     <UserControl.Styles>
         <StyleInclude Source="../../styles/HomeViewStyle.axaml"></StyleInclude>
     </UserControl.Styles>

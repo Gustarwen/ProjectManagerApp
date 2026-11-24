@@ -6,6 +6,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="ProjectManager.Views.MainWindow"
         x:DataType="vm:MainViewModel"
+
         
         
         Icon="/Assets/avalonia-logo.ico"
@@ -17,8 +18,9 @@
       
         <vm:MainViewModel />
     </Design.DataContext>
-
-   <Grid  RowDefinitions="Auto,Auto,*,auto" ColumnDefinitions="200,*" >
+<Grid RowDefinitions="*">
+    <Border Height="20" CornerRadius="10"></Border>
+    <Grid Grid.Row="0"  RowDefinitions="Auto,Auto,*,auto" ColumnDefinitions="200,*" >
       
            
   
@@ -31,5 +33,6 @@
        <ContentControl Grid.Column="1" Grid.RowSpan="3" Content="{Binding  CurrentPage}"></ContentControl>
        <Button Grid.Row="3" Content="Settings" Command="{Binding OpenSettingDialogCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"></Button>
    </Grid>
+</Grid>
 
 </Window>

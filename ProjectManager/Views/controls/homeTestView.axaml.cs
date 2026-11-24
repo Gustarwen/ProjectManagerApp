@@ -59,6 +59,13 @@ public partial class homeTestView : UserControl
         InitializeComponent();
         InitializeProjects();
         InitializeTasks();
+        switch (DateTime.Now.Hour)
+        {
+           
+            case <12: welcome.Text = "Good Morning"; break;
+            case <18: welcome.Text = "Good Afternoon"; break;
+            default: welcome.Text = "Good Night"; break;
+        }
         this.SizeChanged += (s, e) =>
         {
             if (Bounds.Width < 860)
