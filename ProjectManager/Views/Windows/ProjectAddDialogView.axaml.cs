@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.LogicalTree;
 using Avalonia.Markup.Xaml;
 using ProjectManager.DataTemplates;
 using ProjectManager.ViewModels;
@@ -24,6 +25,7 @@ public partial class ProjectAddDialogView : Window
             item.Content = project.Name;
             item.Tag = project.Id;
             projectDatas.Add(project);
+            ProjectCombo.Items.Add(item);
         }
         Accept.Click += (a, p) =>
         {
@@ -33,14 +35,14 @@ public partial class ProjectAddDialogView : Window
             ProjectData data = new ProjectData();
             data.Type = 'N';
             data.deadLine =(DateTimeOffset)MyDatePicker.SelectedDate;
-            data.ProjectId = projectDatas.Where(p=>p.Id == (int)ProjectCombo.Tag).FirstOrDefault().ProjectId;
+            if (ProjectCombo.SelectedItem is not ComboBoxItem item) return;
+            data.ProjectId = DataBaseController.Taskrepository.Query().Where(p=> p.Id==(int)item.Tag).Execute().FirstOrDefault().ProjectId;
             data.start =DateTime.Now;
             data.Name = NameBox.Text;
             data.Date = MyDatePicker.SelectedDate;
-            data.ParentId = 
-            informations.OnClicked(data);
-            nodesview.MapCanvas.Children.Clear();
-            nodesview.onUpdate();
+            data.ParentId = (int)item.Tag;
+          
+            DataBaseController.Taskrepository.Create(data);
             this.Close();
         };
 

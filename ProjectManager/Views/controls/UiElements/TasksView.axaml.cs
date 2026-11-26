@@ -12,6 +12,7 @@ public partial class TasksView : UserControl
         AddButton.Click += (e, v) =>
         {
             Window dialog = new ProjectAddDialogView();
+            dialog.Show();
         };
     }
 }

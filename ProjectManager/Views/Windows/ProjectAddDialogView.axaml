@@ -7,7 +7,8 @@
         SystemDecorations="None"
         Title="ProjectAddDialogView">
         <Border x:Name="WindowBorder">
-                <Grid RowDefinitions="Auto Auto * * *">
+                <Grid RowDefinitions="Auto Auto Auto * * *">
+                        <Button Height="20" Width="20" x:Name="Close">x</Button>
                         <TextBlock>Project:</TextBlock>
                         <ComboBox Grid.Row="1" x:Name="ProjectCombo"></ComboBox>
                         <TextBox Grid.Row="2" x:Name="NameBox" Watermark="Task Name"/>
