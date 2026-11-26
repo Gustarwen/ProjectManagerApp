@@ -18,7 +18,7 @@
             </StackPanel>
 
             <Button Grid.Column="1" Classes="Add" Content="+"
-                    ToolTip.Tip="Add task"/>
+                    ToolTip.Tip="Add task" x:Name="AddButton"/>
         </Grid>
 
         <!-- list -->

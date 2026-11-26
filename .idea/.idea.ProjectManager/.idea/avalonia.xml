@@ -25,6 +25,7 @@
         <entry key="ProjectManager/Views/SettingsView.axaml" value="ProjectManager/ProjectManager.csproj" />
         <entry key="ProjectManager/Views/Windows/NodConfiguration.axaml" value="ProjectManager/ProjectManager.csproj" />
         <entry key="ProjectManager/Views/Windows/ProjectAdd.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/Windows/ProjectAddDialogView.axaml" value="ProjectManager/ProjectManager.csproj" />
         <entry key="ProjectManager/Views/Windows/ProjectAddView.axaml" value="ProjectManager/ProjectManager.csproj" />
         <entry key="ProjectManager/Views/Windows/SettingsView.axaml" value="ProjectManager/ProjectManager.csproj" />
         <entry key="ProjectManager/Views/Windows/connectNodes.axaml" value="ProjectManager/ProjectManager.csproj" />
@@ -52,6 +53,7 @@
         <entry key="ProjectManager/styles/HomeViewStyle.axaml" value="ProjectManager/ProjectManager.csproj" />
         <entry key="ProjectManager/styles/InfoCards.axaml" value="ProjectManager/ProjectManager.csproj" />
         <entry key="ProjectManager/styles/TaskStyles.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/styles/Windows.axaml" value="ProjectManager/ProjectManager.csproj" />
         <entry key="ProjectManager/styles/nodestyle.axaml" value="ProjectManager/ProjectManager.csproj" />
         <entry key="ProjectManager/styles/style.axaml" value="ProjectManager/ProjectManager.csproj" />
       </map>

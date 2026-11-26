@@ -9,5 +9,9 @@ public partial class TasksView : UserControl
     public TasksView()
     {
         InitializeComponent();
+        AddButton.Click += (e, v) =>
+        {
+            Window dialog = new ProjectAddDialogView();
+        };
     }
 }
