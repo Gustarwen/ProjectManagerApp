@@ -11,12 +11,13 @@ namespace ProjectManager.Views;
 
 public partial class task : UserControl
 {
+
     public static readonly List<task> tasks = new List<task>();
     public ProjectData data;
 
     public task(ProjectData Data)
     {
-       
+     
         InitializeComponent();
         taskViewModel viewmodel = new taskViewModel();
         Accept.Command = viewmodel.AcceptCommand;

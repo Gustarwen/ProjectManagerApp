@@ -299,6 +299,7 @@ public void createMap(ProjectData firstData)
     private Polyline generateLine(Point a, Point b, Point c, Point d)
     {
         Polyline polyline = new();
+        polyline.Points.Add(a);
         
         for (int i = 0; i < 100; i++)
         {
@@ -348,7 +349,8 @@ private void renderSpecialNode(MainProjectData node)
                 int ooX = 0;
                 int ooY = 10;
                 
-               Polyline line = generateLine(new Point(node.X,node.Y), new(node.X+ooX,node.Y+ooY), new(normal.X - ooX,normal.Y-ooY), new(normal.X,normal.Y));
+                Polyline line = generateLine(new Point(node.X+node.NodeWidth/2,node.Y + node.NodeHeight/2), new(node.X+ooX+node.NodeWidth/2,node.Y+ooY+node.NodeHeight/2), new(normal.X - ooX + normal.NodeWidth/2,normal.Y-ooY + normal.NodeHeight/2), new(normal.X + normal.NodeWidth/2,normal.Y + normal.NodeHeight/2));
+                line.ZIndex = -1;
                 line.Bind(Line.StrokeProperty, new DynamicResourceExtension("redfour"));
 
 
@@ -358,14 +360,10 @@ private void renderSpecialNode(MainProjectData node)
 
             foreach (var special in node.JoindedProject)
             {
-                Line line = new Line()
-                {
-                    StartPoint = new Point(node.X + 125, node.Y + 25),
-                    EndPoint = new Point(special.X + 125, special.Y + 25),
-                    ZIndex = -1,
-                    StrokeThickness = 10
-
-                };
+                int ooX = 0;
+                int ooY = 10;
+                Polyline line = generateLine(new Point(node.X+node.NodeWidth/2,node.Y + node.NodeHeight/2), new(node.X+ooX+node.NodeWidth/2,node.Y+ooY+node.NodeHeight/2), new(special.X - ooX + node.NodeWidth/2,special.Y-ooY + node.NodeHeight/2), new(special.X + special.NodeWidth/2,special.Y + special.NodeHeight/2));
+                line.ZIndex = -1;
                 line.Bind(Line.StrokeProperty, new DynamicResourceExtension("redfour"));
 
 
@@ -441,24 +439,21 @@ private void _renderNodes(ProjectData node)
             int ooX = 0;
             int ooY = 100;
                 
-            Polyline line = generateLine(new Point(node.X,node.Y), new(node.X+ooX,node.Y+ooY), new(normal.X - ooX,normal.Y-ooY), new(normal.X,normal.Y));
+            Polyline line = generateLine(new Point(node.X+node.NodeWidth/2,node.Y + node.NodeHeight/2), new(node.X+ooX+node.NodeWidth/2,node.Y+ooY+node.NodeHeight/2), new(normal.X - ooX + normal.NodeWidth/2,normal.Y-ooY + normal.NodeHeight/2), new(normal.X + normal.NodeWidth/2,normal.Y + normal.NodeHeight/2));
             line.Bind(Line.StrokeProperty, new DynamicResourceExtension("redfour"));
 
-
+            line.ZIndex = -1;
             MapCanvas.Children.Add(line);
             _renderNodes(normal);
         }
 
         foreach (var special in node.JoindedProject)
         {
-            Line line = new Line()
-            {
-                StartPoint = new Point(node.X + 125, node.Y + 25),
-                EndPoint = new Point(special.X + 125, special.Y + 25),
-                ZIndex = -1,
-                StrokeThickness = 10
-
-            };
+            int ooX = 0;
+            int ooY = 100;
+            Polyline line = generateLine(new Point(node.X+node.NodeWidth/2,node.Y + node.NodeHeight/2), new(node.X+ooX+node.NodeWidth/2,node.Y+ooY+node.NodeHeight/2), new(special.X - ooX + node.NodeWidth/2,special.Y-ooY + node.NodeHeight/2), new(special.X + special.NodeWidth/2,special.Y + special.NodeHeight/2));
+            line.Bind(Line.StrokeProperty, new DynamicResourceExtension("redfour"));
+            line.ZIndex = -1;
             line.Bind(Line.StrokeProperty, new DynamicResourceExtension("redfour"));
 
 

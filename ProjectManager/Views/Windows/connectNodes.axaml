@@ -37,7 +37,7 @@
     </Window.Styles>
 
     <!-- vnější Border = vzhled okna (zaoblení + stín) -->
-    <Border Margin="12" Background="#E5F0FF" CornerRadius="16"
+    <Border Margin="12" Background="#E5F0FF" CornerRadius="16" 
             BoxShadow="0 6 24 0 #40000E24" ClipToBounds="True">
         <Grid RowDefinitions="Auto * Auto">
 

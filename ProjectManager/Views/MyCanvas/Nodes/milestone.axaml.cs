@@ -8,8 +8,13 @@ namespace ProjectManager.Views;
 
 public partial class milestone : task
 {
+    
+    
     public milestone(ProjectData Data):base(Data)
     {
+        Data.NodeHeight = 200;
+        Data.NodeWidth = 150;
+     
         InitializeComponent();
         taskViewModel viewmodel = new taskViewModel();
         Accept.Command = viewmodel.AcceptCommand;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
@@ -23,6 +24,29 @@ public partial class ProjectBoardView : UserControl
             if (vm.Piegraph is piegraphViewModel pie)
             {
                 pie.Alpha = data;
+            }
+            if (vm.Blockgraph is blockGraphViewModel blockGraph)
+            {
+                var tasksOrderBY = DataBaseController.Taskrepository.Query().Where(p=>p.ProjectId==vm.project.Id).GroupBy(t => t.accept).Execute().ToList();
+
+                    List<int> taskPerDate = new List<int>();
+                    int datum = 0;
+                    DateTimeOffset actuallDate = new DateTimeOffset();
+                    foreach (var task in tasksOrderBY)
+                    {
+                        if (task.Key == actuallDate )
+                        {
+                            datum++;
+                        }
+                        else
+                        {
+                            actuallDate = task.Key;
+                            taskPerDate.Add(datum);
+                            datum = 0;
+                        }
+                    }
+                    blockGraph.Datas = taskPerDate;
+                
             }
         };
         

@@ -1,0 +1,18 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="ProjectManager.Views.ProjectAddDialogView"
+        SystemDecorations="None"
+        Title="ProjectAddDialogView">
+        <Border x:Name="WindowBorder">
+                <Grid RowDefinitions="Auto Auto * *">
+                        <TextBlock>Project:</TextBlock>
+                        <ComboBox Grid.Row="1" x:Name="ProjectCombo"></ComboBox>
+                        <TextBox Grid.Row="2" Watermark="Task Name" x:Name="ProjectName"/>
+                        <Button Grid.Row="3" x:Name="Accept">Accept</Button>
+                </Grid>
+        </Border>
+        
+</Window>

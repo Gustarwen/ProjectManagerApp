@@ -2,15 +2,28 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="700" d:DesignHeight="300"
         x:Class="ProjectManager.Views.NodConfiguration"
         xmlns:vm ="clr-namespace:ProjectManager.ViewModels"
         x:DataType="vm:CanvasNodesViewModel"
+        SystemDecorations="None"
+
+        Width="480" Height="420"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner"
+        Background="Transparent"
         Title="NodConfiguration">
-        <StackPanel>
-                <TextBox x:Name="NameBox" Watermark="name of task"></TextBox>
-                <DatePicker x:Name="MyDatePicker"></DatePicker>
-                <Button x:Name="Accept">Add Task</Button>
+        <Grid RowDefinitions="* 5*" Background="#002966" PointerPressed="pressed">
+               
+                        <TextBlock Grid.Row="0" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" TextAlignment="Center">Create a Task</TextBlock>
+       
                 
-        </StackPanel>
+                <Grid Grid.Row="1" RowDefinitions="* * * *" Background="#CCE0FF">
+                <Button HorizontalAlignment="Right" x:Name="Close">X</Button>
+                <TextBox Grid.Row="1" x:Name="NameBox" Watermark="name of task"></TextBox>
+                <DatePicker Grid.Row="2" x:Name="MyDatePicker"></DatePicker>
+                <Button Grid.Row="3" x:Name="Accept">Add Task</Button>
+                
+        </Grid>
+        </Grid>
 </Window>

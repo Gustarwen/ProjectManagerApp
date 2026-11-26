@@ -10,9 +10,20 @@ namespace ProjectManager.Views.Windows;
 //for those who will read this text... i created this part in midnight (correctly 11:54 PM) i know...i am not a graphic...so pls...ui wouldnt look better
 public partial class ProjectAddView : Window
 {
+    protected override void OnOpened(EventArgs e)
+    {
+        base.OnOpened(e);
+        ProjectName.Focus();
+    }
     public ProjectAddView(homeTestView view)
     {
         InitializeComponent();
+      
+        ProjectName.Focus();
+        Close.Click += (a, v) =>
+        {
+            this.Close();
+        };
         Button.Click += (e, v) =>
         {
             if (ProjectName.Text == null || DeadLineDate.SelectedDate == null) return;
@@ -32,6 +43,7 @@ public partial class ProjectAddView : Window
                 Finished = false
                 
             };
+            
             MainProjectData mainprojectData = new MainProjectData(projectData);
             DataBaseController.Taskrepository.Create(projectData);
             Console.WriteLine("projekt byl pridan");

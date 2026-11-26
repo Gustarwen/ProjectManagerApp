@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="ProjectManager/App.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/Canvas/piegraph.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/HomeView.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/MainWindow.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/MyCanvas/InfoCard.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/MyCanvas/Nodes/Finished.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/MyCanvas/Nodes/Issue.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/MyCanvas/Nodes/milestone.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/MyCanvas/Nodes/sleepingNode.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/MyCanvas/Nodes/task.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/MyCanvas/blockGraphView.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/MyCanvas/graph.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/MyCanvas/graphView.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/MyCanvas/piegraphView.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/MyCanvas/task.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/NodConfiguration.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/ProjectBoardView.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/QaAView.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/Settings.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/SettingsView.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/Windows/NodConfiguration.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/Windows/ProjectAdd.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/Windows/ProjectAddView.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/Windows/SettingsView.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/Windows/connectNodes.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/canvasNodes.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/canvasNodesView.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/connectNodes.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/controls/Home2View.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/controls/HomeView.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/controls/MainProjectNode.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/controls/MainWindow.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/controls/ProjectBoardView.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/controls/ProjectCardView.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/controls/ProjectView.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/controls/QaAView.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/controls/TasksView.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/controls/UiElements/ProjectCardView.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/controls/UiElements/TaskCardView.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/controls/UiElements/TasksView.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/controls/canvasNodesView.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/controls/homeTestView.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/controls/statistics.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/controls/task.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/statistics.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/Views/task.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/styles/HomeViewStyle.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/styles/InfoCards.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/styles/TaskStyles.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/styles/nodestyle.axaml" value="ProjectManager/ProjectManager.csproj" />
+        <entry key="ProjectManager/styles/style.axaml" value="ProjectManager/ProjectManager.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

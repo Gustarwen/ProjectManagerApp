@@ -46,6 +46,9 @@ public partial class ProjectData : ObservableObject
     public string ProjectName { get; set; }="";
 
     //poloha Tasku pro Canvas
+    public double NodeWidth {  set; get; } = 150.0;
+    public   double NodeHeight{  set; get; } = 50.0;
+
     public double X;
     public double Y;
     public double startX;

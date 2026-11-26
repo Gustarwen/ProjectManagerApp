@@ -6,24 +6,34 @@
         CornerRadius="20"
         CanResize="False"
         x:Class="ProjectManager.Views.Windows.ProjectAddView"
-        Height="200"
-        Width="100"
+        Height="400"
+        Width="350"
+       WindowStartupLocation="CenterScreen"
         Title="ProjectAdd"
         xmlns:vm="clr-namespace:ProjectManager.ViewModels"
+        SystemDecorations="None"
+        Background="Transparent"
         x:DataType="vm:ProjectAddViewModel"
         >
-    <StackPanel>
-        <CalendarDatePicker 
-                            x:Name="DeadLineDate"
-                            SelectedDateFormat="Custom"
-                            CustomDateFormatString="d. M. yyyy"
-                            HorizontalAlignment="Stretch"
-                            Watermark="Vyberte termín" />
-        <TextBox x:Name="ProjectName"></TextBox>
-        <Button HorizontalAlignment="Center" x:Name="Button"   >Add This Project</Button>
+    <Border Padding="20" Background="#E5F0FF" BorderBrush="blue" ClipToBounds="True" CornerRadius="20" >
+
+            <Grid RowDefinitions="Auto 3* Auto Auto" RowSpacing="10" >
+                <Viewbox  HorizontalAlignment="Right" Height="30" Width="30">
+                    <Button Height="26" Width="26" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" x:Name="Close">x</Button>
+                </Viewbox>
+                <Viewbox Grid.Row="1" >
+                    <Calendar Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                              x:Name="DeadLineDate"
+                    />
+                </Viewbox>
+       
+                <TextBox Grid.Row="2" CornerRadius="20" Watermark="Name Of Task"  x:Name="ProjectName"></TextBox>
+                <Button Grid.Row="3" HorizontalAlignment="Center" x:Name="Button"   >Add This Project</Button>
         
         
-        
-    </StackPanel>
+
+            </Grid>
+
+    </Border>
    
 </Window>

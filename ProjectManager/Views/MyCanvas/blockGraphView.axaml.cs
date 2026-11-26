@@ -5,6 +5,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+using ProjectManager.ViewModels;
 
 namespace ProjectManager.Views;
 
@@ -41,12 +42,27 @@ public partial class blockGraphView : UserControl
     public blockGraphView()
     {
         InitializeComponent();
-        this.SizeChanged += (a, v) =>
+        this.DataContextChanged += (a,v) =>
         {
-            if (this.Bounds.Height > 0 && this.Bounds.Width > 0)
+            if (DataContext is blockGraphView vm)
             {
+                graphData=vm.graphData.ToList();
+                vm.PropertyChanged += (e, v) =>
+                {
+                    GenerateGraph();
+                };
                 GenerateGraph();
             }
+            this.SizeChanged += (a, v) =>
+            {
+                if (Bounds.Height != 0 && Bounds.Width != 0)
+                {
+                    GenerateGraph();
+                }
+              
+           
+            };
         };
+       
     }
 }

@@ -10,7 +10,7 @@
              
              >
 
-        <Grid ColumnDefinitions="* *" RowDefinitions="2* 3*" Background="#E5F0FF" MinWidth="200">
+        <Grid ColumnDefinitions="* *" RowDefinitions="2* 3*" Background="#E5F0FF" MinWidth="200" MinHeight="300">
             <Border ClipToBounds="True" >
                   <Viewbox >
                     <ContentControl x:Name = "MyAccept"  Content="{Binding Piegraph}" Margin="10" Height="500" Width="500"></ContentControl>

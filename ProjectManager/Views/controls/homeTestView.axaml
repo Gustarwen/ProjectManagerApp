@@ -6,7 +6,7 @@
              x:Class="ProjectManager.Views.homeTestView"
              xmlns:local = "clr-namespace:ProjectManager.Views" Padding="10">
 
-    <Grid RowDefinitions="Auto 3* 2*" Background="White" ClipToBounds="True">
+    <Grid RowDefinitions="Auto 3* 2*" Background="White" ClipToBounds="True" MinWidth="300">
         <!-- welcome sign -->
         <Viewbox  Stretch="Uniform" Width="300">
             <TextBlock TextAlignment="Center" x:Name="welcome" > Good Morning</TextBlock>
@@ -15,7 +15,7 @@
         
         <Grid Grid.Row="1" ColumnDefinitions="3* 2*">
             <!-- tasks -->
-            <Border   ClipToBounds="True"  Margin="10" x:Name="TaskBorder"  MinWidth="300">
+            <Border   ClipToBounds="True"  Margin="10" x:Name="TaskBorder"  >
                 <Grid RowDefinitions="Auto *">
                  
                    

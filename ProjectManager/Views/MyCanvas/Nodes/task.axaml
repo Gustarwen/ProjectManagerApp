@@ -8,8 +8,8 @@
              xmlns:vm="clr-namespace:ProjectManager.ViewModels"
              x:DataType="vm:taskViewModel">
     <Grid  Height="50" Width="150">
-        <Border BorderBrush="#4895ef" BorderThickness="2" Background="#3a0ca3"/>
-        <TextBlock TextAlignment="Center" VerticalAlignment="Center" x:Name = "Name"/>
+        <Border BorderBrush="#3a0ca3" BorderThickness="2" Background="#4895ef"/>
+        <TextBlock FontWeight="Bold" Foreground="white" TextAlignment="Center" VerticalAlignment="Center" x:Name = "Name"/>
         
         <Grid.ContextFlyout>
           

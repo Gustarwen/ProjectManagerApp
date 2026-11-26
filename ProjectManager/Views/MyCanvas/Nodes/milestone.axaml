@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ProjectManager.Views.milestone">
-    <Grid Height="250" Width="200" RowDefinitions="* Auto">
-        <Polygon Height="200" Width="200" Points="0 5,5 10,10 5, 5 0" StrokeThickness="5" Stroke="#530066" Fill="#F6CCFF" Opacity="0.75" Stretch="Fill"></Polygon>
+    <Grid Height="200" Width="150" RowDefinitions="* Auto">
+        <Polygon Height="150" Width="150" Points="0 5,5 10,10 5, 5 0" StrokeThickness="5" Stroke="#530066" Fill="#F6CCFF"  Stretch="Fill"></Polygon>
         <TextBlock Text="V 1.0" FontSize="25" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center"/>
         <Grid.ContextFlyout>
           

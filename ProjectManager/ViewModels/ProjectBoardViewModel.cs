@@ -18,10 +18,13 @@
         {
             var tasks = DataBaseController.Taskrepository.Query()
                 .Where(p => p.ProjectId == project.Id).Execute().ToList();
+
             double ratio = tasks.Count == 0 ? 0 : (double)tasks.Count(t => t.Finished) / tasks.Count;
             if (Piegraph is piegraphViewModel pie)
                 pie.Alpha = ratio * 2 * Math.PI;
-
+            
+            
+            
             var data = tasks
                 .Where(t => t.Finished)
                 .GroupBy(t => t.accept.Date)
