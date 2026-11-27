@@ -19,7 +19,7 @@ class Program
             Directory.CreateDirectory(Path.Combine(ProjectRoot, ".PMVS","objects"));
        
             Directory.CreateDirectory(Path.Combine(ProjectRoot, ".PMVS","commits"));
-            File.Create(Path.Combine(ProjectRoot, ".PMVS","index"));
+            File.WriteAllText(Path.Combine(ProjectRoot, ".PMVS","index"),"");
           Console.WriteLine(Path.GetFullPath(ProjectRoot));
         
         
@@ -33,7 +33,8 @@ class Program
             {
                 string[] fileName = {BitConverter.ToString(SHA256.Create().ComputeHash(File.ReadAllBytes(file))).Replace("-", "").ToLowerInvariant()};
                 if(!File.Exists(Path.Combine(target, fileName[0]))) File.Copy(file, Path.Combine(target, fileName[0]), true);
-                File.WriteAllLines(Path.Combine(ProjectRoot,".PMVS","index"),fileName);
+                Console.WriteLine("I love this part of my program");
+               
                 
             }
             catch (Exception e)
@@ -57,8 +58,13 @@ class Program
     {
         if (path.Count < 2) return;
         if (path == null||path[1].Length==0) return;
-        CopyDirectory(path[1], Path.Combine(ProjectRoot, ".PMVS","objects"));
+        
+        List<string>indexRecords = File.ReadAllLines(Path.Combine(ProjectRoot,".PMVS","index")).ToList();
 
+        if(indexRecords.Contains(Path.GetFullPath(path[1])))return;
+        indexRecords.Add(Path.GetFullPath(path[1]));
+        File.WriteAllLines(Path.Combine(ProjectRoot,".PMVS","index"),indexRecords.ToArray());
+        CopyDirectory(path[1],Path.Combine(ProjectRoot,".PMVS","objects"));
     }
     static string ByteArrayToString(byte[] arrInput)
     {
@@ -73,7 +79,7 @@ class Program
     //just for subcommands
     private static void CommandDictionary(string cmd)
     {
-        if (!File.Exists(Path.Combine("something", "like", "nothing")))return ;
+
         List<string> args = cmd.Split(' ').ToList();
         switch (args[0])
         {
@@ -81,25 +87,53 @@ class Program
             case "--version": break;
             case "--init": InitializeProject(); break;
             case "--add":AddFiles(args); break;
-            case "--commit": break;
+            case "--commit": CreateCommit(args.ToArray()); break;
             default:Console.WriteLine("Unknown command " + args[0]); break;
         }
     }
     //create commit with files
-    private static void CreateCommit()
+    private static void CommitsFindFiles(string path,List<string> filesPaths)
     {
-        if(!Directory.Exists(Path.Combine(ProjectRoot, ".PMVS"))){Console.WriteLine("Project nebyl inicializovan");
-            return;
+        if (Path.GetFullPath(path) == Path.GetFullPath(Path.Combine(ProjectRoot, ".PMVS"))) return;
+        List<string> index = Directory.GetFiles(Path.Combine(ProjectRoot,".PMVS","objects")).ToList();
+        foreach (string file in Directory.GetFiles(path))
+        {
+            
+            string hashOfFile = ByteArrayToString(  SHA256.Create().ComputeHash(File.ReadAllBytes(file)) ).ToLower();
+            if (File.Exists(Path.Combine(ProjectRoot, ".PMVS", "objects", hashOfFile)))
+            {
+                filesPaths.Add(hashOfFile+":"+Path.GetRelativePath(ProjectRoot,file));
+            }
         }
+
+        foreach (string directory in Directory.GetDirectories(path))
+        {
+            CommitsFindFiles(directory, filesPaths);
+        }
+ 
+    }
+    private static void CreateCommit(string [] args)
+    {
+        string message = args[1];
+        List<string> list = new();
+        List<string> index = File.ReadAllLines(Path.Combine(ProjectRoot,".PMVS","index")).ToList();
+        foreach (var path in index)
+        {
+            CommitsFindFiles(path, list);
+        }
+       
+        File.WriteAllLines(Path.Combine(ProjectRoot,".PMVS","commits",ByteArrayToString(SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(message)))),list);
         
-        
+        Console.WriteLine(list.Count);
+
     }
     static void Main(string[] args)
     {
         Console.WriteLine("Welcome to version system. Write --help for seeing more;");
         while (true)
         {
-            CommandDictionary(Console.ReadLine());
+            string cmd = Console.ReadLine();
+            CommandDictionary(cmd);
         }
 
     }
